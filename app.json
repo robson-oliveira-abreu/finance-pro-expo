@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
-  }
+    ],
+    "sdkVersion": "49.0.0",
+    "entryPoint": ".vscode\\exponentIndex.js",
+    "web": {
+      "bundler": "metro"
+    }
+  },
+  "name": "financaspro_expo"
 }
