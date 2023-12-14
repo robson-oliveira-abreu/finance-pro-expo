@@ -26,7 +26,7 @@ jobs:
         run: npx expo export --platform web
 
       - name: Print contents of build directory
-        run: ls -R build
+        run: ls -R dist
 
   deploy:
     runs-on: ubuntu-latest
