@@ -3,7 +3,7 @@ name: Expo Web CI/CD
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
