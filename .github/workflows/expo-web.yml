@@ -24,7 +24,7 @@ jobs:
           npm install -g expo-cli
 
       - name: Build Expo web app
-        run: expo export --platform web
+        run: expo export:web
 
   deploy:
     runs-on: ubuntu-latest
@@ -35,4 +35,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build # The folder where Expo web build is generated
+          FOLDER: web-build # The folder where Expo web build is generated

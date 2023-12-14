@@ -7,10 +7,7 @@
       "**/*"
     ],
     "sdkVersion": "49.0.0",
-    "entryPoint": ".vscode\\exponentIndex.js",
-    "web": {
-      "bundler": "metro"
-    }
+    "entryPoint": ".vscode\\exponentIndex.js"
   },
   "name": "financaspro_expo"
 }
