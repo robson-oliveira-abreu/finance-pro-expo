@@ -24,7 +24,7 @@ jobs:
           npm install -g expo-cli
 
       - name: Build Expo web app
-        run: expo build:web
+        run: expo export:web
 
   deploy:
     runs-on: ubuntu-latest
