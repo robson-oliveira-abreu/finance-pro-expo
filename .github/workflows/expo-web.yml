@@ -23,7 +23,10 @@ jobs:
           npm install
 
       - name: Build Expo web app
-        run: npx expo export:web
+        run: npx expo export:web --output web-build
+
+      - name: Print contents of build directory
+        run: ls -R web-build
 
   deploy:
     runs-on: ubuntu-latest
