@@ -1,15 +1,18 @@
 import { WebDate } from "../screens/Expenses/components/AddExpenseModal/types";
 
-export function getWebDate(date: WebDate): Date {
+export function getWebDate(date?: WebDate): Date | undefined {
   if (!date?.day || !date?.month || !date?.year) {
     return undefined;
   }
 
   const web_date = new Date();
+  const day = Number(String(date.day).padStart(2, "0"));
+  const month = Number(String(date.month - 1).padStart(2, "0"));
+  const year = Number(String(date.year).padStart(4, "20"));
 
-  web_date.setDate(date.day);
-  web_date.setMonth(date.month - 1);
-  web_date.setFullYear(date.year);
+  web_date.setDate(day);
+  web_date.setMonth(month);
+  web_date.setFullYear(year);
 
   return web_date;
 }

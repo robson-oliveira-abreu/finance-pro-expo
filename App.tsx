@@ -1,35 +1,27 @@
-import React, { useEffect } from "react";
-import { PaperProvider, MD3LightTheme } from "react-native-paper";
+import React from "react";
+import { PaperProvider } from "react-native-paper";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Routes from "./src/routes/Routes";
-import { AlertProvider } from "./src/contexts/AlertContext";
-import Alert from "./src/components/Alert/Alert.component";
-import { ExpenseProvider } from "./src/contexts/ExpensesContext";
+import Routes from "./src/infra/routes/Routes";
+import { AlertProvider } from "./src/commons/contexts/AlertContext";
+import Alert from "./src/commons/components/Alert/Alert.component";
+import { ExpenseProvider } from "./src/commons/contexts/ExpensesContext";
 import { StatusBar } from "react-native";
-import { add_metadata } from "./src/commons/metadata/add_metadata";
-
-const theme: typeof MD3LightTheme = {
-  ...MD3LightTheme,
-  mode: "adaptive",
-  colors: {
-    ...MD3LightTheme.colors,
-    primary: "#fa3c23",
-    surface: "#000",
-  },
-};
+import { useWebSetup } from "./src/commons/Hooks/useWebSetup";
+import { theme } from "./src/commons/theme/theme";
+import { PlanItemsProvider } from "./src/commons/contexts/PlanItemsContext";
 
 export default function App() {
-  useEffect(() => {
-    add_metadata();
-  }, []);
+  useWebSetup();
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <PaperProvider theme={theme}>
         <AlertProvider>
           <ExpenseProvider>
-            <StatusBar barStyle="dark-content" />
-            <Routes />
-            <Alert />
+            <PlanItemsProvider>
+              <StatusBar barStyle="dark-content" />
+              <Routes />
+              <Alert />
+            </PlanItemsProvider>
           </ExpenseProvider>
         </AlertProvider>
       </PaperProvider>

@@ -1,46 +1,44 @@
-import React, {ReactNode} from "react";
-import {FAB, RadioButton, Text} from "react-native-paper";
-import {styles} from "./styles";
-import {TopTabRoutes} from "../../routes/TopTab.routes";
-import {View} from "react-native";
-import {AddExpenseModal} from "./components/AddExpenseModal/AddExpenseModal.view";
-import {ExpensesScreenService} from "./Expenses.service";
-import {ExpensesController} from "./Expenses.controller";
-import {Select} from "../../components/Select/Select.view";
+import React, { ReactNode } from "react";
+import { FAB, Text } from "react-native-paper";
+import { styles } from "./styles";
+import { TopTabRoutes } from "../../infra/routes/TopTab.routes";
+import { View } from "react-native";
+import { ExpensesController } from "./Expenses.controller";
+import { Select } from "../../commons/components/Select/Select.view";
+import { AddExpenseModal } from "./components/AddExpenseModal/AddExpenseModal.view";
+import { isWeb } from "../../commons/platform";
 
 export const Expenses = (): ReactNode => {
-    const controller = ExpensesController();
+  const expensesController = ExpensesController();
 
-    return (
-        <View style={styles.container}>
-            <Text variant="headlineSmall" style={styles.title}>
-                Despesas
-            </Text>
+  return (
+    <View style={styles.container}>
+      <Text variant="headlineSmall" style={styles.title}>
+        Despesas
+      </Text>
 
-            <Select
-                onSelect={controller.onSelectMonth}
-                selected={controller.selectedMonth}
-                style={{paddingHorizontal: 20, paddingBottom: 20}}
-            />
+      <Select
+        onSelect={expensesController.onSelectMonth}
+        selected={expensesController.selectedMonth}
+        style={{ paddingHorizontal: 20, marginBottom: isWeb ? 20 : 0 }}
+      />
 
-            <TopTabRoutes
-                screens={controller.getScreens()}
-            />
+      <TopTabRoutes screens={expensesController.getScreens()} />
 
-            <FAB.Group
-                visible
-                open={controller.openFAB}
-                onStateChange={controller.onStateChange}
-                actions={ExpensesScreenService.getFABActions(controller.onChangeModal)}
-                icon="plus"
-            />
-            {controller.modal.open && (
-                <AddExpenseModal
-                    open={controller.modal.open}
-                    type={controller.modal.type}
-                    onClose={controller.onChangeModal}
-                />
-            )}
-        </View>
-    );
+      <FAB.Group
+        visible
+        open={expensesController.openFAB}
+        onStateChange={expensesController.onStateChange}
+        actions={expensesController.getActions()}
+        icon="plus"
+      />
+      {expensesController.modal.open && (
+        <AddExpenseModal
+          open={expensesController.modal.open}
+          type={expensesController.modal.type}
+          onClose={expensesController.onChangeModal}
+        />
+      )}
+    </View>
+  );
 };

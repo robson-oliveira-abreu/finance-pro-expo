@@ -1,5 +1,3 @@
-import { getWebDate } from "../../../../commons/getWebDate";
-import { ExpenseModel } from "../../../../models/Expense.model";
 import { useState } from "react";
 import { useExpenses } from "../../../../commons/Hooks/useExpenses.hook";
 import {
@@ -9,8 +7,8 @@ import {
   OpenDateAndroid,
   DateLabel,
   ErrorState,
+  WebDateErrorState,
 } from "./types";
-import { isWeb } from "../../../../commons/platform";
 import { AddExpenseModalService } from "./AddExpenseModal.service";
 
 function AddExpenseModalController(props: AddExpenseModalControllerProps) {
@@ -18,6 +16,9 @@ function AddExpenseModalController(props: AddExpenseModalControllerProps) {
   const [webDate, setWebDate] = useState<WebDateState>({});
   const [openAndroidDate, setOpenAndroidDate] = useState<OpenDateAndroid>({});
   const [errors, setErrors] = useState<ErrorState>(new Map());
+  const [webDateErrors, setWebDateErrors] = useState<WebDateErrorState>(
+    new Map()
+  );
   const expenses = useExpenses();
 
   const onChange = (label: keyof ExpenseFormState) => {
@@ -54,17 +55,21 @@ function AddExpenseModalController(props: AddExpenseModalControllerProps) {
     props.onClose();
   };
 
-  const onSubmit = () =>
-    AddExpenseModalService.onSubmit(
-      formState,
-      webDate,
-      expenses,
-      setErrors,
-      closeModal
-    );
+  const onSubmit = () => {
+    if (expenses)
+      AddExpenseModalService.onSubmit(
+        formState,
+        webDate,
+        expenses,
+        setErrors,
+        setWebDateErrors,
+        () => closeModal()
+      );
+  };
 
   return {
     errors,
+    webDateErrors,
     formState,
     openAndroidDate,
     onChange,

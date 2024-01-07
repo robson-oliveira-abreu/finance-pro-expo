@@ -1,8 +1,8 @@
 import React from "react";
 import { View } from "react-native";
 import { Surface, Text, TouchableRipple } from "react-native-paper";
-import { ExpenseModel } from "../../../../models/Expense.model";
-import { Spacer } from "../../../../components/Spacer/Spacer";
+import { ExpenseModel } from "../../../../commons/models/Expense.model";
+import { Spacer } from "../../../../commons/components/Spacer/Spacer";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { currency } from "../../../../commons/currency";

@@ -1,8 +1,13 @@
 import { getWebDate } from "../../../../commons/getWebDate";
-import { ExpenseModel } from "../../../../models/Expense.model";
+import { ExpenseModel } from "../../../../commons/models/Expense.model";
 import { isWeb } from "../../../../commons/platform";
-import { ErrorState, ExpenseFormState, WebDateState } from "./types";
-import { UseExpense } from "../../../../commons/Hooks/useExpenses.hook";
+import {
+  ErrorState,
+  ExpenseFormState,
+  WebDateErrorState,
+  WebDateState,
+} from "./types";
+import { UseExpense } from "../../../../commons/Hooks/useExpensesContext.hook";
 import { addMonths } from "date-fns";
 
 export class AddExpenseModalService {
@@ -11,6 +16,7 @@ export class AddExpenseModalService {
     webDate: WebDateState,
     expenses: UseExpense,
     setErrors: React.Dispatch<React.SetStateAction<ErrorState>>,
+    setWebDateErrors: React.Dispatch<React.SetStateAction<WebDateErrorState>>,
     closeModal: () => void
   ) {
     try {
@@ -31,36 +37,70 @@ export class AddExpenseModalService {
         return;
       }
 
-      const amount = Number(formState.amount.replaceAll(",", ".")) * 100;
+      if (isWeb) {
+        if (
+          !webDate.due_date?.day ||
+          webDate.due_date.day.toString().length > 2
+        )
+          return setWebDateErrors((state) => {
+            const newState = new Map(state);
+            newState.set("day", "Dia invalido");
+            return newState;
+          });
+
+        if (
+          !webDate.due_date?.month ||
+          webDate.due_date.month.toString().length > 2
+        )
+          return setWebDateErrors((state) => {
+            const newState = new Map(state);
+            newState.set("month", "mês invalido");
+            return newState;
+          });
+
+        if (![2, 4].includes(webDate.due_date?.year?.toString().length || 0))
+          return setWebDateErrors((state) => {
+            const newState = new Map(state);
+
+            newState.set("year", "Ano invalido");
+
+            return newState;
+          });
+      }
+
+      const amount = Math.round(
+        Number(formState.amount.replaceAll(",", ".")) * 100
+      );
       const installment = Number(formState.installment) || 1;
       const installments = Number(formState.installments) || 1;
 
       const due_date = isWeb
         ? getWebDate(webDate?.due_date)
-        : formState?.due_date;
+        : formState.due_date;
       const paid_date = isWeb
         ? getWebDate(webDate?.paid_date)
         : formState?.paid_date;
 
       const expense_list = new Array(installments - installment + 1)
         .fill(null)
-        .map(
-          (_, index) =>
-            new ExpenseModel(
-              null,
-              formState.description,
-              amount,
-              addMonths(due_date, index),
-              installment + index,
-              installments,
-              formState.observation,
-              formState.paid,
-              formState.paid_amount,
-              paid_date
-            )
+        .map((_, index) =>
+          ExpenseModel(
+            null,
+            formState.description || "",
+            amount,
+            addMonths(due_date || new Date(), index),
+            installment + index,
+            installments,
+            formState.observation,
+            formState.paid,
+            formState.paid_amount,
+            paid_date
+          )
         );
 
-      expense_list.forEach((expense) => expenses?.setExpense(expense));
+      expense_list.forEach((expense) => {
+        if (expense) expenses?.setExpense(expense);
+      });
 
       closeModal();
     } catch (error) {

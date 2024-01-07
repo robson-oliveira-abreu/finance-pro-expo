@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, FAB, TextInput, Text } from "react-native-paper";
-import { Spacer } from "../../components/Spacer/Spacer";
+import { Button, TextInput, Text } from "react-native-paper";
+import { Spacer } from "../../commons/components/Spacer/Spacer";
 import { useDialog } from "../../commons/Hooks/useDialog.hook";
-import { useWidth } from "../../commons/Hooks/useWidth";
+import { useWidth } from "../../commons/Hooks/useWidth.hook";
 
 type Labels = "email" | "password";
 
@@ -16,34 +16,10 @@ const initialState: FormState = {
   password: "",
 };
 
-export default function Login() {
-  const [state, setState] = React.useState({ open: false });
+export function Login() {
   const [form, setForm] = React.useState(initialState);
   const { Alert, closeAlert } = useDialog();
   const { maxWidth } = useWidth();
-
-  const onStateChange = ({ open }) => setState({ open });
-
-  const handleActions = () => {
-    return [
-      { icon: "plus", onPress: () => console.log("Pressed add") },
-      {
-        icon: "star",
-        label: "Star",
-        onPress: () => console.log("Pressed star"),
-      },
-      {
-        icon: "email",
-        label: "Email",
-        onPress: () => console.log("Pressed email"),
-      },
-      {
-        icon: "bell",
-        label: "Remind",
-        onPress: () => console.log("Pressed notifications"),
-      },
-    ];
-  };
 
   const onChangeForm = (label: Labels) => {
     return (text: string) => {
@@ -87,7 +63,7 @@ export default function Login() {
           onChangeText={onChangeForm("password")}
         />
 
-        <Spacer vertical={8} />
+        <Spacer y={8} />
 
         <Button mode="contained" style={styles.button} onPress={onSubmit}>
           Entrar
@@ -96,15 +72,6 @@ export default function Login() {
         <Button mode="text" style={styles.button} onPress={clearFields}>
           Limpar
         </Button>
-
-        <FAB.Group
-          visible
-          open={state.open}
-          onStateChange={onStateChange}
-          actions={handleActions()}
-          icon="plus"
-          onPress={() => console.log("Pressed")}
-        />
       </View>
     </View>
   );

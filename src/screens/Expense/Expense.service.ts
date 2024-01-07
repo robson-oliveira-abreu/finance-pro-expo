@@ -1,5 +1,5 @@
 import { NavigationProp } from "@react-navigation/native";
-import { ExpenseModel } from "../../models/Expense.model";
+import { ExpenseModel } from "../../commons/models/Expense.model";
 
 type Expenses = {
   expenses: ExpenseModel[];
@@ -8,12 +8,14 @@ type Expenses = {
 };
 
 export class ExpenseScreenService {
-  static payExpense(expense: ExpenseModel, expenses: Expenses) {
-    expense.pay();
-    expenses.setExpense(expense);
+  async payExpense(expense: ExpenseModel, expenses: Expenses) {
+    const paidExpense: ExpenseModel = { ...expense, paid: true };
+    await expenses.setExpense(paidExpense);
+
+    return paidExpense;
   }
 
-  static removeExpense(
+  removeExpense(
     expense: ExpenseModel,
     expenses: Expenses,
     navigator: NavigationProp<ReactNavigation.RootParamList>

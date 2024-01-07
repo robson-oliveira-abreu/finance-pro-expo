@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
     padding: 20,
+    marginBottom: 20,
     gap: 12,
   },
   flexOne: {

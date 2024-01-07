@@ -1,11 +1,11 @@
 import { FlatList } from "react-native";
-import { ExpenseModel } from "../../../../models/Expense.model";
-import { Spacer } from "../../../../components/Spacer/Spacer";
+import { ExpenseModel } from "../../../../commons/models/Expense.model";
+import { Spacer } from "../../../../commons/components/Spacer/Spacer";
 import { ExpenseItem } from "../ExpenseItem/ExpenseItem.view";
 import { styles } from "./styles";
 
 type ExpenseListProps = {
-  data: Array<ExpenseModel>;
+  data?: Array<ExpenseModel>;
 };
 
 export function ExpenseList(props: ExpenseListProps) {
@@ -13,7 +13,8 @@ export function ExpenseList(props: ExpenseListProps) {
     <FlatList
       data={props.data}
       contentContainerStyle={styles.list}
-      ItemSeparatorComponent={() => <Spacer vertical={12} />}
+      ItemSeparatorComponent={() => <Spacer y={12} />}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => <ExpenseItem expense={item} />}
     />
   );

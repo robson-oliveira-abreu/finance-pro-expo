@@ -1,4 +1,4 @@
-import { ExpenseModel } from "../../../../models/Expense.model";
+import { ExpenseModel } from "../../../../commons/models/Expense.model";
 import { ModalState } from "../../Expenses.controller";
 
 export interface ExpenseFormState
@@ -31,6 +31,8 @@ export type AddExpenseModalControllerProps = {
 };
 
 export type ErrorState = Map<keyof ExpenseFormState, string>;
+
+export type WebDateErrorState = Map<keyof WebDate, string>;
 
 export type AddExpenseModalProps = {
   open: boolean;
