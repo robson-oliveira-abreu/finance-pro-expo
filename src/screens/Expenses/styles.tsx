@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { isIos } from "../../commons/platform";
+import { isIos } from "../../commons/utils/platform";
 
 export const styles = StyleSheet.create({
   container: {

@@ -1,6 +1,6 @@
-import { getWebDate } from "../../../../commons/getWebDate";
+import { getWebDate } from "../../../../commons/utils/getWebDate";
 import { ExpenseModel } from "../../../../commons/models/Expense.model";
-import { isWeb } from "../../../../commons/platform";
+import { isWeb } from "../../../../commons/utils/platform";
 import {
   ErrorState,
   ExpenseFormState,

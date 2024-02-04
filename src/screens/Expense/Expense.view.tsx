@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Button, IconButton, Text } from "react-native-paper";
-import { currency } from "../../commons/currency";
-import { getLocaleDate } from "../../commons/date";
+import { currency } from "../../commons/utils/currency";
+import { getLocaleDate } from "../../commons/utils/date";
 import { styles } from "./styles";
 import { useExpenseController } from "./Expense.controller";
 

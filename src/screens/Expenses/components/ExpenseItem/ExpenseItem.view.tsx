@@ -5,8 +5,8 @@ import { ExpenseModel } from "../../../../commons/models/Expense.model";
 import { Spacer } from "../../../../commons/components/Spacer/Spacer";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { currency } from "../../../../commons/currency";
-import { getLocaleDate } from "../../../../commons/date";
+import { currency } from "../../../../commons/utils/currency";
+import { getLocaleDate } from "../../../../commons/utils/date";
 
 type ExpenseItemProps = {
   expense: ExpenseModel;

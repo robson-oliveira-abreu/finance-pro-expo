@@ -1,4 +1,4 @@
-import { generateId } from "../generateId";
+import { generateId } from "../utils/generateId";
 
 export type ExpenseModel = {
   id: string;

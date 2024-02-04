@@ -4,7 +4,7 @@ import {
   TouchableWithoutFeedback,
   ViewStyle,
 } from "react-native";
-import { isWeb } from "../../platform";
+import { isWeb } from "../../utils/platform";
 import { PropsWithChildren } from "react";
 
 type KeyboardAvoidingViewProps = PropsWithChildren & {

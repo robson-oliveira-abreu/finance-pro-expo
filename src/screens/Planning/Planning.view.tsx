@@ -4,7 +4,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { styles } from "./styles";
 import { planningController } from "./Planning.controller";
 import { CreatePlanModal } from "./components/CreatePlanModal/CreatePlanModal.view";
-import { currency } from "../../commons/currency";
+import { currency } from "../../commons/utils/currency";
 
 function Planning() {
   const controller = planningController();

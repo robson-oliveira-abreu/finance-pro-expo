@@ -6,7 +6,7 @@ import { View } from "react-native";
 import { ExpensesController } from "./Expenses.controller";
 import { Select } from "../../commons/components/Select/Select.view";
 import { AddExpenseModal } from "./components/AddExpenseModal/AddExpenseModal.view";
-import { isWeb } from "../../commons/platform";
+import { isWeb } from "../../commons/utils/platform";
 
 export const Expenses = (): ReactNode => {
   const expensesController = ExpensesController();

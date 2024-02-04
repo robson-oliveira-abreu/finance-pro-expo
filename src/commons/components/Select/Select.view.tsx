@@ -6,7 +6,7 @@ import { styles } from "./styles";
 import { SelectProps } from "./types";
 import { IconButton, Text } from "react-native-paper";
 import { Spacer } from "../Spacer/Spacer";
-import { isIos } from "../../platform";
+import { isIos } from "../../utils/platform";
 
 export function Select(props: SelectProps) {
   const controller = SelectController(props);

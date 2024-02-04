@@ -8,9 +8,9 @@ import {
 } from "react-native-paper";
 import { Spacer } from "../../../../commons/components/Spacer/Spacer";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { getLocaleDate } from "../../../../commons/date";
+import { getLocaleDate } from "../../../../commons/utils/date";
 import { AddExpenseModalController } from "./AddExpenseModal.controller";
-import { isAndroid, isIos, isWeb } from "../../../../commons/platform";
+import { isAndroid, isIos, isWeb } from "../../../../commons/utils/platform";
 import { AddExpenseModalProps } from "./types";
 import { styles } from "./styles";
 import { KeyboardAvoidingView } from "../../../../commons/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
