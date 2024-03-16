@@ -6,7 +6,7 @@ export function Header({ onPress = () => {} }) {
   return (
     <View style={styles.container}>
       <Text variant="headlineSmall" style={styles.logo}>
-        ClientPro
+        Finanças Pro
       </Text>
 
       <IconButton icon="menu" onPress={onPress} />

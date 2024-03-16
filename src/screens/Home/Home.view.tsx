@@ -6,7 +6,6 @@ import { Header } from "./components/Header/Header.view";
 import { GoalsViewModel } from "./components/Goals/Goals.view-model";
 import { ExpenseList } from "../../commons/components/ExpenseList/ExpenseList.view";
 import { Spacer } from "../../commons/components/Spacer/Spacer";
-import { Text } from "../../commons/components/UIComponents";
 
 export function HomeView(props: THomeModel) {
   const { onPressMenu, payableExpenses } = props;

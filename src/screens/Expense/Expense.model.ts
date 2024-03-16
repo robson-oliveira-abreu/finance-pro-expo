@@ -37,7 +37,6 @@ export function ExpenseModel(): TExpenseModel {
   return {
     payExpense,
     removeExpense,
-    goBack,
     expense,
   };
 }
