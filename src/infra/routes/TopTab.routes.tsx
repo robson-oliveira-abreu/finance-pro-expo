@@ -29,7 +29,6 @@ export const TopTabRoutes = ({ screens }: TopTabProps) => {
   return (
     <TopTab.Navigator
       style={style}
-      sceneContainerStyle={{ backgroundColor: "red" }}
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarIndicatorContainerStyle: {

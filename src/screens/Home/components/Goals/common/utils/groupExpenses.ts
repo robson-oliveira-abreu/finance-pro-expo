@@ -14,12 +14,14 @@ export function groupExpenses(_expenses: ExpenseModel[]) {
     if (!filterByMonth(expense)) return;
 
     if (expense.paid) {
-      grouped.paid += expense.amount;
-    } else if (new Date(expense.due_date) > new Date()) {
-      grouped.payable += expense.amount;
-    } else {
+      return (grouped.paid += expense.amount);
+    }
+
+    if (new Date(expense.due_date) < new Date()) {
       grouped.overdue += expense.amount;
     }
+
+    grouped.payable += expense.amount;
   });
 
   return grouped;

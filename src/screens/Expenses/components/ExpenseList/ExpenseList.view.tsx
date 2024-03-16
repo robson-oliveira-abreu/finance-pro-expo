@@ -11,14 +11,12 @@ type ExpenseListProps = {
 
 export function ExpenseList(props: ExpenseListProps) {
   return (
-    <Surface style={{ minHeight: "100%" }}>
-      <FlatList
-        data={props.data}
-        contentContainerStyle={styles.list}
-        ItemSeparatorComponent={() => <Spacer y={12} />}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ExpenseItem expense={item} />}
-      />
-    </Surface>
+    <FlatList
+      data={props.data}
+      contentContainerStyle={styles.list}
+      ItemSeparatorComponent={() => <Spacer y={12} />}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => <ExpenseItem expense={item} />}
+    />
   );
 }
