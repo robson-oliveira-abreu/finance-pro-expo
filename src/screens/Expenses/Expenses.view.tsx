@@ -1,44 +1,47 @@
 import React, { ReactNode } from "react";
-import { FAB, Text } from "react-native-paper";
-import { styles } from "./styles";
+import { FAB, Surface } from "react-native-paper";
+import { styles } from "./common/styles";
 import { TopTabRoutes } from "../../infra/routes/TopTab.routes";
-import { View } from "react-native";
-import { ExpensesController } from "./Expenses.controller";
 import { Select } from "../../commons/components/Select/Select.view";
 import { AddExpenseModal } from "./components/AddExpenseModal/AddExpenseModal.view";
 import { isWeb } from "../../commons/utils/platform";
+import { ExpensesViewProps } from "./common/types";
 
-export const Expenses = (): ReactNode => {
-  const expensesController = ExpensesController();
-
+export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
+  const {
+    openFAB,
+    modal,
+    selectedMonth,
+    getActions,
+    getScreens,
+    onSelectMonth,
+    onStateChange,
+    onChangeModal,
+  } = props;
   return (
-    <View style={styles.container}>
-      <Text variant="headlineSmall" style={styles.title}>
-        Despesas
-      </Text>
-
+    <Surface style={styles.container}>
       <Select
-        onSelect={expensesController.onSelectMonth}
-        selected={expensesController.selectedMonth}
+        onSelect={onSelectMonth}
+        selected={selectedMonth}
         style={{ paddingHorizontal: 20, marginBottom: isWeb ? 20 : 0 }}
       />
 
-      <TopTabRoutes screens={expensesController.getScreens()} />
+      <TopTabRoutes screens={getScreens()} />
 
       <FAB.Group
         visible
-        open={expensesController.openFAB}
-        onStateChange={expensesController.onStateChange}
-        actions={expensesController.getActions()}
+        open={openFAB}
+        onStateChange={onStateChange}
+        actions={getActions()}
         icon="plus"
       />
-      {expensesController.modal.open && (
+      {modal.open && (
         <AddExpenseModal
-          open={expensesController.modal.open}
-          type={expensesController.modal.type}
-          onClose={expensesController.onChangeModal}
+          open={modal.open}
+          type={modal.type}
+          onClose={onChangeModal}
         />
       )}
-    </View>
+    </Surface>
   );
 };

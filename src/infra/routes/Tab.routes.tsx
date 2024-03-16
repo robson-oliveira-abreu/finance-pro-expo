@@ -2,41 +2,21 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesignIcon from "@expo/vector-icons/AntDesign";
 import FontAwesomeIcon from "@expo/vector-icons/FontAwesome";
 
-import { Home } from "../../screens/Home/Home.view";
-import { Planning } from "../../screens/Planning/Planning.view";
-import { Expenses } from "../../screens/Expenses/Expenses.view";
+import { PlanningViewModel } from "../../screens/Planning/Planning.view-model";
+import { ExpensesViewModel } from "../../screens/Expenses/Expenses.view-model";
 
 import { BottomTabBar } from "../../commons/components/BottomTabBar/BottomTabBar.component";
+import { HomeViewModel } from "../../screens/Home/Home.view-model";
+import { Login } from "../../screens/Login/Login.screen";
 
 const Tab = createBottomTabNavigator();
-
-type TabBarIcon = (props: { color: string; size: number }) => React.ReactNode;
-class TabScreen {
-  constructor(
-    public name: string,
-    public component: () => React.JSX.Element | React.ReactNode,
-    public tabBarIcon: TabBarIcon
-  ) {}
-}
-
-const Screens: Array<TabScreen> = [
-  new TabScreen("Home", Home, ({ color, size }) => (
-    <AntDesignIcon name="home" size={size} color={color} />
-  )),
-  new TabScreen("Expenses", Expenses, ({ color, size }) => (
-    <FontAwesomeIcon name="dollar" size={size} color={color} />
-  )),
-  new TabScreen("Planning", Expenses, ({ color, size }) => (
-    <FontAwesomeIcon name="line-chart" size={size} color={color} />
-  )),
-];
 
 export function TabRoutes() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={BottomTabBar}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Inicio"
+        component={HomeViewModel}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <AntDesignIcon name="home" size={size} color={color} />;
@@ -45,7 +25,7 @@ export function TabRoutes() {
       />
       <Tab.Screen
         name="Despesas"
-        component={Expenses}
+        component={ExpensesViewModel}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <FontAwesomeIcon name="dollar" size={size} color={color} />;
@@ -55,12 +35,21 @@ export function TabRoutes() {
 
       <Tab.Screen
         name="Planejamento"
-        component={Planning}
+        component={PlanningViewModel}
         options={{
           tabBarIcon: ({ color, size }) => {
             return (
               <FontAwesomeIcon name="line-chart" size={size} color={color} />
             );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Perfil"
+        component={Login}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <AntDesignIcon name="user" size={size} color={color} />;
           },
         }}
       />

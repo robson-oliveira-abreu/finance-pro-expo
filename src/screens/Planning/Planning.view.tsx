@@ -1,24 +1,25 @@
-import { SafeAreaView, View } from "react-native";
-import { Text, DataTable, Button, FAB } from "react-native-paper";
+import { SafeAreaView } from "react-native";
+import { DataTable, FAB, Surface } from "react-native-paper";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { styles } from "./styles";
-import { planningController } from "./Planning.controller";
+import { styles } from "./common/styles";
 import { CreatePlanModal } from "./components/CreatePlanModal/CreatePlanModal.view";
 import { currency } from "../../commons/utils/currency";
+import { PlanningViewProps } from "./common/types";
+import { Button, Text } from "../../commons/components/UIComponents";
 
-function Planning() {
-  const controller = planningController();
+export function PlanningView(props: PlanningViewProps) {
+  const { modalOpen, planItems, openModal, closeModal } = props;
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
+      <Surface style={styles.container}>
         <Text variant="headlineLarge">Planejamento</Text>
 
         <Text variant="bodyMedium">
-          Receita - {currency(controller.planItems?.totalRevenue || 0)}
+          Receita - {currency(planItems?.totalRevenue || 0)}
         </Text>
         <Text variant="bodyMedium">
-          Despesa - {currency(controller.planItems?.totalExpenses || 0)}
+          Despesa - {currency(planItems?.totalExpenses || 0)}
         </Text>
 
         <DataTable>
@@ -27,7 +28,7 @@ function Planning() {
             <DataTable.Title>Valor</DataTable.Title>
             <DataTable.Title>{""}</DataTable.Title>
           </DataTable.Header>
-          {controller.planItems?.planItems.map((planItem) => (
+          {planItems?.planItems.map((planItem) => (
             <DataTable.Row key={planItem.id}>
               <DataTable.Cell>{planItem.description}</DataTable.Cell>
               <DataTable.Cell>{currency(planItem.amount)}</DataTable.Cell>
@@ -46,16 +47,11 @@ function Planning() {
           onStateChange={() => {}}
           actions={[]}
           icon="plus"
-          onPress={controller.openModal}
+          onPress={openModal}
         />
 
-        <CreatePlanModal
-          open={controller.modalOpen}
-          closeModal={controller.closeModal}
-        />
-      </View>
+        <CreatePlanModal open={modalOpen} closeModal={closeModal} />
+      </Surface>
     </SafeAreaView>
   );
 }
-
-export { Planning };

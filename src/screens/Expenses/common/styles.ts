@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
-import { isIos } from "../../commons/utils/platform";
+import { isIos } from "../../../commons/utils/platform";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    minHeight: "100%",
     alignItems: "center",
     justifyContent: "center",
   },

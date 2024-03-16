@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Dialog, Portal, Text } from "react-native-paper";
+import { Dialog, Portal } from "react-native-paper";
 import { useDialog } from "../../Hooks/useDialog.hook";
+import { Text, Button } from "../UIComponents";
 
 const Alert: React.FC = () => {
   const { alert, closeAlert } = useDialog();

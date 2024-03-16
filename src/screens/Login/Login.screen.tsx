@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, TextInput, Text } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import { Spacer } from "../../commons/components/Spacer/Spacer";
 import { useDialog } from "../../commons/Hooks/useDialog.hook";
 import { useWidth } from "../../commons/Hooks/useWidth.hook";
+import { Button, Text } from "../../commons/components/UIComponents";
 
 type Labels = "email" | "password";
 
@@ -18,7 +19,7 @@ const initialState: FormState = {
 
 export function Login() {
   const [form, setForm] = React.useState(initialState);
-  const { Alert, closeAlert } = useDialog();
+  const dialog = useDialog();
   const { maxWidth } = useWidth();
 
   const onChangeForm = (label: Labels) => {
@@ -36,10 +37,10 @@ export function Login() {
       (text, [label, value]) => (text += `${label}: ${value}; \n`),
       ""
     );
-    Alert({
+    dialog?.Alert({
       title: "Submit",
       message: alert_text,
-      actions: [{ label: "OK", onPress: closeAlert }],
+      actions: [{ label: "OK", onPress: dialog.closeAlert }],
     });
   };
 

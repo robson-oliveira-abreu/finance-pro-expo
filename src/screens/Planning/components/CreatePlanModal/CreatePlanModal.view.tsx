@@ -1,16 +1,12 @@
 import { Modal, View } from "react-native";
-import {
-  Button,
-  IconButton,
-  SegmentedButtons,
-  TextInput,
-} from "react-native-paper";
+import { IconButton, SegmentedButtons, TextInput } from "react-native-paper";
 import { Spacer } from "../../../../commons/components/Spacer/Spacer";
 import { CreatePlanProps } from "./types";
 import { KeyboardAvoidingView } from "../../../../commons/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
 import { CreatePlanModalController } from "./CreatePlanModal.controller";
 import { styles } from "./styles";
 import { buttons } from "./constants";
+import { Button } from "../../../../commons/components/UIComponents";
 
 export function CreatePlanModal(props: CreatePlanProps) {
   const controller = CreatePlanModalController(props);

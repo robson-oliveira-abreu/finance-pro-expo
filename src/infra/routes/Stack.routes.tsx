@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Expense } from "../../screens/Expense/Expense.view";
+import { ExpenseViewModel } from "../../screens/Expense/Expense.view-model";
 import { TabRoutes } from "./Tab.routes";
 import { ExpenseModel } from "../../commons/models/Expense.model";
 
@@ -18,7 +18,7 @@ export function StackRoutes() {
       }}
     >
       <Stack.Screen name="HomeTabs" component={TabRoutes} />
-      <Stack.Screen name="Expense" component={Expense} />
+      <Stack.Screen name="Expense" component={ExpenseViewModel} />
     </Stack.Navigator>
   );
 }

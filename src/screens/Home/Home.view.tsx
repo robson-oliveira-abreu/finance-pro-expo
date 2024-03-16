@@ -1,21 +1,17 @@
 import React from "react";
-import { FAB, Surface } from "react-native-paper";
-import { useHomeController } from "./Home.controller";
-import { styles } from "./styles";
+import { Surface } from "react-native-paper";
+import { styles } from "./common/styles";
+import { THomeModel } from "./common/types";
+import { Header } from "./components/Header/Header.view";
+import { GoalsViewModel } from "./components/Goals/Goals.view-model";
 
-export function Home() {
-  const homeScrennController = useHomeController();
-
+export function HomeView(props: THomeModel) {
+  const { onPressMenu } = props;
   return (
     <Surface style={[styles.container]}>
-      <FAB.Group
-        visible
-        open={homeScrennController.state.open}
-        onStateChange={homeScrennController.onStateChange}
-        actions={homeScrennController.actions}
-        icon="plus"
-        onPress={() => console.log("Pressed")}
-      />
+      <Header onPress={onPressMenu} />
+
+      <GoalsViewModel />
     </Surface>
   );
 }

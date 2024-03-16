@@ -1,5 +1,5 @@
 import { ExpenseModel } from "../../../../commons/models/Expense.model";
-import { ModalState } from "../../Expenses.controller";
+import { ModalState } from "../../Expenses.model";
 
 export interface ExpenseFormState
   extends Partial<

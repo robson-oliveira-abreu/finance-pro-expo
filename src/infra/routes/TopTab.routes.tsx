@@ -1,18 +1,25 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleProp, ViewStyle, useWindowDimensions } from "react-native";
+import { useTheme } from "react-native-paper";
+import { ExpenseModel } from "../../commons/models/Expense.model";
 
-export class TopTabScreen {
-  constructor(public name: string, public component: React.JSX.Element) {}
+export class TopTabScreen<TProps> {
+  constructor(
+    public name: string,
+    public component: (props: TProps) => React.JSX.Element,
+    public props: TProps
+  ) {}
 }
 
 type TopTabProps = {
-  screens: Array<TopTabScreen>;
+  screens?: Array<TopTabScreen<{ data?: ExpenseModel[] }>>;
 };
 
 const TopTab = createMaterialTopTabNavigator();
 
 export const TopTabRoutes = ({ screens }: TopTabProps) => {
   const { width } = useWindowDimensions();
+  const { colors } = useTheme();
 
   const style: StyleProp<ViewStyle> = {
     width,
@@ -22,18 +29,22 @@ export const TopTabRoutes = ({ screens }: TopTabProps) => {
   return (
     <TopTab.Navigator
       style={style}
+      sceneContainerStyle={{ backgroundColor: "red" }}
       screenOptions={{
-        tabBarActiveTintColor: "#ff0c0c",
+        tabBarActiveTintColor: colors.primary,
+        tabBarIndicatorContainerStyle: {
+          backgroundColor: colors.background,
+        },
         tabBarIndicatorStyle: {
-          backgroundColor: "#ff0c0c",
+          backgroundColor: colors.primary,
         },
       }}
     >
-      {screens.map((Screen) => (
+      {screens?.map((Screen) => (
         <TopTab.Screen
           key={"screen:" + Screen.name}
           name={Screen.name}
-          children={() => Screen.component}
+          children={() => <Screen.component {...Screen.props} />}
         />
       ))}
     </TopTab.Navigator>

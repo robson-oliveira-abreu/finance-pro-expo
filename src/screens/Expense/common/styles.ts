@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    minHeight: "100%",
   },
   header: {
     flexDirection: "row",
@@ -16,5 +17,8 @@ export const styles = StyleSheet.create({
   footer: {
     padding: 20,
     gap: 8,
+  },
+  bold: {
+    fontWeight: "700",
   },
 });

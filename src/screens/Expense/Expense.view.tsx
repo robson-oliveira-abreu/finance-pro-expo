@@ -1,68 +1,66 @@
 import { View } from "react-native";
-import { Button, IconButton, Text } from "react-native-paper";
+import { IconButton, Surface } from "react-native-paper";
 import { currency } from "../../commons/utils/currency";
 import { getLocaleDate } from "../../commons/utils/date";
-import { styles } from "./styles";
-import { useExpenseController } from "./Expense.controller";
+import { styles } from "./common/styles";
+import { ExpenseViewProps } from "./common/types";
+import { Text, Button } from "../../commons/components/UIComponents";
 
-export function Expense() {
-  const expenseController = useExpenseController();
+export function ExpenseView(props: ExpenseViewProps) {
+  const { expense, goBack, payExpense, removeExpense } = props;
   return (
-    <View style={styles.container}>
+    <Surface style={styles.container}>
       <View style={styles.header}>
-        <IconButton icon="arrow-left" onPress={expenseController.goBack} />
+        <IconButton icon="arrow-left" onPress={goBack} />
         <IconButton icon="dots-vertical" onPress={() => {}} />
       </View>
 
       <View style={styles.content}>
-        <Text variant="headlineMedium">
-          {expenseController.expense?.description}
+        <Text variant="headlineMedium">{expense?.description}</Text>
+
+        <Text variant="bodyLarge">
+          <Text style={styles.bold}>Status: </Text>
+          {expense?.paid ? "Pago" : "A Pagar"}
         </Text>
 
         <Text variant="bodyLarge">
-          <Text style={{ fontWeight: "700" }}>Status: </Text>
-          {expenseController.expense?.paid ? "Pago" : "A Pagar"}
+          <Text style={styles.bold}>Parcela: </Text>
+          {expense?.installment}/{expense?.installments}
         </Text>
 
         <Text variant="bodyLarge">
-          <Text style={{ fontWeight: "700" }}>Parcela: </Text>
-          {expenseController.expense?.installment}/
-          {expenseController.expense?.installments}
+          <Text style={styles.bold}>Observação: </Text>
+          {expense?.observation}
         </Text>
 
         <Text variant="bodyLarge">
-          <Text style={{ fontWeight: "700" }}>Observação: </Text>
-          {expenseController.expense?.observation}
+          <Text style={styles.bold}>Data de Vencimento: </Text>
+          {getLocaleDate(expense?.due_date || new Date())}
         </Text>
 
         <Text variant="bodyLarge">
-          <Text style={{ fontWeight: "700" }}>Data de Vencimento: </Text>
-          {getLocaleDate(expenseController.expense?.due_date || new Date())}
+          <Text style={styles.bold}>Valor: </Text>
+          {currency(expense?.amount || 0)}
         </Text>
 
-        <Text variant="bodyLarge">
-          <Text style={{ fontWeight: "700" }}>Valor: </Text>
-          {currency(expenseController.expense?.amount || 0)}
-        </Text>
-
-        {Boolean(expenseController.expense?.paid_amount) && (
+        {Boolean(expense?.paid_amount) && (
           <Text variant="bodyLarge">
-            <Text style={{ fontWeight: "700" }}>Valor pago: </Text>
-            {currency(expenseController.expense?.paid_amount || 0)}
+            <Text style={styles.bold}>Valor pago: </Text>
+            {currency(expense?.paid_amount || 0)}
           </Text>
         )}
       </View>
 
       <View style={styles.footer}>
-        {!expenseController.expense?.paid && (
-          <Button mode="contained" onPress={expenseController.payExpense}>
+        {!expense?.paid && (
+          <Button mode="contained" onPress={payExpense}>
             Pagar
           </Button>
         )}
-        <Button mode="text" onPress={expenseController.removeExpense}>
+        <Button mode="text" onPress={removeExpense}>
           Excluir
         </Button>
       </View>
-    </View>
+    </Surface>
   );
 }

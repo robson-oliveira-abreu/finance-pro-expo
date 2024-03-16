@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { usePlanItems } from "../../commons/Hooks/usePlanItems.hook";
+import { TPlanningModel } from "./common/types";
 
-function planningController() {
+export function PlanningModel(): TPlanningModel {
   const [modalOpen, setModalOpen] = useState(false);
   const planItems = usePlanItems();
 
@@ -20,5 +21,3 @@ function planningController() {
     closeModal,
   };
 }
-
-export { planningController };
