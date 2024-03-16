@@ -1,3 +1,5 @@
+import { ExpenseModel } from "../../../commons/models/Expense.model";
+
 export type THomeModel = {
   state: {
     open: boolean;
@@ -9,4 +11,5 @@ export type THomeModel = {
     label?: string;
   }[];
   onPressMenu: () => void;
+  payableExpenses: ExpenseModel[];
 };

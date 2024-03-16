@@ -1,16 +1,19 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-const { width } = Dimensions.get("window");
+const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
+const MAX_WIDTH = WIDTH / 3 - 12 > HEIGHT * 0.3 ? HEIGHT * 0.3 : WIDTH / 3 - 12;
 
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    paddingHorizontal: 12,
   },
   itemContainer: {
     flexGrow: 1,
-    maxWidth: width / 3 - 24,
+    maxWidth: MAX_WIDTH,
+    maxHeight: MAX_WIDTH,
     gap: 4,
   },
   itemContent: {

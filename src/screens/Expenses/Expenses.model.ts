@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
 import { TopTabScreen } from "../../infra/routes/TopTab.routes";
-import { ExpenseList } from "./components/ExpenseList/ExpenseList.view";
+import { ExpenseList } from "../../commons/components/ExpenseList/ExpenseList.view";
 import { ExpenseModel } from "../../commons/models/Expense.model";
 import { TExpensesModel } from "./common/types";
 import { filterMonthExpenses } from "../../commons/utils/filterExpensesByMonth";

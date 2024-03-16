@@ -2,16 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: "relative",
+    justifyContent: "center",
     alignItems: "center",
-    gap: 12,
-    minHeight: "100%",
   },
-  input: {
-    width: "100%",
-  },
-  button: {
-    width: "100%",
-    borderRadius: 8,
+  text: {
+    fontWeight: "900",
+    position: "absolute",
+    textAlign: "center",
   },
 });

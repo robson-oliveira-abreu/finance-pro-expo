@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { THomeModel } from "./common/types";
+import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
+import { filterPayableExpenses } from "../../commons/utils/filterPayableExpenses";
 
 export function HomeModel(): THomeModel {
   const [state, setState] = useState({ open: false });
+  const { expenses } = useExpenses();
+  const payableExpenses = filterPayableExpenses(expenses);
 
   const onStateChange = ({ open }) => setState({ open });
 
@@ -30,6 +34,7 @@ export function HomeModel(): THomeModel {
   return {
     state,
     actions,
+    payableExpenses,
     onStateChange,
     onPressMenu,
   };

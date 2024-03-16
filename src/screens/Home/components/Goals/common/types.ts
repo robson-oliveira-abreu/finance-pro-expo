@@ -3,6 +3,7 @@ export type TGoalsModel = {
     paid: number;
     payable: number;
     overdue: number;
+    total: number;
   };
 };
 

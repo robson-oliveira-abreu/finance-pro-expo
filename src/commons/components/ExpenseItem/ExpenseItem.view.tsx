@@ -1,13 +1,13 @@
 import React from "react";
 import { View } from "react-native";
 import { Surface, TouchableRipple } from "react-native-paper";
-import { ExpenseModel } from "../../../../commons/models/Expense.model";
-import { Spacer } from "../../../../commons/components/Spacer/Spacer";
+import { ExpenseModel } from "../../models/Expense.model";
+import { Spacer } from "../Spacer/Spacer";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { currency } from "../../../../commons/utils/currency";
-import { getLocaleDate } from "../../../../commons/utils/date";
-import { Text } from "../../../../commons/components/UIComponents";
+import { currency } from "../../utils/currency";
+import { getLocaleDate } from "../../utils/date";
+import { Text } from "../UIComponents";
 
 type ExpenseItemProps = {
   expense: ExpenseModel;

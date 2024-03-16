@@ -2,7 +2,8 @@ import { HomeModel } from "./Home.model";
 import { HomeView } from "./Home.view";
 
 export function HomeViewModel() {
-  const { actions, state, onStateChange, onPressMenu } = HomeModel();
+  const { actions, state, payableExpenses, onStateChange, onPressMenu } =
+    HomeModel();
 
   return (
     <HomeView
@@ -10,6 +11,7 @@ export function HomeViewModel() {
       state={state}
       onStateChange={onStateChange}
       onPressMenu={onPressMenu}
+      payableExpenses={payableExpenses}
     />
   );
 }
