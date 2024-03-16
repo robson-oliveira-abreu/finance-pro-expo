@@ -15,7 +15,10 @@ export function useExpensesContext(): UseExpense {
   const getExpenses = async () => {
     const result = await expenseService.list();
 
-    if (result) setExpenses(result);
+    if (result)
+      setExpenses(
+        result.sort((a, b) => a.due_date.getTime() - b.due_date.getTime())
+      );
   };
 
   const setExpense = async (expense: ExpenseModel) => {
