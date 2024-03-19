@@ -1,5 +1,5 @@
-import { HomeModel } from "./Home.Model";
-import { HomeView } from "./Home.View";
+import { HomeModel } from "./Home.model";
+import { HomeView } from "./Home.view";
 
 export function HomeViewModel() {
   const { payableExpenses, onPressMenu } = HomeModel();
