@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { Text } from "../../../../commons/components/UIComponents";
 import { IconButton } from "react-native-paper";
-import { GoalsViewModel } from "../Goals/Goals.ViewModel";
+import { GoalsViewModel } from "../Goals/Goals.view-model";
 import { theme } from "../../../../commons/theme/theme";
 
 export function Header({ onPress = () => {} }) {

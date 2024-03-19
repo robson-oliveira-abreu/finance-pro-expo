@@ -1,4 +1,4 @@
-import { GoalsModel } from "./Goals.Model";
+import { GoalsModel } from "./Goals.model";
 import { GoalsView } from "./Goals.View";
 
 export function GoalsViewModel() {
