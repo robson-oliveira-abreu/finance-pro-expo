@@ -1,7 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
-import { TopTabScreen } from "../../infra/routes/TopTab.routes";
-import { ExpenseList } from "../../commons/components/ExpenseList/ExpenseList.view";
 import { ExpenseModel } from "../../commons/models/Expense.model";
 import { TExpensesModel } from "./common/types";
 import { filterMonthExpenses } from "../../commons/utils/filterExpensesByMonth";
@@ -17,31 +15,15 @@ const defaultModalState: ModalState = {
 };
 
 export function ExpensesModel(): TExpensesModel {
-  const expenses = useExpenses();
+  const { expenses } = useExpenses();
   const [openFAB, setOpenFAB] = useState(false);
   const [modal, setModal] = useState<ModalState>(defaultModalState);
   const [selectedMonth, setSelectedMonth] = useState(new Date().toDateString());
 
-  const onStateChange = ({ open }) => {
-    setOpenFAB(open);
-  };
-
-  const onChangeModal = (type?: ModalState["type"]) => {
-    setModal((state) =>
-      state.open ? defaultModalState : { open: true, type }
-    );
-  };
-
-  const onSelectMonth = (newMonth: string) => {
-    setSelectedMonth(newMonth);
-  };
-
-  const getScreens = () => {
-    if (!expenses) return;
-
+  const { unPaidExpense, paidExpense } = useMemo(() => {
     const filter = filterMonthExpenses(new Date(selectedMonth));
 
-    const [paidExpense, unPaidExpense] = expenses.expenses.reduce(
+    const [paidExpense, unPaidExpense] = expenses?.reduce(
       (acc, curr) => {
         if (!filter(curr)) {
           return acc;
@@ -60,38 +42,31 @@ export function ExpensesModel(): TExpensesModel {
       [new Array<ExpenseModel>(), new Array<ExpenseModel>()]
     );
 
-    return [
-      new TopTabScreen<{ data?: ExpenseModel[] }>("A Pagar", ExpenseList, {
-        data: unPaidExpense,
-      }),
-      new TopTabScreen<{ data?: ExpenseModel[] }>("Pago", ExpenseList, {
-        data: paidExpense,
-      }),
-    ];
+    return { paidExpense, unPaidExpense };
+  }, [expenses]);
+
+  const onStateChange = ({ open }) => {
+    setOpenFAB(open);
   };
 
-  const getActions = () => {
-    const expenseLooseAction = {
-      icon: "plus",
-      label: "Despesa avulsa",
-      onPress: () => onChangeModal("loose"),
+  const onChangeModal = (type?: ModalState["type"]) => {
+    return () => {
+      setModal((state) =>
+        state.open ? defaultModalState : { open: true, type }
+      );
     };
-    const expenseFixedAction = {
-      icon: "pin",
-      label: "Despesa fixa",
-      onPress: () => onChangeModal("fixed"),
-    };
+  };
 
-    return [expenseLooseAction, expenseFixedAction];
+  const onSelectMonth = (newMonth: string) => {
+    setSelectedMonth(newMonth);
   };
 
   return {
-    expenses,
     openFAB,
     modal,
     selectedMonth,
-    getActions,
-    getScreens,
+    unPaidExpense,
+    paidExpense,
     onSelectMonth,
     onStateChange,
     onChangeModal,

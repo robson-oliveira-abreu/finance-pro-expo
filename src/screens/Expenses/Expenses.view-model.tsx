@@ -3,12 +3,11 @@ import { ExpensesView } from "./Expenses.view";
 
 export function ExpensesViewModel() {
   const {
-    expenses,
     openFAB,
     modal,
     selectedMonth,
-    getActions,
-    getScreens,
+    paidExpense,
+    unPaidExpense,
     onSelectMonth,
     onStateChange,
     onChangeModal,
@@ -16,12 +15,11 @@ export function ExpensesViewModel() {
 
   return (
     <ExpensesView
-      expenses={expenses}
       openFAB={openFAB}
       modal={modal}
       selectedMonth={selectedMonth}
-      getActions={getActions}
-      getScreens={getScreens}
+      paidExpense={paidExpense}
+      unPaidExpense={unPaidExpense}
       onSelectMonth={onSelectMonth}
       onStateChange={onStateChange}
       onChangeModal={onChangeModal}

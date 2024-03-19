@@ -19,7 +19,7 @@ export function ExpenseItem(props: ExpenseItemProps) {
   const { expense } = props;
   const navigator = useNavigation();
 
-  const openExpense = () => navigator.navigate("Expense", { expense: expense });
+  const openExpense = () => navigator.navigate("Expense", { expense });
 
   const status = getStatus(expense);
 
@@ -27,7 +27,7 @@ export function ExpenseItem(props: ExpenseItemProps) {
     <TouchableRipple
       rippleColor="rgba(200,0,0,0.2)"
       onPress={openExpense}
-      style={{ borderRadius: 12 }}
+      style={{ borderRadius: 12, marginHorizontal: 20 }}
     >
       <Surface style={styles.container}>
         <View>

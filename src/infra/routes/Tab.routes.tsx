@@ -6,7 +6,7 @@ import { PlanningViewModel } from "../../screens/Planning/Planning.view-model";
 import { ExpensesViewModel } from "../../screens/Expenses/Expenses.view-model";
 
 import { BottomTabBar } from "../../commons/components/BottomTabBar/BottomTabBar.component";
-import { HomeViewModel } from "../../screens/Home/Home.view-model";
+import { HomeViewModel } from "../../screens/Home/Home.ViewModel";
 import { Login } from "../../screens/Login/Login.screen";
 
 const Tab = createBottomTabNavigator();

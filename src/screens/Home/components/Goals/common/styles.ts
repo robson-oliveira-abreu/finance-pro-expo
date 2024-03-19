@@ -9,9 +9,10 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 12,
+    paddingBottom: 30,
   },
   itemContainer: {
-    flexGrow: 1,
+    width: "33%",
     maxWidth: MAX_WIDTH,
     maxHeight: MAX_WIDTH,
     gap: 4,
