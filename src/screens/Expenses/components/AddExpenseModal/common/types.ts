@@ -1,5 +1,5 @@
-import { ExpenseModel } from "../../../../commons/models/Expense.model";
-import { ModalState } from "../../Expenses.model";
+import { ExpenseModel } from "../../../../../commons/models/Expense.model";
+import { ModalState } from "../../../Expenses.model";
 
 export interface ExpenseFormState
   extends Partial<
@@ -28,14 +28,35 @@ export type OpenDateAndroid = {
 
 export type AddExpenseModalControllerProps = {
   onClose: () => void;
+  type: ModalState["type"];
 };
 
 export type ErrorState = Map<keyof ExpenseFormState, string>;
 
 export type WebDateErrorState = Map<keyof WebDate, string>;
 
-export type AddExpenseModalProps = {
+export type AddExpenseModalViewModelProps = {
   open: boolean;
   type: ModalState["type"];
   onClose: () => void;
+};
+
+export type AddExpenseModalViewProps = AddExpenseModalViewModelProps &
+  TAddExpenseModalModel;
+
+export type TAddExpenseModalModel = {
+  errors: ErrorState;
+  webDateErrors: WebDateErrorState;
+  formState: ExpenseFormState;
+  openAndroidDate: OpenDateAndroid;
+  onChangeDateNative: (label: DateLabel, date: Date) => void;
+  onChange: (
+    label: keyof ExpenseFormState
+  ) => (value: ExpenseFormState[keyof ExpenseFormState]) => void;
+  onSubmit: () => void;
+  onChangeDateWeb: (
+    key: DateLabel,
+    label: "day" | "month" | "year"
+  ) => (data: string) => void;
+  handleOpenAndroidDate: (label: DateLabel) => () => void;
 };

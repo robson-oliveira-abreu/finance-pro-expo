@@ -5,7 +5,6 @@ import FontAwesomeIcon from "@expo/vector-icons/FontAwesome";
 import { PlanningViewModel } from "../../screens/Planning/Planning.view-model";
 import { ExpensesViewModel } from "../../screens/Expenses/Expenses.view-model";
 
-import { BottomTabBar } from "../../commons/components/BottomTabBar/BottomTabBar.component";
 import { HomeViewModel } from "../../screens/Home/Home.view-model";
 import { Login } from "../../screens/Login/Login.screen";
 
@@ -13,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 export function TabRoutes() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }} tabBar={BottomTabBar}>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="Inicio"
         component={HomeViewModel}

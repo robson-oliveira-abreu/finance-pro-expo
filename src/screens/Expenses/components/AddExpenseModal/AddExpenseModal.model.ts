@@ -1,24 +1,67 @@
+import { useState } from "react";
+import { useExpenses } from "../../../../commons/Hooks/useExpenses.hook";
+import {
+  ExpenseFormState,
+  AddExpenseModalControllerProps,
+  WebDateState,
+  OpenDateAndroid,
+  DateLabel,
+  ErrorState,
+  WebDateErrorState,
+  TAddExpenseModalModel,
+} from "./common/types";
 import { getWebDate } from "../../../../commons/utils/getWebDate";
 import { ExpenseModel } from "../../../../commons/models/Expense.model";
 import { isWeb } from "../../../../commons/utils/platform";
-import {
-  ErrorState,
-  ExpenseFormState,
-  WebDateErrorState,
-  WebDateState,
-} from "./types";
-import { UseExpense } from "../../../../commons/Hooks/useExpensesContext.hook";
 import { addMonths } from "date-fns";
 
-export class AddExpenseModalService {
-  static onSubmit(
-    formState: ExpenseFormState,
-    webDate: WebDateState,
-    expenses: UseExpense,
-    setErrors: React.Dispatch<React.SetStateAction<ErrorState>>,
-    setWebDateErrors: React.Dispatch<React.SetStateAction<WebDateErrorState>>,
-    closeModal: () => void
-  ) {
+function AddExpenseModalModel(
+  props: AddExpenseModalControllerProps
+): TAddExpenseModalModel {
+  const [formState, setFormState] = useState<ExpenseFormState>({});
+  const [webDate, setWebDate] = useState<WebDateState>({});
+  const [openAndroidDate, setOpenAndroidDate] = useState<OpenDateAndroid>({});
+  const [errors, setErrors] = useState<ErrorState>(new Map());
+  const [webDateErrors, setWebDateErrors] = useState<WebDateErrorState>(
+    new Map()
+  );
+  const expenses = useExpenses();
+
+  const onChange = (label: keyof ExpenseFormState) => {
+    return (value: ExpenseFormState[keyof ExpenseFormState]) => {
+      errors.set(label, "");
+      setFormState((state) => ({
+        ...state,
+        [label]: value,
+      }));
+    };
+  };
+
+  const onChangeDateWeb = (key: DateLabel, label: "day" | "month" | "year") => {
+    return (data: string) => {
+      setWebDate((state) => ({
+        ...state,
+        [key]: { ...state[key], [label]: data },
+      }));
+    };
+  };
+
+  const onChangeDateNative = (label: DateLabel, date: Date) => {
+    setOpenAndroidDate((state) => ({ ...state, [label]: false }));
+    onChange(label)(date);
+  };
+
+  const handleOpenAndroidDate = (label: DateLabel) => {
+    return () => setOpenAndroidDate((state) => ({ ...state, [label]: true }));
+  };
+
+  const closeModal = () => {
+    setFormState({});
+    setErrors(new Map());
+    props.onClose();
+  };
+
+  const onSubmit = () => {
     try {
       if (!formState.description || !formState.amount) {
         setErrors((state) => {
@@ -92,19 +135,33 @@ export class AddExpenseModalService {
             installment + index,
             installments,
             formState.observation,
-            formState.paid,
+            props.type === "expense" ? true : formState.paid,
             formState.paid_amount,
             paid_date
           )
         );
 
       expense_list.forEach((expense) => {
-        if (expense) expenses?.setExpense(expense);
+        expenses.setExpense(expense);
       });
 
       closeModal();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  return {
+    errors,
+    webDateErrors,
+    formState,
+    openAndroidDate,
+    onChange,
+    onSubmit,
+    onChangeDateWeb,
+    handleOpenAndroidDate,
+    onChangeDateNative,
+  };
 }
+
+export { AddExpenseModalModel };
