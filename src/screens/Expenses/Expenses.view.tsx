@@ -3,7 +3,7 @@ import { FAB, Surface } from "react-native-paper";
 import { styles } from "./common/styles";
 import { TopTabRoutes, TopTabScreen } from "../../infra/routes/TopTab.routes";
 import { Select } from "../../commons/components/Select/Select.view";
-import { AddExpenseModal } from "./components/AddExpenseModal/AddExpenseModal.view";
+import { AddExpenseModalViewModel } from "./components/AddExpenseModal/AddExpenseModal.view-model";
 import { isWeb } from "../../commons/utils/platform";
 import { ExpensesViewProps } from "./common/types";
 import { ExpenseList } from "../../commons/components/ExpenseList/ExpenseList.view";
@@ -42,7 +42,7 @@ export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
           {
             icon: "plus",
             label: "Despesa",
-            onPress: onChangeModal("loose"),
+            onPress: onChangeModal("expense"),
           },
           {
             icon: "plus",
@@ -58,7 +58,7 @@ export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
         icon="plus"
       />
       {modal.open && (
-        <AddExpenseModal
+        <AddExpenseModalViewModel
           open={modal.open}
           type={modal.type}
           onClose={onChangeModal()}

@@ -6,7 +6,7 @@ import { filterMonthExpenses } from "../../commons/utils/filterExpensesByMonth";
 
 export type ModalState = {
   open: boolean;
-  type?: "fixed" | "loose";
+  type?: "fixed" | "loose" | "expense";
 };
 
 const defaultModalState: ModalState = {
