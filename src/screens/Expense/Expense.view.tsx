@@ -44,6 +44,9 @@ export function ExpenseView(props: ExpenseViewProps) {
             Pagar
           </Button>
         )}
+        <Button mode="text" onPress={() => {}}>
+          Editar
+        </Button>
         <Button mode="text" onPress={removeExpense}>
           Excluir
         </Button>

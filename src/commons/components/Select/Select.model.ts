@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
-import { SelectService } from "./Select.service";
+import { useState } from "react";
 import { SelectProps } from "./types";
-import { TextInput } from "react-native";
+import { format } from "date-fns";
+import localePtBr from "date-fns/locale/pt-BR";
+import { getMonths } from "./utils";
 
-export function SelectController(props: SelectProps) {
+export function SelectModel(props: SelectProps) {
   const [open, setOpen] = useState(false);
   const [month, setMonth] = useState("");
-  const months = SelectService.getMonths();
+  const months = getMonths();
 
   const handleOpen = () => {
     setOpen((state) => !state);
@@ -27,11 +28,14 @@ export function SelectController(props: SelectProps) {
   };
 
   const formatDate = (date: Date) => {
-    return SelectService.formatDate(date);
+    return format(date, "MMMM/yyyy", { locale: localePtBr });
   };
 
   const getRadioStatus = (month: Date, selected: Date) => {
-    return SelectService.getRadioStatus(month, selected);
+    const sameYear = month.getFullYear() === selected.getFullYear();
+    const sameMonth = month.getMonth() === selected.getMonth();
+
+    return sameYear && sameMonth ? "checked" : "unchecked";
   };
 
   const onSelect = (itemValue: string) => {

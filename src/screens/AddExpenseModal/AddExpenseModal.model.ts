@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useExpenses } from "../../../../commons/Hooks/useExpenses.hook";
+import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
 import {
   ExpenseFormState,
   AddExpenseModalControllerProps,
@@ -10,9 +10,9 @@ import {
   WebDateErrorState,
   TAddExpenseModalModel,
 } from "./common/types";
-import { getWebDate } from "../../../../commons/utils/getWebDate";
-import { ExpenseModel } from "../../../../commons/models/Expense.model";
-import { isWeb } from "../../../../commons/utils/platform";
+import { getWebDate } from "../../commons/utils/getWebDate";
+import { ExpenseModel } from "../../commons/models/Expense.model";
+import { isWeb } from "../../commons/utils/platform";
 import { addMonths } from "date-fns";
 
 function AddExpenseModalModel(

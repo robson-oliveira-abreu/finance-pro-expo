@@ -6,14 +6,14 @@ import {
   TextInput,
   useTheme,
 } from "react-native-paper";
-import { Spacer } from "../../../../commons/components/Spacer/Spacer";
+import { Spacer } from "../../commons/components/Spacer/Spacer";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { getLocaleDate } from "../../../../commons/utils/date";
-import { isAndroid, isIos, isWeb } from "../../../../commons/utils/platform";
+import { getLocaleDate } from "../../commons/utils/date";
+import { isAndroid, isIos, isWeb } from "../../commons/utils/platform";
 import { AddExpenseModalViewProps } from "./common/types";
 import { styles } from "./common/styles";
-import { KeyboardAvoidingView } from "../../../../commons/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
-import { Button, Text } from "../../../../commons/components/UIComponents";
+import { KeyboardAvoidingView } from "../../commons/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
+import { Button, Text } from "../../commons/components/UIComponents";
 
 export function AddExpenseModalView(props: AddExpenseModalViewProps) {
   const {

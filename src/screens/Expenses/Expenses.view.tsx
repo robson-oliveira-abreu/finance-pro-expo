@@ -2,11 +2,11 @@ import React, { ReactNode } from "react";
 import { FAB, Surface } from "react-native-paper";
 import { styles } from "./common/styles";
 import { TopTabRoutes, TopTabScreen } from "../../infra/routes/TopTab.routes";
-import { Select } from "../../commons/components/Select/Select.view";
-import { AddExpenseModalViewModel } from "./components/AddExpenseModal/AddExpenseModal.view-model";
+import { AddExpenseModalViewModel } from "../AddExpenseModal/AddExpenseModal.view-model";
 import { isWeb } from "../../commons/utils/platform";
 import { ExpensesViewProps } from "./common/types";
 import { ExpenseList } from "../../commons/components/ExpenseList/ExpenseList.view";
+import { SelectViewModel } from "../../commons/components/Select/Select.view-model";
 
 export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
   const {
@@ -21,7 +21,7 @@ export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
   } = props;
   return (
     <Surface style={styles.container}>
-      <Select
+      <SelectViewModel
         onSelect={onSelectMonth}
         selected={selectedMonth}
         style={{ paddingHorizontal: 20, marginBottom: isWeb ? 20 : 0 }}
