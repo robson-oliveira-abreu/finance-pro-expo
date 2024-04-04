@@ -11,7 +11,7 @@
     "web": {
       "bundler": "metro",
       "output": "build",
-      "favicon": "./src/commons/assets/logo192.png"
+      "favicon": "./src/commons/assets/logo.png"
     }
   },
   "name": "financaspro_expo"
