@@ -1,5 +1,5 @@
 import { StyleProp, ViewStyle } from "react-native";
-import { SelectModel } from "./Select.model";
+import { SelectModel } from "../Select.model";
 
 export type SelectProps = {
   style?: StyleProp<ViewStyle>;

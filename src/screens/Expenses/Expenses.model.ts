@@ -43,7 +43,7 @@ export function ExpensesModel(): TExpensesModel {
     );
 
     return { paidExpense, unPaidExpense };
-  }, [expenses]);
+  }, [expenses, selectedMonth]);
 
   const onStateChange = ({ open }) => {
     setOpenFAB(open);

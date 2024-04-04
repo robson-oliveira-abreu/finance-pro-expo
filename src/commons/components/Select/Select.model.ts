@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { SelectProps } from "./types";
+import { SelectProps } from "./common/types";
 import { format } from "date-fns";
 import localePtBr from "date-fns/locale/pt-BR";
-import { getMonths } from "./utils";
+import { getMonths } from "./common/utils";
 
 export function SelectModel(props: SelectProps) {
   const [open, setOpen] = useState(false);

@@ -1,8 +1,8 @@
 import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-import { styles } from "./styles";
-import { SelectViewProps } from "./types";
+import { styles } from "./common/styles";
+import { SelectViewProps } from "./common/types";
 import { IconButton, Text } from "react-native-paper";
 import { Spacer } from "../Spacer/Spacer";
 import { isIos } from "../../utils/platform";
