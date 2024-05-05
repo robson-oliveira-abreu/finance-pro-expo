@@ -5,7 +5,7 @@ import { theme } from "../../../commons/theme/theme";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    minHeight: "100%",
+    maxHeight: isWeb ? ("100dvh" as any) : "100%",
     alignItems: "flex-start",
     justifyContent: "center",
     backgroundColor: theme.colors.background,
