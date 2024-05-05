@@ -1,69 +1,44 @@
 import React, { ReactNode } from "react";
-import { FAB, Surface } from "react-native-paper";
 import { styles } from "./common/styles";
-import { TopTabRoutes, TopTabScreen } from "../../infra/routes/TopTab.routes";
+import { TopTabRoutes } from "../../infra/routes/TopTab.routes";
 import { AddExpenseModalViewModel } from "../AddExpenseModal/AddExpenseModal.view-model";
-import { isWeb } from "../../commons/utils/platform";
+import { isIos, isWeb } from "../../commons/utils/platform";
 import { ExpensesViewProps } from "./common/types";
 import { ExpenseList } from "../../commons/components/ExpenseList/ExpenseList.view";
 import { SelectViewModel } from "../../commons/components/Select/Select.view-model";
+import { View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import AntDesignIcon from "@expo/vector-icons/AntDesign";
+import { Spacer } from "../../commons/components/Spacer/Spacer";
+import { BackButton } from "../../commons/components/BackButton/BackButton";
+import { theme } from "../../commons/theme/theme";
 
 export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
-  const {
-    openFAB,
-    modal,
-    selectedMonth,
-    unPaidExpense,
-    paidExpense,
-    onSelectMonth,
-    onStateChange,
-    onChangeModal,
-  } = props;
+  const { modal, selectedMonth, onSelectMonth, onChangeModal, getScreens } =
+    props;
   return (
-    <Surface style={styles.container}>
+    <View style={styles.container}>
+      <Spacer y={isIos ? 20 : isWeb ? 12 : 0} />
+
+      <BackButton />
+
       <SelectViewModel
         onSelect={onSelectMonth}
         selected={selectedMonth}
-        style={{ paddingHorizontal: 20, marginBottom: isWeb ? 20 : 0 }}
+        style={styles.selectMonth}
       />
 
-      <TopTabRoutes
-        screens={[
-          new TopTabScreen("A Pagar", ExpenseList, { data: unPaidExpense }),
-          new TopTabScreen("Pago", ExpenseList, { data: paidExpense }),
-        ]}
-      />
+      <TopTabRoutes screens={getScreens(ExpenseList)} />
 
-      <FAB.Group
-        visible
-        open={openFAB}
-        onStateChange={onStateChange}
-        actions={[
-          {
-            icon: "plus",
-            label: "Despesa",
-            onPress: onChangeModal("expense"),
-          },
-          {
-            icon: "plus",
-            label: "Conta avulsa",
-            onPress: onChangeModal("loose"),
-          },
-          {
-            icon: "pin",
-            label: "Conta fixa",
-            onPress: onChangeModal("fixed"),
-          },
-        ]}
-        icon="plus"
-      />
+      <View style={styles.addButtonWrapper}>
+        <TouchableOpacity onPress={onChangeModal} style={styles.addButton}>
+          <AntDesignIcon name="plus" size={32} color={theme.colors.shape} />
+        </TouchableOpacity>
+      </View>
+
       {modal.open && (
-        <AddExpenseModalViewModel
-          open={modal.open}
-          type={modal.type}
-          onClose={onChangeModal()}
-        />
+        <AddExpenseModalViewModel open={modal.open} onClose={onChangeModal} />
       )}
-    </Surface>
+    </View>
   );
 };

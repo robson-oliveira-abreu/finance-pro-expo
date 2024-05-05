@@ -1,24 +1,22 @@
 import { Modal, View } from "react-native";
-import {
-  HelperText,
-  IconButton,
-  Surface,
-  TextInput,
-  useTheme,
-} from "react-native-paper";
 import { Spacer } from "../../commons/components/Spacer/Spacer";
+import { Text } from "../../commons/components/UIComponents/Text";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { getLocaleDate } from "../../commons/utils/date";
 import { isAndroid, isIos, isWeb } from "../../commons/utils/platform";
 import { AddExpenseModalViewProps } from "./common/types";
 import { styles } from "./common/styles";
 import { KeyboardAvoidingView } from "../../commons/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
-import { Button, Text } from "../../commons/components/UIComponents";
+import { Button } from "../../commons/components/UIComponents";
+import { Input } from "../../commons/components/Input/Input";
+import IconButton from "@expo/vector-icons/Ionicons";
+import { SegmentedButton } from "../../commons/components/UIComponents/SegmentedButton/SegmentedButton";
+import { expenseTypeOptions } from "./common/constants";
 
 export function AddExpenseModalView(props: AddExpenseModalViewProps) {
   const {
-    onClose,
     type,
+    onClose,
     open,
     errors,
     webDateErrors,
@@ -29,66 +27,70 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
     onChangeDateWeb,
     handleOpenAndroidDate,
     onChangeDateNative,
+    onChangeType,
   } = props;
-  const { colors } = useTheme();
 
   return (
     <Modal visible={open} onRequestClose={onClose}>
-      <Surface style={{ minHeight: "100%" }}>
+      <View style={{ minHeight: "100%" }}>
         <KeyboardAvoidingView style={styles.keyboardAvoidingView}>
           <View>
             <IconButton
-              icon="close"
+              name="close"
               size={28}
               onPress={onClose}
               rippleColor="rgba(200,0,0,0.35)"
             />
           </View>
+
+          <SegmentedButton
+            options={expenseTypeOptions}
+            onSelect={onChangeType}
+          />
+
           <View>
-            <TextInput
+            <Input
               label="Descrição"
-              onChangeText={onChange("description")}
+              value={formState.description}
+              onChange={onChange("description")}
               error={!!errors.get("description")}
             />
-            {!!errors.get("description") && (
-              <HelperText type="error" visible={!!errors.get("description")}>
-                {errors.get("description")}
-              </HelperText>
+            {!!errors.get("description") && errors.get("description") && (
+              <Text type="error">{errors.get("description")}</Text>
             )}
           </View>
           <View>
-            <TextInput
+            <Input
               label="Valor"
               value={formState.amount?.toString()}
-              onChangeText={onChange("amount")}
-              inputMode="decimal"
-              left={
-                <TextInput.Affix text="R$" textStyle={styles.affixTextStyle} />
-              }
+              onChange={onChange("amount")}
+              inputMode="decimal-pad"
+              // left={<Input.Affix text="R$" textStyle={styles.affixTextStyle} />}
               error={!!errors.get("amount")}
             />
-            {!!errors.get("amount") && (
-              <HelperText type="error" visible={!!errors.get("amount")}>
-                {errors.get("amount")}
-              </HelperText>
+            {!!errors.get("amount") && errors.get("amount") && (
+              <Text type="error">{errors.get("amount")}</Text>
             )}
           </View>
-          <TextInput
+          <Input
             label="Observação"
-            onChangeText={onChange("observation")}
+            value={formState.observation}
+            onChange={onChange("observation")}
           />
           {type === "fixed" && (
             <>
-              <TextInput
+              <Input
                 label="Parcela"
-                keyboardType="numeric"
-                onChangeText={onChange("installment")}
+                inputMode="numeric"
+                value={formState.installment}
+                onChange={onChange("installment")}
               />
-              <TextInput
+              <Input
                 label="Parcelas"
                 inputMode="numeric"
-                onChangeText={onChange("installments")}
-                right={<TextInput.Affix text="vezes" />}
+                value={formState.installments}
+                onChange={onChange("installments")}
+                // right={<Input.Affix text="vezes" />}
               />
             </>
           )}
@@ -102,48 +104,39 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
             {isWeb && (
               <View style={styles.rowInputs}>
                 <View style={styles.flexOne}>
-                  <TextInput
+                  <Input
                     label="Dia"
                     inputMode="numeric"
-                    keyboardType="numeric"
                     defaultValue={`${formState.due_date?.getDate() || ""}`}
-                    onChangeText={onChangeDateWeb("due_date", "day")}
+                    onChange={onChangeDateWeb("due_date", "day")}
                     error={Boolean(webDateErrors.get("day"))}
                   />
                   {Boolean(webDateErrors.get("day")) && (
-                    <HelperText type="error" visible>
-                      {webDateErrors.get("day")}
-                    </HelperText>
+                    <Text type="error">{webDateErrors.get("day")}</Text>
                   )}
                 </View>
                 <View style={styles.flexOne}>
-                  <TextInput
+                  <Input
                     label="Mês"
                     inputMode="numeric"
                     defaultValue={`${formState.due_date?.getMonth() || ""}`}
-                    onChangeText={onChangeDateWeb("due_date", "month")}
-                    keyboardType="numeric"
+                    onChange={onChangeDateWeb("due_date", "month")}
                     error={Boolean(webDateErrors.get("month"))}
                   />
                   {Boolean(webDateErrors.get("month")) && (
-                    <HelperText type="error" visible>
-                      {webDateErrors.get("month")}
-                    </HelperText>
+                    <Text type="error">{webDateErrors.get("month")}</Text>
                   )}
                 </View>
                 <View style={styles.flexOne}>
-                  <TextInput
+                  <Input
                     label="Ano"
                     inputMode="numeric"
                     defaultValue={`${formState.due_date?.getFullYear() || ""}`}
-                    onChangeText={onChangeDateWeb("due_date", "year")}
-                    keyboardType="numeric"
+                    onChange={onChangeDateWeb("due_date", "year")}
                     error={Boolean(webDateErrors.get("year"))}
                   />
                   {Boolean(webDateErrors.get("year")) && (
-                    <HelperText type="error" visible>
-                      {webDateErrors.get("year")}
-                    </HelperText>
+                    <Text type="error">{webDateErrors.get("year")}</Text>
                   )}
                 </View>
               </View>
@@ -167,15 +160,11 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
             )}
           </View>
           <Spacer flex={1} />
-          <Button
-            mode="contained"
-            onPress={onSubmit}
-            textColor={colors.onBackground}
-          >
+          <Button variant="contained" onPress={onSubmit} color={"black"}>
             Salvar
           </Button>
         </KeyboardAvoidingView>
-      </Surface>
+      </View>
     </Modal>
   );
 }

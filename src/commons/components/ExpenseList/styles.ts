@@ -1,13 +1,20 @@
 import { Dimensions, StyleSheet } from "react-native";
+import { theme } from "../../theme/theme";
 
 const { width } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
   title: {
     width: "100%",
     textAlign: "left",
-    paddingLeft: 28,
+    paddingHorizontal: 24,
     paddingTop: 4,
+    paddingBottom: 8,
+    color: "#444",
   },
   list: {
     width,

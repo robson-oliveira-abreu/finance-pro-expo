@@ -8,13 +8,15 @@ import {
   ViewStyle,
   TextStyle,
   ColorValue,
+  KeyboardTypeOptions,
 } from "react-native";
+import { theme } from "../../theme/theme";
 
 type Props = {
   value?: string;
   onChange?: (text: string) => void;
   label?: string;
-  error?: string;
+  error?: string | boolean;
   type?: "email" | "password";
   minLength?: number;
   maxLength?: number;
@@ -25,6 +27,8 @@ type Props = {
   errorMessageStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
   focusColor?: ColorValue;
+  inputMode?: KeyboardTypeOptions;
+  defaultValue?: string;
 };
 
 const border_radius = {
@@ -59,6 +63,8 @@ export function Input(props: Props) {
     errorMessageStyle,
     disabled,
     focusColor,
+    inputMode,
+    defaultValue,
   } = props;
 
   const errorMessage =
@@ -66,7 +72,7 @@ export function Input(props: Props) {
 
   const handleFocused = () => {
     if (disabled) {
-      inputRef.current.blur();
+      inputRef.current?.blur();
       return;
     }
 
@@ -133,6 +139,7 @@ export function Input(props: Props) {
       {!!label && <Text style={[styles.label, labelStyle]}>{label}:</Text>}
       <View style={[handleContentStyles(), containerStyle]}>
         <TextInput
+          keyboardType={inputMode}
           ref={inputRef}
           onFocus={handleFocused}
           onBlur={handleBlur}
@@ -140,6 +147,7 @@ export function Input(props: Props) {
           onChangeText={handleChange}
           style={[style]}
           secureTextEntry={type === "password"}
+          defaultValue={defaultValue}
         />
       </View>
       {!!errorMessage && (
@@ -177,7 +185,7 @@ const styles = StyleSheet.create({
   label: {
     paddingLeft: 8,
     fontSize: 10,
-    color: "#222222",
+    color: theme.colors.shapeDark,
     marginBottom: 4,
   },
 });

@@ -1,5 +1,4 @@
 import { Modal, View } from "react-native";
-import { IconButton, SegmentedButtons, TextInput } from "react-native-paper";
 import { Spacer } from "../../../../commons/components/Spacer/Spacer";
 import { CreatePlanProps } from "./types";
 import { KeyboardAvoidingView } from "../../../../commons/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
@@ -18,7 +17,7 @@ export function CreatePlanModal(props: CreatePlanProps) {
     >
       <KeyboardAvoidingView>
         <View style={styles.container}>
-          <IconButton icon="close" onPress={props.closeModal} />
+          {/* <IconButton icon="close" onPress={props.closeModal} />
 
           <SegmentedButtons
             value={controller.planType}
@@ -38,11 +37,11 @@ export function CreatePlanModal(props: CreatePlanProps) {
               <TextInput.Affix text="R$" textStyle={styles.affixTextStyle} />
             }
             onChangeText={controller.onChange("amount")}
-          />
+          /> */}
 
           <Spacer flex={1} />
 
-          <Button mode="contained" onPress={controller.onSubmit}>
+          <Button variant="contained" onPress={controller.onSubmit}>
             Salvar
           </Button>
 

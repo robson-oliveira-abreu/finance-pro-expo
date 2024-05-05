@@ -1,20 +1,24 @@
 import React from "react";
-import { Surface } from "react-native-paper";
 import { styles } from "./common/styles";
 import { THomeModel } from "./common/types";
-import { Header } from "./components/Header/Header.view";
-import { GoalsViewModel } from "./components/Goals/Goals.view-model";
+import { HeaderModelView } from "./components/Header/Header.view-model";
 import { ExpenseList } from "../../commons/components/ExpenseList/ExpenseList.view";
-import { Spacer } from "../../commons/components/Spacer/Spacer";
+import { View } from "react-native";
 
 export function HomeView(props: THomeModel) {
-  const { onPressMenu, payableExpenses } = props;
   return (
-    <Surface style={[styles.container]}>
+    <View style={styles.container}>
       <ExpenseList
-        HeaderComponent={<Header onPress={onPressMenu} />}
-        data={payableExpenses}
+        title="Despesas proximas"
+        HeaderComponent={
+          <HeaderModelView
+            onPress={props.onPressMenu}
+            onPressAccount={props.onPressAccount}
+            onPressExpenses={props.onPressExpenses}
+          />
+        }
+        data={props.payableExpenses}
       />
-    </Surface>
+    </View>
   );
 }

@@ -44,7 +44,7 @@ export function TabRoutes() {
         }}
       />
       <Tab.Screen
-        name="Perfil"
+        name="Conta"
         component={Login}
         options={{
           tabBarIcon: ({ color, size }) => {

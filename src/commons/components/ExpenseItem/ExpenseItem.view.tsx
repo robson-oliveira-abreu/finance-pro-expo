@@ -1,52 +1,56 @@
 import React from "react";
-import { View } from "react-native";
-import { Badge, Surface, TouchableRipple } from "react-native-paper";
+import { View, TouchableOpacity } from "react-native";
 import { ExpenseModel } from "../../models/Expense.model";
 import { Spacer } from "../Spacer/Spacer";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
-import { currency } from "../../utils/currency";
 import { getLocaleDate } from "../../utils/date";
 import { Text } from "../UIComponents";
 import { getStatus } from "./utils";
 import { badgeStatus } from "./constants";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../infra/routes/Stack.routes";
+import { useCurrency } from "../../Hooks/useCurrency.hook";
 
 type ExpenseItemProps = {
   expense: ExpenseModel;
 };
 
-export function ExpenseItem(props: ExpenseItemProps) {
-  const { expense } = props;
-  const navigator = useNavigation();
-
-  const openExpense = () => navigator.navigate("Expense", { expense });
-
+export function ExpenseItem({ expense }: ExpenseItemProps) {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const status = getStatus(expense);
+  const currency = useCurrency();
+
+  const openExpense = (expense: ExpenseModel) => {
+    navigation.navigate("Expense", { expense });
+  };
 
   return (
-    <TouchableRipple
-      rippleColor="rgba(200,0,0,0.2)"
-      onPress={openExpense}
+    <TouchableOpacity
+      onPress={() => openExpense(expense)}
       style={{ borderRadius: 12, marginHorizontal: 20 }}
     >
-      <Surface style={styles.container}>
+      <View style={styles.container}>
         <View>
           <Text variant="titleMedium" style={styles.title}>
             {expense.description}
           </Text>
 
-          {expense?.observation && <Text>{expense.observation}</Text>}
+          {Boolean(expense?.observation) && <Text>{expense.observation}</Text>}
 
-          <Text>
+          <Text variant="bodySmall">
             {expense.installment}/{expense.installments}
           </Text>
-          <Text>{expense?.due_date && getLocaleDate(expense.due_date)}</Text>
+          <Text variant="bodySmall">
+            {expense?.due_date && getLocaleDate(expense.due_date)}
+          </Text>
         </View>
 
         <View>
-          <Badge style={badgeStatus[status].style}>
-            {badgeStatus[status].text}
-          </Badge>
+          <View style={badgeStatus[status].style}>
+            <Text color={"#FFFFFF"} variant="bodySmall">
+              {badgeStatus[status].text}
+            </Text>
+          </View>
 
           <Spacer flex={1} />
 
@@ -57,10 +61,10 @@ export function ExpenseItem(props: ExpenseItemProps) {
             ]}
             variant="titleMedium"
           >
-            {currency(expense?.amount)}
+            {currency.parse(expense?.amount)}
           </Text>
         </View>
-      </Surface>
-    </TouchableRipple>
+      </View>
+    </TouchableOpacity>
   );
 }

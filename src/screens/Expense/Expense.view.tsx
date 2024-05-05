@@ -1,20 +1,26 @@
 import { View } from "react-native";
-import { Surface } from "react-native-paper";
-import { currency } from "../../commons/utils/currency";
 import { getLocaleDate } from "../../commons/utils/date";
 import { styles } from "./common/styles";
 import { ExpenseViewProps } from "./common/types";
 import { Button } from "../../commons/components/UIComponents";
 import { RowData } from "./components/RowData/RowData.view";
 import { NavigationHeader } from "../../commons/components/NavigationHeader/NavigationHeader.view";
+import { AddExpenseModalViewModel as EditExpenseModalViewModel } from "../AddExpenseModal/AddExpenseModal.view-model";
 
 export function ExpenseView(props: ExpenseViewProps) {
-  const { expense, payExpense, removeExpense } = props;
+  const {
+    expense,
+    payExpense,
+    removeExpense,
+    handleOpenEditExpense,
+    openEditExpense,
+    currency,
+  } = props;
   return (
-    <Surface style={styles.container}>
+    <View style={styles.container}>
       <NavigationHeader
         title={expense?.description ?? ""}
-        rightAction={{ icon: "dots-vertical", onPress: () => {} }}
+        rightAction={{ icon: "ellipsis-v", onPress: () => {} }}
       />
 
       <View style={styles.content}>
@@ -28,29 +34,35 @@ export function ExpenseView(props: ExpenseViewProps) {
           label="Data de Vencimento:"
           value={getLocaleDate(expense?.due_date || new Date())}
         />
-        <RowData label="Valor:" value={currency(expense?.amount || 0)} />
+        <RowData label="Valor:" value={currency.parse(expense?.amount || 0)} />
 
         {Boolean(expense?.paid_amount) && (
           <RowData
             label="Valor pago:"
-            value={currency(expense?.paid_amount || 0)}
+            value={currency.parse(expense?.paid_amount || 0)}
           />
         )}
       </View>
 
       <View style={styles.footer}>
         {!expense?.paid && (
-          <Button mode="contained" onPress={payExpense}>
+          <Button variant="contained" onPress={payExpense}>
             Pagar
           </Button>
         )}
-        <Button mode="text" onPress={() => {}}>
+        <Button variant="text" onPress={handleOpenEditExpense}>
           Editar
         </Button>
-        <Button mode="text" onPress={removeExpense}>
+        <Button variant="text" onPress={removeExpense}>
           Excluir
         </Button>
       </View>
-    </Surface>
+
+      <EditExpenseModalViewModel
+        expense={expense}
+        open={openEditExpense}
+        onClose={handleOpenEditExpense}
+      />
+    </View>
   );
 }

@@ -1,9 +1,11 @@
 import { StyleSheet, Platform } from "react-native";
+import { theme } from "../../../commons/theme/theme";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     minHeight: "100%",
+    backgroundColor: theme.colors.background,
   },
   header: {
     flexDirection: "row",

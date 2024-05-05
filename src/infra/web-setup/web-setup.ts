@@ -1,9 +1,11 @@
+import { onPlatform } from "../../commons/utils/onPlatform";
 import { changeLanguage } from "./lang/lang";
 import { add_metadata } from "./metadata/add_metadata.web";
 
 function web_setup() {
+  console.info("Setup web");
   add_metadata();
   changeLanguage("pt-BR");
 }
 
-export { web_setup };
+export default onPlatform("web", web_setup);

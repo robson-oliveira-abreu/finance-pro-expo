@@ -1,3 +1,5 @@
+import { ICurrencyContext } from "../../../../../commons/Hooks/useCurrencyContext.hook";
+
 export type TGoalsModel = {
   groupedExpenses: {
     paid: number;
@@ -7,4 +9,6 @@ export type TGoalsModel = {
   };
 };
 
-export type GoalsViewProps = {} & TGoalsModel;
+export type GoalsViewProps = {
+  currency: ICurrencyContext;
+} & TGoalsModel;

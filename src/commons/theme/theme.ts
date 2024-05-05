@@ -1,11 +1,11 @@
-import { MD3LightTheme, MD3DarkTheme } from "react-native-paper";
-
-export const theme: typeof MD3LightTheme = {
-  ...MD3LightTheme,
-  mode: "adaptive",
+export const theme = {
   colors: {
-    ...MD3LightTheme.colors,
-    primary: "#fa3c23",
-    surface: "#000",
+    main: "#FF0000",
+    background: "#FFFFFF",
+    backgroundSecondary: "#F6F6F6",
+    shape: "#FFFFFF",
+    shapeSecondary: "#DFDFDF",
+    shapeDark: "#222222",
+    shapeDarkSecondary: "#333333",
   },
 };

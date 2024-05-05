@@ -16,4 +16,6 @@ type TextVariant =
 
 export type TextViewProps = {
   variant?: TextVariant;
+  color?: string;
+  type?: string;
 } & TextProps;

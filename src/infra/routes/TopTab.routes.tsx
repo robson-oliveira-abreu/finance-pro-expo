@@ -1,6 +1,5 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleProp, ViewStyle, useWindowDimensions } from "react-native";
-import { useTheme } from "react-native-paper";
 import { ExpenseModel } from "../../commons/models/Expense.model";
 
 export class TopTabScreen<TProps> {
@@ -19,7 +18,6 @@ const TopTab = createMaterialTopTabNavigator();
 
 export const TopTabRoutes = ({ screens }: TopTabProps) => {
   const { width } = useWindowDimensions();
-  const { colors } = useTheme();
 
   const style: StyleProp<ViewStyle> = {
     width,
@@ -30,12 +28,12 @@ export const TopTabRoutes = ({ screens }: TopTabProps) => {
     <TopTab.Navigator
       style={style}
       screenOptions={{
-        tabBarActiveTintColor: colors.primary,
+        tabBarActiveTintColor: "red",
         tabBarIndicatorContainerStyle: {
-          backgroundColor: colors.background,
+          backgroundColor: "white",
         },
         tabBarIndicatorStyle: {
-          backgroundColor: colors.primary,
+          backgroundColor: "red",
         },
       }}
     >

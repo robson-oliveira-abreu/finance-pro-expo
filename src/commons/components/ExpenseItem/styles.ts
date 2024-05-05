@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 12,
     gap: 8,
+    backgroundColor: "#f6f6f6",
   },
   title: {
     fontWeight: "600",

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../../commons/theme/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -6,6 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
     minHeight: "100%",
+    backgroundColor: theme.colors.background,
   },
   input: {
     width: "100%",

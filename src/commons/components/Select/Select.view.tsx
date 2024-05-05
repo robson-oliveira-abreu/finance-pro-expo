@@ -1,11 +1,12 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
 import { styles } from "./common/styles";
 import { SelectViewProps } from "./common/types";
-import { IconButton, Text } from "react-native-paper";
+import IconButton from "@expo/vector-icons/AntDesign";
 import { Spacer } from "../Spacer/Spacer";
-import { isIos } from "../../utils/platform";
+import { isIos, isWeb } from "../../utils/platform";
+import { Text } from "../UIComponents/Text";
 
 export function SelectView(props: SelectViewProps) {
   const { open, months, onSelect, formatDate, handleOpen } = props;
@@ -13,19 +14,21 @@ export function SelectView(props: SelectViewProps) {
   return (
     <View style={[styles.container, props.style]}>
       {isIos && (
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text onPress={handleOpen}>
-            {formatDate(new Date(props.selected))}
-          </Text>
+        <TouchableOpacity
+          style={{ flexDirection: "row", alignItems: "center" }}
+          onPress={handleOpen}
+        >
+          <Text>{formatDate(new Date(props.selected))}</Text>
           <Spacer flex={1} />
-          <IconButton
-            icon={open ? "arrow-up" : "arrow-down"}
-            onPress={handleOpen}
-          />
-        </View>
+          <IconButton size={16} name={open ? "up" : "down"} />
+        </TouchableOpacity>
       )}
       {(open || !isIos) && (
-        <Picker selectedValue={props.selected} onValueChange={onSelect}>
+        <Picker
+          selectedValue={props.selected}
+          onValueChange={onSelect}
+          style={[isWeb ? { padding: 8, borderRadius: 8 } : {}]}
+        >
           {months.reverse().map((month) => {
             return (
               <Picker.Item

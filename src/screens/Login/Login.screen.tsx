@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { TextInput } from "react-native-paper";
+import { Input } from "../../commons/components/Input/Input";
 import { Spacer } from "../../commons/components/Spacer/Spacer";
 import { useDialog } from "../../commons/Hooks/useDialog.hook";
 import { useWidth } from "../../commons/Hooks/useWidth.hook";
@@ -49,28 +49,28 @@ export function Login() {
       <View style={[styles.content, { width: maxWidth(560) }]}>
         <Text variant="titleSmall">LOGIN</Text>
 
-        <TextInput
+        <Input
           label={"Email"}
           style={styles.input}
           value={form.email}
-          onChangeText={onChangeForm("email")}
+          onChange={onChangeForm("email")}
         />
 
-        <TextInput
+        <Input
           label={"Senha"}
           style={styles.input}
           value={form.password}
-          secureTextEntry
-          onChangeText={onChangeForm("password")}
+          onChange={onChangeForm("password")}
+          type="password"
         />
 
         <Spacer y={8} />
 
-        <Button mode="contained" style={styles.button} onPress={onSubmit}>
+        <Button variant="contained" style={styles.button} onPress={onSubmit}>
           Entrar
         </Button>
 
-        <Button mode="text" style={styles.button} onPress={clearFields}>
+        <Button variant="text" style={styles.button} onPress={clearFields}>
           Limpar
         </Button>
       </View>

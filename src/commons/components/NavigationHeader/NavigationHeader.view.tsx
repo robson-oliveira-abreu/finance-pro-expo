@@ -1,5 +1,5 @@
-import { View } from "react-native";
-import { IconButton } from "react-native-paper";
+import { TouchableOpacity, View } from "react-native";
+import IconButton from "@expo/vector-icons/FontAwesome";
 import { Text } from "../UIComponents";
 import { PropsWithChildren } from "react";
 import { styles } from "./styles";
@@ -31,10 +31,18 @@ export function NavigationHeader({
   return (
     <View style={styles.container}>
       {leftAction || !noGoBack ? (
-        <IconButton
-          icon={leftAction?.icon || "arrow-left"}
+        <TouchableOpacity
+          style={{
+            marginHorizontal: 4,
+            padding: 16,
+          }}
           onPress={leftAction?.onPress ?? goBack}
-        />
+        >
+          <IconButton
+            name={(leftAction?.icon as any) || "angle-left"}
+            size={20}
+          />
+        </TouchableOpacity>
       ) : (
         <View />
       )}
@@ -44,7 +52,11 @@ export function NavigationHeader({
       </Text>
 
       {rightAction ? (
-        <IconButton icon={rightAction.icon} onPress={rightAction.onPress} />
+        <IconButton
+          size={20}
+          name={rightAction.icon as any}
+          onPress={rightAction.onPress}
+        />
       ) : (
         <View />
       )}

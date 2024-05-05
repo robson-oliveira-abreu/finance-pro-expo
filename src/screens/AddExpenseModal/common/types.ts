@@ -1,5 +1,5 @@
-import { ExpenseModel } from "../../../../../commons/models/Expense.model";
-import { ModalState } from "../../../Expenses.model";
+import { ExpenseModel } from "../../../commons/models/Expense.model";
+import { ModalState } from "../../Expenses/common/types";
 
 export interface ExpenseFormState
   extends Partial<
@@ -27,18 +27,20 @@ export type OpenDateAndroid = {
 };
 
 export type AddExpenseModalControllerProps = {
+  expense?: ExpenseModel;
   onClose: () => void;
-  type: ModalState["type"];
 };
 
 export type ErrorState = Map<keyof ExpenseFormState, string>;
 
 export type WebDateErrorState = Map<keyof WebDate, string>;
 
+export type ExpenseType = "loose" | "expense" | "fixed";
+
 export type AddExpenseModalViewModelProps = {
   open: boolean;
-  type: ModalState["type"];
   onClose: () => void;
+  expense?: ExpenseModel;
 };
 
 export type AddExpenseModalViewProps = AddExpenseModalViewModelProps &
@@ -59,4 +61,6 @@ export type TAddExpenseModalModel = {
     label: "day" | "month" | "year"
   ) => (data: string) => void;
   handleOpenAndroidDate: (label: DateLabel) => () => void;
+  type: ExpenseType;
+  onChangeType: (newType: ExpenseType) => void;
 };

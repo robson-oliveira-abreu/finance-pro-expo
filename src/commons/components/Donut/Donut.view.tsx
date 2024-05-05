@@ -35,8 +35,8 @@ export function DonutView({
             stroke={color}
             strokeWidth="12"
             fill="transparent"
-            strokeDasharray={circleCircumference}
-            strokeDashoffset={strokeDashoffset}
+            strokeDasharray={circleCircumference || 0}
+            strokeDashoffset={strokeDashoffset || 0}
             strokeLinecap="round"
           />
         </G>
