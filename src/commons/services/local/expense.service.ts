@@ -1,4 +1,4 @@
-import { ExpenseModel } from "../models/Expense.model";
+import { ExpenseModel } from "../../entities/Expense.entity";
 import { Storage } from "./Storage";
 
 export class ExpenseService {

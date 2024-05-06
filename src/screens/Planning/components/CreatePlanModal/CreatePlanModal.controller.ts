@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   PlanItem,
   PlanItemType,
-} from "../../../../commons/models/PlanItem.model";
+} from "../../../../commons/entities/PlanItem.entity";
 import { CreatePlanProps } from "./types";
 import { usePlanItems } from "../../../../commons/Hooks/usePlanItems.hook";
 import { CreatePlanModalService } from "./CreatePlanModal.service";

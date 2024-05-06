@@ -1,4 +1,4 @@
-import { ExpenseModel } from "../../../../../../commons/models/Expense.model";
+import { ExpenseModel } from "../../../../../../commons/entities/Expense.entity";
 import { filterMonthExpenses } from "../../../../../../commons/utils/filterExpensesByMonth";
 
 export function groupExpenses(_expenses: ExpenseModel[]) {

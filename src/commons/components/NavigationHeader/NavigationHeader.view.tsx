@@ -4,6 +4,7 @@ import { Text } from "../UIComponents";
 import { PropsWithChildren } from "react";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { Spacer } from "../Spacer/Spacer";
 
 type Action = {
   icon: string;
@@ -33,7 +34,6 @@ export function NavigationHeader({
       {leftAction || !noGoBack ? (
         <TouchableOpacity
           style={{
-            marginHorizontal: 4,
             padding: 16,
           }}
           onPress={leftAction?.onPress ?? goBack}
@@ -41,10 +41,14 @@ export function NavigationHeader({
           <IconButton
             name={(leftAction?.icon as any) || "angle-left"}
             size={20}
+            style={{
+              width: 20,
+              height: 20,
+            }}
           />
         </TouchableOpacity>
       ) : (
-        <View />
+        <Spacer x={52} y={52} />
       )}
 
       <Text variant="headlineMedium" style={styles.title}>
@@ -52,13 +56,23 @@ export function NavigationHeader({
       </Text>
 
       {rightAction ? (
-        <IconButton
-          size={20}
-          name={rightAction.icon as any}
+        <TouchableOpacity
+          style={{
+            padding: 16,
+          }}
           onPress={rightAction.onPress}
-        />
+        >
+          <IconButton
+            size={20}
+            name={rightAction.icon as any}
+            style={{
+              width: 20,
+              height: 20,
+            }}
+          />
+        </TouchableOpacity>
       ) : (
-        <View />
+        <Spacer x={52} y={52} />
       )}
     </View>
   );

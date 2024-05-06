@@ -13,7 +13,7 @@ import {
 import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
 import { isWeb } from "../../commons/utils/platform";
 import { getWebDate } from "../../commons/utils/getWebDate";
-import { ExpenseModel } from "../../commons/models/Expense.model";
+import { ExpenseModel } from "../../commons/entities/Expense.entity";
 import { addMonths } from "date-fns";
 
 export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {

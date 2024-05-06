@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Input } from "../../commons/components/Input/Input";
 import { Spacer } from "../../commons/components/Spacer/Spacer";
-import { useDialog } from "../../commons/Hooks/useDialog.hook";
 import { useWidth } from "../../commons/Hooks/useWidth.hook";
 import { Button, Text } from "../../commons/components/UIComponents";
+import { useAuth } from "../../commons/Hooks/useAuth.hook";
 
 type Labels = "email" | "password";
 
@@ -17,10 +17,10 @@ const initialState: FormState = {
   password: "",
 };
 
-export function Login() {
+export function Signin() {
   const [form, setForm] = React.useState(initialState);
-  const dialog = useDialog();
   const { maxWidth } = useWidth();
+  const { signin } = useAuth();
 
   const onChangeForm = (label: Labels) => {
     return (text: string) => {
@@ -33,15 +33,7 @@ export function Login() {
   };
 
   const onSubmit = () => {
-    const alert_text = Object.entries(form).reduce(
-      (text, [label, value]) => (text += `${label}: ${value}; \n`),
-      ""
-    );
-    dialog?.Alert({
-      title: "Submit",
-      message: alert_text,
-      actions: [{ label: "OK", onPress: dialog.closeAlert }],
-    });
+    signin?.(form.email, form.password);
   };
 
   return (

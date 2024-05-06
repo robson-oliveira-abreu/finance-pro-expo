@@ -1,5 +1,5 @@
 import { differenceInDays } from "date-fns";
-import { ExpenseModel } from "../models/Expense.model";
+import { ExpenseModel } from "../entities/Expense.entity";
 
 export function filterPayableExpenses(expenses: ExpenseModel[]) {
   const currentDate = new Date();

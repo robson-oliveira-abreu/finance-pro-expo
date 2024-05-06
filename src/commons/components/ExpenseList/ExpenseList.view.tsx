@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { ExpenseModel } from "../../models/Expense.model";
+import { ExpenseModel } from "../../entities/Expense.entity";
 import { Spacer } from "../Spacer/Spacer";
 import { ExpenseItem } from "../ExpenseItem/ExpenseItem.view";
 import { styles } from "./styles";

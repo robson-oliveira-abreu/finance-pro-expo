@@ -1,6 +1,6 @@
 import { UsePlanItem } from "../../../../commons/Hooks/usePlanItemsContext.hook";
 import { PlanItemFormState } from "./CreatePlanModal.controller";
-import { PlanItem } from "../../../../commons/models/PlanItem.model";
+import { PlanItem } from "../../../../commons/entities/PlanItem.entity";
 
 function onSubmit(
   planItemFormState: PlanItemFormState,

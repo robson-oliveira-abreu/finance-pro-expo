@@ -1,4 +1,4 @@
-import { ExpenseModel } from "../../../commons/models/Expense.model";
+import { ExpenseModel } from "../../../commons/entities/Expense.entity";
 
 export type THomeModel = {
   payableExpenses: ExpenseModel[];

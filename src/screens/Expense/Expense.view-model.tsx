@@ -7,7 +7,7 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
-import { ExpenseModel as Expense } from "../../commons/models/Expense.model";
+import { ExpenseModel as Expense } from "../../commons/entities/Expense.entity";
 import { useState } from "react";
 import { RootStackParamList } from "../../infra/routes/Stack.routes";
 

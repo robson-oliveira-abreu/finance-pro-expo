@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
-import { ExpenseModel } from "../../models/Expense.model";
+import { ExpenseModel } from "../../entities/Expense.entity";
 import { Spacer } from "../Spacer/Spacer";
 import { styles } from "./styles";
 import { getLocaleDate } from "../../utils/date";

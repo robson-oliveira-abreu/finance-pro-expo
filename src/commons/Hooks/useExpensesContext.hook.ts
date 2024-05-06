@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ExpenseModel } from "../models/Expense.model";
-import { ExpenseService } from "../services/expense.service";
+import { ExpenseModel } from "../entities/Expense.entity";
+import { ExpenseService } from "../services/local/expense.service";
 
 export type UseExpense = {
   expenses: ExpenseModel[];

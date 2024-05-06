@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
-import { ExpenseModel } from "../../commons/models/Expense.model";
+import { ExpenseModel } from "../../commons/entities/Expense.entity";
 import { TopTabScreen } from "../../infra/routes/TopTab.routes";
 import { ExpensesView } from "./Expenses.view";
 import { filterMonthExpenses } from "../../commons/utils/filterExpensesByMonth";

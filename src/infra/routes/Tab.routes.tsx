@@ -6,7 +6,7 @@ import { PlanningViewModel } from "../../screens/Planning/Planning.view-model";
 import { ExpensesViewModel } from "../../screens/Expenses/Expenses.view-model";
 
 import { HomeViewModel } from "../../screens/Home/Home.view-model";
-import { Login } from "../../screens/Login/Login.screen";
+import { Signin } from "../../screens/Signin/Singin.screen";
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +45,7 @@ export function TabRoutes() {
       />
       <Tab.Screen
         name="Conta"
-        component={Login}
+        component={Signin}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <AntDesignIcon name="user" size={size} color={color} />;

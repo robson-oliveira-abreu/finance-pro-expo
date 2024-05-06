@@ -1,4 +1,4 @@
-import { PlanItem } from "../models/PlanItem.model";
+import { PlanItem } from "../../entities/PlanItem.entity";
 import { Storage } from "./Storage";
 
 export function PlaItemService() {

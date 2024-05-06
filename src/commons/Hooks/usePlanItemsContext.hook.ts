@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { PlanItem } from "../models/PlanItem.model";
-import { PlaItemService } from "../services/planItem.service";
+import { PlanItem } from "../entities/PlanItem.entity";
+import { PlaItemService } from "../services/local/planItem.service";
 
 export type UsePlanItem = {
   planItems: PlanItem[];

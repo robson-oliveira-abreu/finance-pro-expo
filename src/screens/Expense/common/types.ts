@@ -1,5 +1,5 @@
 import { ICurrencyContext } from "../../../commons/Hooks/useCurrencyContext.hook";
-import { ExpenseModel as Expense } from "../../../commons/models/Expense.model";
+import { ExpenseModel as Expense } from "../../../commons/entities/Expense.entity";
 
 export type ExpenseModel = {
   payExpense: () => Promise<void>;

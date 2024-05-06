@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { ExpenseViewModel } from "../../screens/Expense/Expense.view-model";
-import { ExpenseModel } from "../../commons/models/Expense.model";
+import { ExpenseModel } from "../../commons/entities/Expense.entity";
 import { HomeViewModel } from "../../screens/Home/Home.view-model";
 import { ExpensesViewModel } from "../../screens/Expenses/Expenses.view-model";
 

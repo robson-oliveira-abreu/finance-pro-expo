@@ -2,10 +2,10 @@ import { StyleSheet, Text } from "react-native";
 import { TextViewProps } from "./types";
 
 export function TextView(props: TextViewProps) {
-  const { children, variant = "bodyMedium", color, ...rest } = props;
+  const { children, variant = "bodyMedium", style, color, ...rest } = props;
 
   return (
-    <Text style={[styles[variant], color ? { color } : null]} {...rest}>
+    <Text style={[styles[variant], color ? { color } : null, style]} {...rest}>
       {children}
     </Text>
   );

@@ -1,4 +1,4 @@
-import { ExpenseModel } from "../../../commons/models/Expense.model";
+import { ExpenseModel } from "../../../commons/entities/Expense.entity";
 import { ModalState } from "../../Expenses/common/types";
 
 export interface ExpenseFormState

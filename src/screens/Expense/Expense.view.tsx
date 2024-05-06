@@ -18,10 +18,7 @@ export function ExpenseView(props: ExpenseViewProps) {
   } = props;
   return (
     <View style={styles.container}>
-      <NavigationHeader
-        title={expense?.description ?? ""}
-        rightAction={{ icon: "ellipsis-v", onPress: () => {} }}
-      />
+      <NavigationHeader title={expense?.description ?? ""} />
 
       <View style={styles.content}>
         <RowData label="Status:" value={expense?.paid ? "Pago" : "A Pagar"} />
