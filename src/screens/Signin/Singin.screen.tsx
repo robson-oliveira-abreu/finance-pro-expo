@@ -4,7 +4,7 @@ import { Input } from "../../commons/components/Input/Input";
 import { Spacer } from "../../commons/components/Spacer/Spacer";
 import { useWidth } from "../../commons/Hooks/useWidth.hook";
 import { Button, Text } from "../../commons/components/UIComponents";
-import { useAuth } from "../../commons/Hooks/useAuth.hook";
+import { useAuth } from "../../commons/Hooks/useAuth/useAuth.hook";
 
 type Labels = "email" | "password";
 
@@ -20,7 +20,7 @@ const initialState: FormState = {
 export function Signin() {
   const [form, setForm] = React.useState(initialState);
   const { maxWidth } = useWidth();
-  const { signin } = useAuth();
+  const { signin, loading } = useAuth();
 
   const onChangeForm = (label: Labels) => {
     return (text: string) => {
@@ -58,11 +58,23 @@ export function Signin() {
 
         <Spacer y={8} />
 
-        <Button variant="contained" style={styles.button} onPress={onSubmit}>
+        <Button
+          variant="contained"
+          style={styles.button}
+          onPress={onSubmit}
+          loading={loading}
+          disabled={loading}
+        >
           Entrar
         </Button>
 
-        <Button variant="text" style={styles.button} onPress={clearFields}>
+        <Button
+          variant="text"
+          style={styles.button}
+          onPress={clearFields}
+          loading={loading}
+          disabled={loading}
+        >
           Limpar
         </Button>
       </View>

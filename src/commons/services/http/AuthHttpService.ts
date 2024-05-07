@@ -13,18 +13,21 @@ export class AuthHttpService {
     private authLocalService: AuthTokenLocalService
   ) {}
 
+  initialize(token: string) {
+    this.setAuthorizationToken(token);
+  }
+
   async signin(email: string, password: string): Promise<Success | Failure> {
     try {
       const body = {
         email,
         password,
       };
+
       const response = await this.httpService.post<{
         user: User;
         token: string;
-      }>("/auth/signin", body, {
-        headers: { "Content-Type": "application/json" },
-      });
+      }>("/auth/signin", body);
 
       this.onSignin(response.data.user, response.data.token);
 
@@ -65,11 +68,14 @@ export class AuthHttpService {
     this.httpService.defaults.headers.common["Authorization"] = "";
   }
 
-  private onSignin(user: User, token: string) {
+  private setAuthorizationToken(token: string) {
     this.httpService.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${token}`;
+  }
 
+  private onSignin(user: User, token: string) {
+    this.setAuthorizationToken(token);
     this.userLocalService.set(user);
     this.authLocalService.set(token);
   }
