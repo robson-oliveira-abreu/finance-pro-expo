@@ -1,10 +1,12 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Input } from "../../commons/components/Input/Input";
 import { Spacer } from "../../commons/components/Spacer/Spacer";
 import { useWidth } from "../../commons/Hooks/useWidth.hook";
 import { Button, Text } from "../../commons/components/UIComponents";
 import { useAuth } from "../../commons/Hooks/useAuth/useAuth.hook";
+import { styles } from "./styles";
+import { Props } from "./types";
 
 type Labels = "email" | "password";
 
@@ -17,7 +19,7 @@ const initialState: FormState = {
   password: "",
 };
 
-export function Signin() {
+export function Signin({ navigation }: Props) {
   const [form, setForm] = React.useState(initialState);
   const { maxWidth } = useWidth();
   const { signin, loading } = useAuth();
@@ -28,8 +30,8 @@ export function Signin() {
     };
   };
 
-  const clearFields = () => {
-    setForm(initialState);
+  const goToSignup = () => {
+    navigation.navigate("Signup");
   };
 
   const onSubmit = () => {
@@ -39,18 +41,16 @@ export function Signin() {
   return (
     <View style={styles.container}>
       <View style={[styles.content, { width: maxWidth(560) }]}>
-        <Text variant="titleSmall">LOGIN</Text>
+        <Text variant="titleLarge">Login</Text>
 
         <Input
           label={"Email"}
-          style={styles.input}
           value={form.email}
           onChange={onChangeForm("email")}
         />
 
         <Input
           label={"Senha"}
-          style={styles.input}
           value={form.password}
           onChange={onChangeForm("password")}
           type="password"
@@ -71,35 +71,13 @@ export function Signin() {
         <Button
           variant="text"
           style={styles.button}
-          onPress={clearFields}
+          onPress={goToSignup}
           loading={loading}
           disabled={loading}
         >
-          Limpar
+          Cadastro
         </Button>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 24,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  content: {
-    gap: 12,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    width: "100%",
-  },
-  button: {
-    width: "100%",
-    borderRadius: 8,
-  },
-});

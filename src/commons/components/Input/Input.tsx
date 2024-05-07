@@ -22,7 +22,6 @@ type Props = {
   maxLength?: number;
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "rounded";
   labelStyle?: StyleProp<TextStyle>;
-  containerStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<TextStyle>;
   errorMessageStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
@@ -58,7 +57,6 @@ export function Input(props: Props) {
     minLength,
     maxLength,
     labelStyle,
-    containerStyle,
     style,
     errorMessageStyle,
     disabled,
@@ -137,19 +135,17 @@ export function Input(props: Props) {
   return (
     <View style={styles.container}>
       {!!label && <Text style={[styles.label, labelStyle]}>{label}:</Text>}
-      <View style={[handleContentStyles(), containerStyle]}>
-        <TextInput
-          keyboardType={inputMode}
-          ref={inputRef}
-          onFocus={handleFocused}
-          onBlur={handleBlur}
-          value={value}
-          onChangeText={handleChange}
-          style={[style]}
-          secureTextEntry={type === "password"}
-          defaultValue={defaultValue}
-        />
-      </View>
+      <TextInput
+        keyboardType={inputMode}
+        ref={inputRef}
+        onFocus={handleFocused}
+        onBlur={handleBlur}
+        value={value}
+        onChangeText={handleChange}
+        style={[handleContentStyles(), style]}
+        secureTextEntry={type === "password"}
+        defaultValue={defaultValue}
+      />
       {!!errorMessage && (
         <Text style={[styles.errorMessage, errorMessageStyle]}>
           {errorMessage}
