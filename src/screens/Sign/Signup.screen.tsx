@@ -37,7 +37,7 @@ export function Signup({ navigation }: Props) {
   };
 
   const onSubmit = () => {
-    signup?.(form.email, form.password, form.name);
+    //signup?.(form.email, form.password, form.name);
   };
 
   return (

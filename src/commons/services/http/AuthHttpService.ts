@@ -33,7 +33,6 @@ export class AuthHttpService {
 
       return { user: response.data.user, success: true };
     } catch (error) {
-      // TODO notificar erro
       console.log(error);
       return { success: false };
     }
@@ -56,7 +55,6 @@ export class AuthHttpService {
 
       return { user: response.data.user, success: true };
     } catch (error) {
-      // TODO notificar erro
       console.log(error);
       return { success: false };
     }

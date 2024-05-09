@@ -4,6 +4,7 @@ import { AuthHttpService } from "../../services/http/AuthHttpService";
 import { httpService } from "../../services/http/HttpService";
 import { AuthTokenLocalService } from "../../services/local/AuthLocalService";
 import { UserLocalService } from "../../services/local/UserLocalService";
+import { SubscribeHttpErrorObserver } from "../../../commons/observables/HttpErrorObservable/SubscribeHttpErrorObserver";
 
 export function useAuthContext() {
   const [user, setUser] = useState<User | null>(null);
@@ -78,6 +79,18 @@ export function useAuthContext() {
   useEffect(() => {
     getUser();
     getToken();
+  }, []);
+
+  useEffect(() => {
+    const onHttpError = (props: { status: number }) => {
+      if (props?.status === 401) signout();
+    };
+
+    const subscription = new SubscribeHttpErrorObserver(onHttpError);
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   return {

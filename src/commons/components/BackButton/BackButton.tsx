@@ -14,7 +14,7 @@ export function BackButton() {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 4,
-    padding: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 8,
   },
 });

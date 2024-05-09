@@ -3,7 +3,7 @@ import { Picker } from "@react-native-picker/picker";
 
 import { styles } from "./common/styles";
 import { SelectViewProps } from "./common/types";
-import IconButton from "@expo/vector-icons/AntDesign";
+import IconButton from "@expo/vector-icons/FontAwesome";
 import { Spacer } from "../Spacer/Spacer";
 import { isIos, isWeb } from "../../utils/platform";
 import { Text } from "../UIComponents/Text";
@@ -20,7 +20,7 @@ export function SelectView(props: SelectViewProps) {
         >
           <Text>{formatDate(new Date(props.selected))}</Text>
           <Spacer flex={1} />
-          <IconButton size={16} name={open ? "up" : "down"} />
+          <IconButton size={16} name={open ? "angle-up" : "angle-down"} />
         </TouchableOpacity>
       )}
       {(open || !isIos) && (

@@ -8,7 +8,17 @@ import Icon from "@expo/vector-icons/Ionicons";
 import { Spacer } from "../../../../commons/components/Spacer/Spacer";
 import { theme } from "../../../../commons/theme/theme";
 
-export function Header({ onPress, onPressAccount, onPressExpenses }) {
+type HeaderProps = {
+  onPressAccount: () => void;
+  onPressExpenses: () => void;
+  onPressSettings: () => void;
+};
+
+export function Header({
+  onPressAccount,
+  onPressExpenses,
+  onPressSettings,
+}: HeaderProps) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -20,7 +30,7 @@ export function Header({ onPress, onPressAccount, onPressExpenses }) {
           <Icon
             name="settings-sharp"
             size={20}
-            onPress={onPress}
+            onPress={onPressSettings}
             style={styles.settingIcon}
           />
 

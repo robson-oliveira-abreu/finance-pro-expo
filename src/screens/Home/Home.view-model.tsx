@@ -2,19 +2,13 @@ import { Alert } from "react-native";
 import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
 import { filterPayableExpenses } from "../../commons/utils/filterPayableExpenses";
 import { HomeView } from "./Home.view";
-import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../infra/routes/Stack.routes";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
-type NavigationProps = StackScreenProps<RootStackParamList, "Home">;
-type HomeProps = {} & NavigationProps;
-
-export function HomeViewModel({ navigation }: HomeProps) {
+export function HomeViewModel() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { expenses } = useExpenses();
   const payableExpenses = filterPayableExpenses(expenses);
-
-  const onPressMenu = () => {
-    Alert.alert("Title", "Hello world", [{ text: "Ok" }, { text: "Cancel" }]);
-  };
 
   const onPressAccount = () => {
     navigation.navigate("Account");
@@ -24,12 +18,16 @@ export function HomeViewModel({ navigation }: HomeProps) {
     navigation.navigate("Expenses");
   };
 
+  const onPressSettings = () => {
+    navigation.navigate("Settings");
+  };
+
   return (
     <HomeView
-      onPressMenu={onPressMenu}
       payableExpenses={payableExpenses}
       onPressAccount={onPressAccount}
       onPressExpenses={onPressExpenses}
+      onPressSettings={onPressSettings}
     />
   );
 }
