@@ -24,19 +24,20 @@ export class ExpenseService {
     const id = this.getFullId("");
     const data = await this.storage.list(id);
 
-    return data?.map((expense) =>
-      ExpenseModel(
-        expense.id,
-        expense.description,
-        expense.amount,
-        expense.due_date,
-        expense.installment,
-        expense.installments,
-        expense.observation,
-        expense.paid,
-        expense.paid_amount,
-        expense.paid_date
-      )
+    return data?.map(
+      (expense) =>
+        new ExpenseModel(
+          expense.id,
+          expense.description,
+          expense.amount,
+          expense.due_date,
+          expense.installment,
+          expense.installments,
+          expense.observation,
+          expense.paid,
+          expense.paid_amount,
+          expense.paid_date
+        )
     );
   }
 

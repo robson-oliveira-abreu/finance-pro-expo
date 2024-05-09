@@ -10,6 +10,8 @@ import { useExpenses } from "../../commons/Hooks/useExpenses.hook";
 import { ExpenseModel as Expense } from "../../commons/entities/Expense.entity";
 import { useState } from "react";
 import { RootStackParamList } from "../../infra/routes/Stack.routes";
+import { ExpenseHttpService } from "../../commons/services/http/ExpenseHttpService";
+import { httpService } from "../../commons/services/http/HttpService";
 
 export function ExpenseViewModel() {
   const currency = useCurrency();
@@ -18,6 +20,7 @@ export function ExpenseViewModel() {
   const route = useRoute<RouteProp<RootStackParamList>>();
   const [expense, setExpense] = useState(route.params?.expense);
   const [openEditExpense, setOpenEditExpense] = useState(false);
+  const expensesHttpService = new ExpenseHttpService(httpService);
 
   const payExpense = async () => {
     if (!expense || !expenses) return;
@@ -33,6 +36,8 @@ export function ExpenseViewModel() {
     if (!expense) {
       return;
     }
+
+    expensesHttpService.delete(expense.id);
 
     expenses?.removeExpense(expense.id);
     goBack();

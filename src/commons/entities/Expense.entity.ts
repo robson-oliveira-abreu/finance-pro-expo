@@ -1,40 +1,22 @@
-import { generateId } from "../utils/generateId";
+import uuid from "react-native-uuid";
+export class ExpenseModel {
+  public id: string;
 
-export type ExpenseModel = {
-  id: string;
-  description: string;
-  amount: number;
-  due_date: Date;
-  installment: number;
-  installments: number;
-  observation: string;
-  paid: boolean;
-  paid_amount?: number;
-  paid_date?: Date;
-};
-
-export function ExpenseModel(
-  id: string | null = null,
-  description: string,
-  amount: number,
-  due_date: Date = new Date(),
-  installment: number = 1,
-  installments: number = 1,
-  observation: string = "",
-  paid: boolean = false,
-  paid_amount?: number,
-  paid_date?: Date
-): ExpenseModel {
-  return {
-    id: id || generateId(),
-    description,
-    amount,
-    due_date: new Date(due_date),
-    installment,
-    installments,
-    observation,
-    paid,
-    paid_amount,
-    paid_date,
-  };
+  constructor(
+    id: string | null,
+    public description: string,
+    public amount: number,
+    public due_date: Date = new Date(),
+    public installment: number = 1,
+    public installments: number = 1,
+    public observation: string = "",
+    public paid: boolean = false,
+    public paid_amount?: number,
+    public paid_date?: Date,
+    public userId?: string
+  ) {
+    this.id = id || (uuid.v4() as string);
+    this.due_date = new Date(due_date);
+    this.paid_date = paid_date ? new Date(paid_date) : undefined;
+  }
 }

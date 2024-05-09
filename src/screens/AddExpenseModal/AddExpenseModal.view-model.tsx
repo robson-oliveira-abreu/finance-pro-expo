@@ -15,6 +15,9 @@ import { isWeb } from "../../commons/utils/platform";
 import { getWebDate } from "../../commons/utils/getWebDate";
 import { ExpenseModel } from "../../commons/entities/Expense.entity";
 import { addMonths } from "date-fns";
+import { ExpenseHttpService } from "../../commons/services/http/ExpenseHttpService";
+import { httpService } from "../../commons/services/http/HttpService";
+import { useAuth } from "../../commons/Hooks/useAuth/useAuth.hook";
 
 export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
   const [formState, setFormState] = useState<ExpenseFormState>({});
@@ -26,6 +29,8 @@ export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
   );
   const expenses = useExpenses();
   const [type, setType] = useState<ExpenseType>("expense");
+  const expenseHttpService = new ExpenseHttpService(httpService);
+  const { user } = useAuth();
 
   const onChange = (label: keyof ExpenseFormState) => {
     return (value: ExpenseFormState[keyof ExpenseFormState]) => {
@@ -61,7 +66,7 @@ export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
     props.onClose();
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     try {
       if (!formState.description || !formState.amount) {
         setErrors((state) => {
@@ -124,24 +129,29 @@ export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
         ? getWebDate(webDate?.paid_date)
         : formState?.paid_date;
 
-      console.log({ type });
-
       const expense_list = new Array(installments - installment + 1)
         .fill(null)
-        .map((_, index) =>
-          ExpenseModel(
-            null,
-            formState.description || "",
-            amount,
-            addMonths(due_date || new Date(), index),
-            installment + index,
-            installments,
-            formState.observation,
-            type === "expense" ? true : formState.paid,
-            formState.paid_amount,
-            paid_date
-          )
+        .map(
+          (_, index) =>
+            new ExpenseModel(
+              null,
+              formState.description || "",
+              amount,
+              addMonths(due_date || new Date(), index),
+              installment + index,
+              installments,
+              formState.observation,
+              type === "expense" ? true : formState.paid,
+              formState.paid_amount,
+              paid_date
+            )
         );
+
+      const { id, ...expense } = expense_list[0];
+      expense.userId = user?.id;
+      const res = await expenseHttpService.create(expense);
+
+      console.log({ res });
 
       expense_list.forEach((expense) => {
         expenses.setExpense(expense);

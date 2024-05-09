@@ -51,7 +51,7 @@ export function NavigationHeader({
         <Spacer x={52} y={52} />
       )}
 
-      <Text variant="headlineMedium" style={styles.title}>
+      <Text variant="titleLarge" style={styles.title}>
         {title}
       </Text>
 
