@@ -2,7 +2,7 @@ import { SafeAreaView, Switch, View } from "react-native";
 import { Button, Text } from "../../commons/components/UIComponents";
 import { NavigationHeader } from "../../commons/components/NavigationHeader/NavigationHeader.view";
 
-export function SettingsView({ handleUseHttp, useHttp }) {
+export function SettingsView({ handleUseHttp, useHttp, signout }) {
   return (
     <SafeAreaView style={{ flex: 1, minHeight: "100%" }}>
       <NavigationHeader title="Settings" />
@@ -19,6 +19,7 @@ export function SettingsView({ handleUseHttp, useHttp }) {
           <Text>User servicos http</Text>
           <Switch value={useHttp} onValueChange={handleUseHttp} />
         </View>
+        <Button onPress={signout}>Sair</Button>
       </View>
     </SafeAreaView>
   );
