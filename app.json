@@ -10,8 +10,8 @@
     "entryPoint": ".vscode\\exponentIndex.js",
     "web": {
       "bundler": "metro",
-      "output": "build",
-      "favicon": "./src/commons/assets/logo.png"
+      "output": "single",
+      "favicon": "./src/ui/assets/logo.png"
     }
   },
   "name": "financaspro_expo"

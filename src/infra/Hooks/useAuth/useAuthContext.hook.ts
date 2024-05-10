@@ -89,7 +89,9 @@ export function useAuthContext() {
   }
 
   function onHttpError(onHttpErrorProps: { status: number }) {
-    if (onHttpErrorProps?.status === 401) signout();
+    if (onHttpErrorProps?.status === 401) {
+      signout();
+    }
   }
 
   useEffect(() => {
