@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "declaration": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true
   },
   "extends": "expo/tsconfig.base"
 }

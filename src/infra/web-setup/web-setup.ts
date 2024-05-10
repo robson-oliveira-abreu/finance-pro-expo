@@ -1,4 +1,4 @@
-import { onPlatform } from "../../commons/utils/onPlatform";
+import { onPlatform } from "../utils/onPlatform";
 import { changeLanguage } from "./lang/lang";
 import { add_metadata } from "./metadata/add_metadata.web";
 
