@@ -5,6 +5,10 @@ import { UserLocalService } from "../local/UserLocalService";
 
 type Success = { user: User; success: true };
 type Failure = { success: false };
+type ResponseData = {
+  user: User;
+  access_token: string;
+};
 
 export class AuthHttpService {
   constructor(
@@ -24,12 +28,12 @@ export class AuthHttpService {
         password,
       };
 
-      const response = await this.httpService.post<{
-        user: User;
-        token: string;
-      }>("/auth/signin", body);
+      const response = await this.httpService.post<ResponseData>(
+        "/auth/signin",
+        body
+      );
 
-      this.onSignin(response.data.user, response.data.token);
+      this.onSignin(response.data.user, response.data.access_token);
 
       return { user: response.data.user, success: true };
     } catch (error) {
@@ -46,12 +50,12 @@ export class AuthHttpService {
         password: user.password,
       };
 
-      const response = await this.httpService.post<{
-        user: User;
-        token: string;
-      }>(`/auth/signup`, body);
+      const response = await this.httpService.post<ResponseData>(
+        `/auth/signup`,
+        body
+      );
 
-      this.onSignin(response.data.user, response.data.token);
+      this.onSignin(response.data.user, response.data.access_token);
 
       return { user: response.data.user, success: true };
     } catch (error) {
