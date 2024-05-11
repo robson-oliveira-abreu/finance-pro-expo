@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
 import { User } from "../../../core/entities/User.entity";
-import { AuthTokenLocalService } from "../local/AuthLocalService";
+import { AuthTokenLocalService } from "../local/AuthTokenLocalService";
 import { UserLocalService } from "../local/UserLocalService";
 import { Failure } from "../../../core/entities/Failure";
 import { Success } from "../../../core/entities/Success";

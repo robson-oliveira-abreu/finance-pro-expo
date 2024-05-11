@@ -70,34 +70,32 @@ export class Authentication {
     return this;
   }
 
-  public async loadUser() {
-    const response = await this.userLocalService.get();
+  public async loadLocalAuth() {
+    try {
+      const [user_response, token_response] = await Promise.all([
+        this.userLocalService.get(),
+        this.authTokenLocalService.get(),
+      ]);
 
-    if (response.success && response.payload) {
-      const newAuth = this.newInstance();
+      if (
+        user_response.success &&
+        user_response.payload &&
+        token_response.success &&
+        token_response.payload
+      ) {
+        const newAuth = this.newInstance();
 
-      const user = new User(response.payload);
+        newAuth.user = user_response.payload;
 
-      if (!user) return this;
+        this.authService.initialize(token_response.payload);
 
-      newAuth.user;
+        return this.newInstance(newAuth);
+      }
 
-      return this.newInstance(newAuth);
-    }
-
-    return this;
-  }
-
-  public async loadToken() {
-    const response = await this.authTokenLocalService.get();
-
-    if (!response.success || !response.payload) {
+      return this.signout();
+    } catch (error) {
+      console.log({ error });
       return this;
     }
-
-    this.authService.initialize(response.payload);
-    const newAuth = await this.signout();
-
-    return newAuth;
   }
 }

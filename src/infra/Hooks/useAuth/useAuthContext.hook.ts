@@ -1,30 +1,28 @@
 import { useEffect, useState } from "react";
 import { AuthHttpService } from "../../services/http/AuthHttpService";
 import { httpService } from "../../services/http/HttpService";
-import { AuthTokenLocalService } from "../../services/local/AuthLocalService";
+import { AuthTokenLocalService } from "../../services/local/AuthTokenLocalService";
 import { UserLocalService } from "../../services/local/UserLocalService";
 import { SubscribeHttpErrorObserver } from "../../observables/HttpErrorObservable/SubscribeHttpErrorObserver";
 import { Authentication } from "../../../core/entities/Authentication.entity";
 
 const defaultLoadings = {
-  getUser: false,
+  loadLocalAuthData: false,
   signin: false,
   signup: false,
-  getToken: false,
   signout: false,
 };
 
 export function useAuthContext() {
   const userLocalService = new UserLocalService();
   const authTokenLocalService = new AuthTokenLocalService();
-  const [loadings, setLoadings] = useState(defaultLoadings);
-  const loading = Object.values(defaultLoadings).some(Boolean);
-
   const authHttpService = new AuthHttpService(
     httpService,
     userLocalService,
     authTokenLocalService
   );
+
+  const [loadings, setLoadings] = useState(defaultLoadings);
   const [authentication, setAuthentication] = useState(
     new Authentication(
       null,
@@ -34,6 +32,7 @@ export function useAuthContext() {
     )
   );
 
+  const loading = Object.values(loadings).some(Boolean);
   const isAuthenticated = Boolean(authentication.user?.id);
 
   function setLoading(props: Partial<typeof loadings>) {
@@ -45,47 +44,36 @@ export function useAuthContext() {
       revertLoadingValue[key] = !value;
     });
 
-    return () => setLoadings((state) => ({ ...state, ...props }));
+    return () => setLoadings((state) => ({ ...state, ...revertLoadingValue }));
   }
 
-  async function signin(email: string, password: string) {
-    const revertLoading = setLoading({ signin: true });
+  async function runAuthMethod(
+    authenticationMethod: () => Promise<Authentication>,
+    loadKey: keyof typeof loadings
+  ) {
+    const revertLoading = setLoading({ [loadKey]: true });
 
-    setAuthentication(await authentication.signin(email, password));
+    const newAuthState = await authenticationMethod();
+
+    setAuthentication(newAuthState);
 
     revertLoading();
   }
 
-  async function signup(email: string, password: string, name: string) {
-    const revertLoading = setLoading({ signup: true });
-
-    setAuthentication(await authentication.signup(email, password, name));
-
-    revertLoading();
+  function signin(email: string, password: string) {
+    runAuthMethod(() => authentication.signin(email, password), "signin");
   }
 
-  async function signout() {
-    const revertLoading = setLoading({ signout: true });
-
-    setAuthentication(await authentication.signout());
-
-    revertLoading();
+  function signup(email: string, password: string, name: string) {
+    runAuthMethod(() => authentication.signup(email, password, name), "signup");
   }
 
-  async function loadUser() {
-    const revertLoading = setLoading({ getUser: true });
-
-    setAuthentication(await authentication.loadUser());
-
-    revertLoading();
+  function signout() {
+    runAuthMethod(() => authentication.signout(), "signout");
   }
 
-  async function loadToken() {
-    const revertLoading = setLoading({ getToken: true });
-
-    setAuthentication(await authentication.loadToken());
-
-    revertLoading();
+  function loadLocalAuth() {
+    runAuthMethod(() => authentication.loadLocalAuth(), "loadLocalAuthData");
   }
 
   function onHttpError(onHttpErrorProps: { status: number }) {
@@ -95,8 +83,7 @@ export function useAuthContext() {
   }
 
   useEffect(() => {
-    loadUser();
-    loadToken();
+    loadLocalAuth();
   }, []);
 
   useEffect(() => {

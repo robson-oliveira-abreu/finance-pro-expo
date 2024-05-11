@@ -19,9 +19,9 @@ export function Storage<Entitie>() {
         return new Success(null);
       }
 
-      const pasrsed_data: Entitie = JSON.parse(data);
+      const parsed_data: Entitie = JSON.parse(data);
 
-      return new Success(pasrsed_data);
+      return new Success(parsed_data);
     } catch (error) {
       console.error(error);
       return new Failure();

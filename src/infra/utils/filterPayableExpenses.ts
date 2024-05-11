@@ -5,7 +5,7 @@ export function filterPayableExpenses(expenses: ExpenseModel[]) {
   const currentDate = new Date();
   currentDate.setDate(1);
 
-  return expenses.filter(({ paid, due_date }) => {
+  return expenses?.filter(({ paid, due_date }) => {
     return !paid && differenceLessThanTrirtyDays(due_date, currentDate);
   });
 }

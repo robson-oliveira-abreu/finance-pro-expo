@@ -11,7 +11,7 @@ export function groupExpenses(_expenses: ExpenseModel[]) {
 
   const filterByMonth = filterMonthExpenses(new Date());
 
-  _expenses.forEach((expense) => {
+  _expenses?.forEach((expense) => {
     if (!filterByMonth(expense)) return;
 
     grouped.total += expense.amount;
