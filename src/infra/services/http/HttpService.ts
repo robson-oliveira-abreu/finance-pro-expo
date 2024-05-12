@@ -1,7 +1,7 @@
 import axios from "axios";
 import HttpAuthErrorObservable from "../../observables/HttpErrorObservable/HttpErrorObservable";
 
-const backendUrl = process.env.EXPO_PUBLIC__BACKEND_URL;
+const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
 
 export const httpService = axios.create({
   baseURL: backendUrl,

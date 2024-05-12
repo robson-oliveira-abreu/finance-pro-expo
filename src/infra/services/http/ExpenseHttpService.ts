@@ -49,7 +49,7 @@ export class ExpenseHttpService implements ExpenseService {
         throw new Error("groupId or userId must be provided");
 
       const query =
-        "/expense?" +
+        "/expenses?" +
         (userId && groupId
           ? `userId=${userId}&groupId=${groupId}`
           : userId

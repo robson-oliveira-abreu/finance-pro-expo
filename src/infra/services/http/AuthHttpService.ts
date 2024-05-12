@@ -50,9 +50,9 @@ export class AuthHttpService implements AuthService {
   }
 
   async signup(
-    name: string,
     email: string,
-    password: string
+    password: string,
+    name: string
   ): Promise<Success<User> | Failure> {
     try {
       const body = {

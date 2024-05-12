@@ -37,7 +37,7 @@ export function Signup({ navigation }: Props) {
   };
 
   const onSubmit = () => {
-    //signup?.(form.email, form.password, form.name);
+    signup?.(form.email, form.password, form.name);
   };
 
   return (
@@ -48,13 +48,14 @@ export function Signup({ navigation }: Props) {
         <Input
           label={"Nome"}
           value={form.name}
-          onChange={onChangeForm("email")}
+          onChange={onChangeForm("name")}
         />
 
         <Input
           label={"Email"}
           value={form.email}
           onChange={onChangeForm("email")}
+          type="email"
         />
 
         <Input

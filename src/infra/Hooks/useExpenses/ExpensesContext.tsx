@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
-import { useExpensesContext } from "../Hooks/useExpenses/useExpensesContext.hook";
-import { ExpenseModel } from "../../core/entities/Expense.entity";
+import { useExpensesContext } from "./useExpensesContext.hook";
+import { ExpenseModel } from "../../../core/entities/Expense.entity";
 
 export const ExpensesContext = createContext<
   ReturnType<typeof useExpensesContext>
@@ -8,8 +8,6 @@ export const ExpensesContext = createContext<
   expenses: [],
   setExpense: (expense: ExpenseModel) => new Promise(() => {}),
   removeExpense: (expense_id: string) => new Promise(() => {}),
-  handleUseHttp: function (): void {},
-  useHttp: false,
   migrate: () => {},
 });
 

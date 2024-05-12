@@ -10,9 +10,7 @@ export type UseExpense = {
   expenses: ExpenseModel[];
   setExpense: (expense: ExpenseModel) => Promise<void>;
   removeExpense: (expense_id: string) => Promise<void>;
-  handleUseHttp: () => void;
   migrate: () => void;
-  useHttp: boolean;
 };
 
 const defaultLoadingsState = {
@@ -31,18 +29,17 @@ export function useExpensesContext(): UseExpense {
     new ExpenseList(null, expenseHttpService)
   );
   const [loadings, setLoadings] = useState(defaultLoadingsState);
-  const [useHttp, setUseHttp] = useState(false);
   const { user } = useAuth();
 
   async function runAuthMethod(
-    authenticationMethod: () => Promise<ExpenseList>,
+    expenseListMethod: () => Promise<ExpenseList>,
     loadKey: keyof typeof loadings
   ) {
     setLoadings((state) => ({ ...state, [loadKey]: true }));
 
-    const newAuthState = await authenticationMethod();
+    const newExpenseState = await expenseListMethod();
 
-    setExpenseList(newAuthState);
+    setExpenseList(newExpenseState);
 
     setLoadings((state) => ({ ...state, [loadKey]: false }));
   }
@@ -52,9 +49,13 @@ export function useExpensesContext(): UseExpense {
   };
 
   const createExpense = async (expense: ExpenseModel) => {
-    if (user) runAuthMethod(() => expenseList.create(expense), "create");
+    const { id, ...expenseWithoutId } = expense;
+    if (user)
+      runAuthMethod(() => expenseList.create(expenseWithoutId), "create");
 
     await expenseService.set(expense);
+
+    listExpenses();
   };
 
   const removeExpense = async (expense_id: string) => {
@@ -66,24 +67,24 @@ export function useExpensesContext(): UseExpense {
     const expenses = await expenseService.list();
 
     if (expenses.success)
-      expenseHttpService.migrate(
+      await expenseHttpService.migrate(
         expenses.payload.map(({ id, ...rest }) => ({
           ...rest,
           userId: user?.id,
         }))
       );
+
+    listExpenses();
   };
 
   useEffect(() => {
     listExpenses();
-  }, [useHttp]);
+  }, [user]);
 
   return {
     expenses: expenseList.expenses,
     setExpense: createExpense,
     removeExpense,
-    handleUseHttp: () => setUseHttp((state) => !state),
-    useHttp,
     migrate,
   };
 }
