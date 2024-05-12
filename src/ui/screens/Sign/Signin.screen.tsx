@@ -47,6 +47,8 @@ export function Signin({ navigation }: Props) {
           label={"Email"}
           value={form.email}
           onChange={onChangeForm("email")}
+          keyboardType="email-address"
+          inputMode="email"
         />
 
         <Input
@@ -54,6 +56,8 @@ export function Signin({ navigation }: Props) {
           value={form.password}
           onChange={onChangeForm("password")}
           type="password"
+          inputMode="text"
+          keyboardType="default"
         />
 
         <Spacer y={8} />

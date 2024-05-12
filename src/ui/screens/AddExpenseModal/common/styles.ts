@@ -10,9 +10,6 @@ export const styles = StyleSheet.create({
   flexOne: {
     flex: 1,
   },
-  affixTextStyle: {
-    paddingRight: 6,
-  },
   rowInputs: {
     flexDirection: "row",
     width: "100%",

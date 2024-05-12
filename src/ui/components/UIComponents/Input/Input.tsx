@@ -9,8 +9,11 @@ import {
   TextStyle,
   ColorValue,
   KeyboardTypeOptions,
+  InputModeOptions,
 } from "react-native";
 import { theme } from "@ui/theme/theme";
+import { isWeb } from "@infra/utils/platform";
+import { Spacer } from "@ui/components/Spacer/Spacer";
 
 type Props = {
   value?: string;
@@ -26,8 +29,11 @@ type Props = {
   errorMessageStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
   focusColor?: ColorValue;
-  inputMode?: KeyboardTypeOptions;
+  keyboardType?: KeyboardTypeOptions;
   defaultValue?: string;
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+  inputMode?: InputModeOptions | undefined;
 };
 
 const border_radius = {
@@ -62,13 +68,14 @@ export function Input(props: Props) {
     disabled,
     focusColor,
     inputMode,
+    keyboardType,
     defaultValue,
   } = props;
 
   const errorMessage =
     Object.values(errors).find((error) => error) || props?.error;
 
-  const handleFocused = () => {
+  const handleFocused = (e) => {
     if (disabled) {
       inputRef.current?.blur();
       return;
@@ -135,17 +142,34 @@ export function Input(props: Props) {
   return (
     <View style={styles.container}>
       {!!label && <Text style={[styles.label, labelStyle]}>{label}:</Text>}
-      <TextInput
-        keyboardType={inputMode}
-        ref={inputRef}
-        onFocus={handleFocused}
-        onBlur={handleBlur}
-        value={value}
-        onChangeText={handleChange}
-        style={[handleContentStyles(), style]}
-        secureTextEntry={type === "password"}
-        defaultValue={defaultValue}
-      />
+      <View style={[handleContentStyles(), style]}>
+        {Boolean(props.left) && (
+          <>
+            {props.left}
+            <Spacer x={4} />
+          </>
+        )}
+
+        <TextInput
+          style={[styles.input, isWeb && ({ outline: 0 } as any)]}
+          keyboardType={keyboardType}
+          ref={inputRef}
+          onFocus={handleFocused}
+          onBlur={handleBlur}
+          value={value}
+          onChangeText={handleChange}
+          secureTextEntry={type === "password"}
+          inputMode={inputMode}
+          defaultValue={defaultValue}
+        />
+
+        {Boolean(props.right) && (
+          <>
+            <Spacer x={4} />
+            {props.right}
+          </>
+        )}
+      </View>
       {!!errorMessage && (
         <Text style={[styles.errorMessage, errorMessageStyle]}>
           {errorMessage}
@@ -160,10 +184,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   content: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 2,
     borderColor: "#d1d1d1",
     borderRadius: 8,
-    width: "100%",
     paddingVertical: 4,
     paddingHorizontal: 8,
   },
@@ -183,5 +209,10 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: theme.colors.shapeDark,
     marginBottom: 4,
+  },
+  input: {
+    borderWidth: 0,
+    width: "100%",
+    lineHeight: 16,
   },
 });

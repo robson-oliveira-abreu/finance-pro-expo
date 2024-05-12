@@ -49,6 +49,8 @@ export function Signup({ navigation }: Props) {
           label={"Nome"}
           value={form.name}
           onChange={onChangeForm("name")}
+          keyboardType="default"
+          inputMode="text"
         />
 
         <Input
@@ -56,6 +58,8 @@ export function Signup({ navigation }: Props) {
           value={form.email}
           onChange={onChangeForm("email")}
           type="email"
+          keyboardType="email-address"
+          inputMode="email"
         />
 
         <Input
@@ -63,6 +67,8 @@ export function Signup({ navigation }: Props) {
           value={form.password}
           onChange={onChangeForm("password")}
           type="password"
+          keyboardType="default"
+          inputMode="text"
         />
 
         <Input
@@ -70,6 +76,8 @@ export function Signup({ navigation }: Props) {
           value={form.confirmPassword}
           onChange={onChangeForm("confirmPassword")}
           type="password"
+          keyboardType="default"
+          inputMode="text"
         />
 
         <Spacer y={8} />

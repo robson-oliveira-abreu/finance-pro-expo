@@ -9,9 +9,10 @@ import { styles } from "./common/styles";
 import { KeyboardAvoidingView } from "@ui/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
 import { Button } from "@ui/components/UIComponents";
 import { Input } from "@ui/components/UIComponents/Input/Input";
-import IconButton from "@expo/vector-icons/Ionicons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { SegmentedButton } from "@ui/components/UIComponents/SegmentedButton/SegmentedButton";
 import { expenseTypeOptions } from "./common/constants";
+import { theme } from "@ui/theme/theme";
 
 export function AddExpenseModalView(props: AddExpenseModalViewProps) {
   const {
@@ -35,7 +36,7 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
       <View style={{ minHeight: "100%" }}>
         <KeyboardAvoidingView style={styles.keyboardAvoidingView}>
           <View>
-            <IconButton
+            <Ionicons
               name="close"
               size={28}
               onPress={onClose}
@@ -54,6 +55,8 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
               value={formState.description}
               onChange={onChange("description")}
               error={!!errors.get("description")}
+              keyboardType="default"
+              inputMode="text"
             />
             {!!errors.get("description") && errors.get("description") && (
               <Text type="error">{errors.get("description")}</Text>
@@ -64,8 +67,15 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
               label="Valor"
               value={formState.amount?.toString()}
               onChange={onChange("amount")}
-              inputMode="decimal-pad"
-              // left={<Input.Affix text="R$" textStyle={styles.affixTextStyle} />}
+              keyboardType="decimal-pad"
+              inputMode="decimal"
+              left={
+                <Ionicons
+                  name="logo-usd"
+                  size={16}
+                  color={theme.colors.shapeDarkSecondary}
+                />
+              }
               error={!!errors.get("amount")}
             />
             {!!errors.get("amount") && errors.get("amount") && (
@@ -76,21 +86,25 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
             label="Observação"
             value={formState.observation}
             onChange={onChange("observation")}
+            keyboardType="default"
+            inputMode="text"
           />
           {type === "fixed" && (
             <>
               <Input
-                label="Parcela"
-                inputMode="numeric"
+                label="1º Parcela"
                 value={formState.installment}
                 onChange={onChange("installment")}
+                keyboardType="numeric"
+                inputMode="decimal"
               />
               <Input
-                label="Parcelas"
-                inputMode="numeric"
+                label="Qtd. Parcelas"
                 value={formState.installments}
                 onChange={onChange("installments")}
-                // right={<Input.Affix text="vezes" />}
+                right={<Text variant="bodySmall">vezes</Text>}
+                keyboardType="numeric"
+                inputMode="decimal"
               />
             </>
           )}
@@ -106,10 +120,11 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
                 <View style={styles.flexOne}>
                   <Input
                     label="Dia"
-                    inputMode="numeric"
                     // defaultValue={`${formState.due_date?.getDate() || ""}`}
                     onChange={onChangeDateWeb("due_date", "day")}
                     error={Boolean(webDateErrors.get("day"))}
+                    keyboardType="numeric"
+                    inputMode="decimal"
                   />
                   {Boolean(webDateErrors.get("day")) && (
                     <Text type="error">{webDateErrors.get("day")}</Text>
@@ -118,10 +133,11 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
                 <View style={styles.flexOne}>
                   <Input
                     label="Mês"
-                    inputMode="numeric"
                     // defaultValue={`${formState.due_date?.getMonth() || ""}`}
                     onChange={onChangeDateWeb("due_date", "month")}
                     error={Boolean(webDateErrors.get("month"))}
+                    keyboardType="numeric"
+                    inputMode="decimal"
                   />
                   {Boolean(webDateErrors.get("month")) && (
                     <Text type="error">{webDateErrors.get("month")}</Text>
@@ -130,10 +146,11 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
                 <View style={styles.flexOne}>
                   <Input
                     label="Ano"
-                    inputMode="numeric"
                     // defaultValue={`${formState.due_date?.getFullYear() || ""}`}
                     onChange={onChangeDateWeb("due_date", "year")}
                     error={Boolean(webDateErrors.get("year"))}
+                    keyboardType="numeric"
+                    inputMode="decimal"
                   />
                   {Boolean(webDateErrors.get("year")) && (
                     <Text type="error">{webDateErrors.get("year")}</Text>
