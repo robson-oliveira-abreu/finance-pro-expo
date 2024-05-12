@@ -12,6 +12,9 @@
       "bundler": "metro",
       "output": "single",
       "favicon": "./src/ui/assets/logo.png"
+    },
+    "experiments": {
+      "tsconfigPaths": true
     }
   },
   "name": "financaspro_expo"

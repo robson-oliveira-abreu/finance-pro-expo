@@ -4,7 +4,19 @@
     "strictPropertyInitialization": false,
     "declaration": true,
     "noEmit": false,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": [
+        "src/core/*"
+      ],
+      "@infra/*": [
+        "src/infra/*"
+      ],
+      "@ui/*": [
+        "src/ui/*"
+      ],
+    }
   },
   "extends": "expo/tsconfig.base"
 }
