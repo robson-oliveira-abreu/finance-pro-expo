@@ -1,10 +1,10 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { ExpenseModel } from "../../../core/entities/Expense.entity";
-import { Spacer } from "../Spacer/Spacer";
-import { ExpenseItem } from "../ExpenseItem/ExpenseItem.view";
+import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Spacer } from "@ui/components/Spacer/Spacer";
+import { ExpenseItem } from "@ui/components/ExpenseItem/ExpenseItem.view";
 import { styles } from "./styles";
-import { Text } from "../UIComponents";
+import { Text } from "@ui/components/UIComponents";
 
 export type ExpenseListProps = {
   data?: Array<ExpenseModel>;

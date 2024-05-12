@@ -10,14 +10,14 @@ import {
   WebDateErrorState,
   WebDateState,
 } from "./common/types";
-import { useExpenses } from "../../../infra/Hooks/useExpenses/useExpenses.hook";
-import { isWeb } from "../../../infra/utils/platform";
-import { getWebDate } from "../../../infra/utils/getWebDate";
-import { ExpenseModel } from "../../../core/entities/Expense.entity";
+import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
+import { isWeb } from "@infra/utils/platform";
+import { getWebDate } from "@infra/utils/getWebDate";
+import { ExpenseModel } from "@core/entities/Expense.entity";
 import { addMonths } from "date-fns";
-import { ExpenseHttpService } from "../../../infra/services/http/ExpenseHttpService";
-import { httpService } from "../../../infra/services/http/HttpService";
-import { useAuth } from "../../../infra/Hooks/useAuth/useAuth.hook";
+import { ExpenseHttpService } from "@infra/services/http/ExpenseHttpService";
+import { httpService } from "@infra/services/http/HttpService";
+import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
 
 export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
   const [formState, setFormState] = useState<ExpenseFormState>({});

@@ -10,7 +10,7 @@ import {
   ColorValue,
   KeyboardTypeOptions,
 } from "react-native";
-import { theme } from "../../../theme/theme";
+import { theme } from "@ui/theme/theme";
 
 type Props = {
   value?: string;

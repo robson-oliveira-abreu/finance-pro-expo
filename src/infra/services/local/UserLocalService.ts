@@ -1,6 +1,6 @@
-import { Failure } from "../../../core/entities/Failure";
-import { Success } from "../../../core/entities/Success";
-import { User } from "../../../core/entities/User.entity";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
+import { User } from "@core/entities/User.entity";
 import { Storage } from "./Storage";
 
 export class UserLocalService {

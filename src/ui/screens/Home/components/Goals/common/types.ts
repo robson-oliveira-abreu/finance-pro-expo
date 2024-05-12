@@ -1,4 +1,4 @@
-import { ICurrencyContext } from "../../../../../../infra/Hooks/useCurrency/useCurrencyContext.hook";
+import { ICurrencyContext } from "@infra/Hooks/useCurrency/useCurrencyContext.hook";
 
 export type TGoalsModel = {
   groupedExpenses: {

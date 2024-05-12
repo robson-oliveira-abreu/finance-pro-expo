@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { isIos, isWeb } from "../../../../infra/utils/platform";
-import { theme } from "../../../theme/theme";
+import { isIos, isWeb } from "@infra/utils/platform";
+import { theme } from "@ui/theme/theme";
 
 export const styles = StyleSheet.create({
   container: {

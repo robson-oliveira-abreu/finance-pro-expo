@@ -1,5 +1,4 @@
-import { ExpenseModel } from "../../../../core/entities/Expense.entity";
-import { ModalState } from "../../Expenses/common/types";
+import { ExpenseModel } from "@core/entities/Expense.entity";
 
 export interface ExpenseFormState
   extends Partial<

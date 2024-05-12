@@ -1,10 +1,10 @@
 import React from "react";
 import { View } from "react-native";
-import { Input } from "../../components/UIComponents/Input/Input";
-import { Spacer } from "../../components/Spacer/Spacer";
-import { useWidth } from "../../../infra/Hooks/useWidth.hook";
-import { Button, Text } from "../../components/UIComponents";
-import { useAuth } from "../../../infra/Hooks/useAuth/useAuth.hook";
+import { Input } from "@ui/components/UIComponents/Input/Input";
+import { Spacer } from "@ui/components/Spacer/Spacer";
+import { useWidth } from "@infra/Hooks/useWidth.hook";
+import { Button, Text } from "@ui/components/UIComponents";
+import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
 import { styles } from "./styles";
 import { Props } from "./types";
 

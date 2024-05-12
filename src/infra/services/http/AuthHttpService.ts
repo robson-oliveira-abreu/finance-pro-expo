@@ -1,11 +1,11 @@
 import { AxiosInstance } from "axios";
-import { User } from "../../../core/entities/User.entity";
-import { AuthTokenLocalService } from "../local/AuthTokenLocalService";
-import { UserLocalService } from "../local/UserLocalService";
-import { Failure } from "../../../core/entities/Failure";
-import { Success } from "../../../core/entities/Success";
-import { AuthService } from "../../../core/services/AuthService";
-import { LogError } from "../../utils/logError";
+import { User } from "@core/entities/User.entity";
+import { AuthTokenLocalService } from "@infra/services/local/AuthTokenLocalService";
+import { UserLocalService } from "@infra/services/local/UserLocalService";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
+import { AuthService } from "@core/services/AuthService";
+import { LogError } from "@infra/utils/logError";
 
 type HttpResponseData = {
   user: User;

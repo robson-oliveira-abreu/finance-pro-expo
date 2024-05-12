@@ -1,9 +1,9 @@
 import { View } from "react-native";
-import { Text } from "../../../../components/UIComponents";
+import { Text } from "@ui/components/UIComponents";
 import { styles } from "./common/styles";
 import { GoalsViewProps } from "./common/types";
 import { monthExpensesAmountByStatus } from "./common/constants";
-import { DonutView } from "../../../../components/Donut/Donut.view";
+import { DonutView } from "@ui/components/Donut/Donut.view";
 
 export function GoalsView(props: GoalsViewProps) {
   return (

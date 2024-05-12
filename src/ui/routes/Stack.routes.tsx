@@ -1,9 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { ExpenseViewModel } from "../screens/Expense/Expense.view-model";
-import { ExpenseModel } from "../../core/entities/Expense.entity";
-import { HomeViewModel } from "../screens/Home/Home.view-model";
-import { ExpensesViewModel } from "../screens/Expenses/Expenses.view-model";
-import { Settings } from "../screens/Settings";
+import { ExpenseViewModel } from "@ui/screens/Expense/Expense.view-model";
+import { ExpenseModel } from "@core/entities/Expense.entity";
+import { HomeViewModel } from "@ui/screens/Home/Home.view-model";
+import { ExpensesViewModel } from "@ui/screens/Expenses/Expenses.view-model";
+import { Settings } from "@ui/screens/Settings";
 
 export type RootStackParamList = {
   Expense: { expense?: ExpenseModel };

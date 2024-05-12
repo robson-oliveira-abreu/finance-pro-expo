@@ -1,5 +1,5 @@
-import { Failure } from "../../../core/entities/Failure";
-import { Success } from "../../../core/entities/Success";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
 import { Storage } from "./Storage";
 
 export class AuthTokenLocalService {

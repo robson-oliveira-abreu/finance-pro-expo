@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext } from "react";
-import { User } from "../../../core/entities/User.entity";
-import { useAuthContext } from "../../Hooks/useAuth/useAuthContext.hook";
+import { User } from "@core/entities/User.entity";
+import { useAuthContext } from "@infra/Hooks/useAuth/useAuthContext.hook";
 
 export const AuthContext = createContext<{
   isAuthenticated: boolean;

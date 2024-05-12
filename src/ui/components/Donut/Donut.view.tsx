@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Circle, G, Svg } from "react-native-svg";
-import { Text } from "../UIComponents";
+import { Text } from "@ui/components/UIComponents";
 import { styles } from "./styles";
 
 export function DonutView({

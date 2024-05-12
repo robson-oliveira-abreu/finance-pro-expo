@@ -1,4 +1,4 @@
-import { ExpenseModel } from "../../core/entities/Expense.entity";
+import { ExpenseModel } from "@core/entities/Expense.entity";
 
 export function filterMonthExpenses(selectedMonth: Date) {
   return function (expense: ExpenseModel) {

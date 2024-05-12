@@ -1,15 +1,15 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
-import { ExpenseModel } from "../../../core/entities/Expense.entity";
-import { Spacer } from "../Spacer/Spacer";
+import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Spacer } from "@ui/components/Spacer/Spacer";
 import { styles } from "./styles";
-import { getLocaleDate } from "../../../infra/utils/date";
-import { Text } from "../UIComponents";
+import { getLocaleDate } from "@infra/utils/date";
+import { Text } from "@ui/components/UIComponents";
 import { getStatus } from "./utils";
 import { badgeStatus } from "./constants";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../../routes/Stack.routes";
-import { useCurrency } from "../../../infra/Hooks/useCurrency/useCurrency.hook";
+import { RootStackParamList } from "@ui/routes/Stack.routes";
+import { useCurrency } from "@infra/Hooks/useCurrency/useCurrency.hook";
 
 type ExpenseItemProps = {
   expense: ExpenseModel;

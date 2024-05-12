@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { View } from "react-native";
-import { Text } from "../UIComponents/Text";
+import { Text } from "@ui/components/UIComponents/Text";
 
 export const Header = ({}): ReactNode => {
   return (

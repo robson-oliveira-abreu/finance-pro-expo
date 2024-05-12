@@ -2,7 +2,7 @@ import { PropsWithChildren, createContext } from "react";
 import {
   ICurrencyContext,
   useCurrencyContext,
-} from "../../Hooks/useCurrency/useCurrencyContext.hook";
+} from "@infra/Hooks/useCurrency/useCurrencyContext.hook";
 
 export const CurrencyContext = createContext<ICurrencyContext>({
   currency: "",

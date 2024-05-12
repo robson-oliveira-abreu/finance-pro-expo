@@ -1,9 +1,9 @@
 import { AxiosInstance } from "axios";
-import { ExpenseModel } from "../../../core/entities/Expense.entity";
-import { Failure } from "../../../core/entities/Failure";
-import { Success } from "../../../core/entities/Success";
-import { LogError } from "../../utils/logError";
-import { ExpenseService } from "../../../core/services/ExpenseService";
+import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
+import { LogError } from "@infra/utils/logError";
+import { ExpenseService } from "@core/services/ExpenseService";
 
 type CreateExpense = Omit<ExpenseModel, "id">;
 

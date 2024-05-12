@@ -1,16 +1,16 @@
 import { Modal, View } from "react-native";
-import { Spacer } from "../../components/Spacer/Spacer";
-import { Text } from "../../components/UIComponents/Text";
+import { Spacer } from "@ui/components/Spacer/Spacer";
+import { Text } from "@ui/components/UIComponents/Text";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { getLocaleDate } from "../../../infra/utils/date";
-import { isAndroid, isIos, isWeb } from "../../../infra/utils/platform";
+import { getLocaleDate } from "@infra/utils/date";
+import { isAndroid, isIos, isWeb } from "@infra/utils/platform";
 import { AddExpenseModalViewProps } from "./common/types";
 import { styles } from "./common/styles";
-import { KeyboardAvoidingView } from "../../components/KeyboardAvoidingView/KeyboardAvoidingView.view";
-import { Button } from "../../components/UIComponents";
-import { Input } from "../../components/UIComponents/Input/Input";
+import { KeyboardAvoidingView } from "@ui/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
+import { Button } from "@ui/components/UIComponents";
+import { Input } from "@ui/components/UIComponents/Input/Input";
 import IconButton from "@expo/vector-icons/Ionicons";
-import { SegmentedButton } from "../../components/UIComponents/SegmentedButton/SegmentedButton";
+import { SegmentedButton } from "@ui/components/UIComponents/SegmentedButton/SegmentedButton";
 import { expenseTypeOptions } from "./common/constants";
 
 export function AddExpenseModalView(props: AddExpenseModalViewProps) {

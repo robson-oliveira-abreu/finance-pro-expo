@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Signin } from "../screens/Sign/Signin.screen";
-import { Signup } from "../screens/Sign/Signup.screen";
+import { Signin } from "@ui/screens/Sign/Signin.screen";
+import { Signup } from "@ui/screens/Sign/Signup.screen";
 
 export type PublicRootStackParamList = {
   Signin: undefined;

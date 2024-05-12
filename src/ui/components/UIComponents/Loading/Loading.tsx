@@ -1,5 +1,5 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { theme } from "../../../theme/theme";
+import { theme } from "@ui/theme/theme";
 
 export function Loading() {
   return (

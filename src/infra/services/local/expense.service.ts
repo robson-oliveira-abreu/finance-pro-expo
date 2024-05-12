@@ -1,6 +1,6 @@
-import { ExpenseModel } from "../../../core/entities/Expense.entity";
-import { Failure } from "../../../core/entities/Failure";
-import { Success } from "../../../core/entities/Success";
+import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
 import { Storage } from "./Storage";
 
 export class ExpenseService {

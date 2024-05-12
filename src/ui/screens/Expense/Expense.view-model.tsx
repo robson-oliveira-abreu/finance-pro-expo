@@ -1,4 +1,4 @@
-import { useCurrency } from "../../../infra/Hooks/useCurrency/useCurrency.hook";
+import { useCurrency } from "@infra/Hooks/useCurrency/useCurrency.hook";
 import { ExpenseView } from "./Expense.view";
 import {
   NavigationProp,
@@ -6,12 +6,12 @@ import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import { useExpenses } from "../../../infra/Hooks/useExpenses/useExpenses.hook";
-import { ExpenseModel as Expense } from "../../../core/entities/Expense.entity";
+import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
+import { ExpenseModel as Expense } from "@core/entities/Expense.entity";
 import { useState } from "react";
-import { RootStackParamList } from "../../routes/Stack.routes";
-import { ExpenseHttpService } from "../../../infra/services/http/ExpenseHttpService";
-import { httpService } from "../../../infra/services/http/HttpService";
+import { RootStackParamList } from "@ui/routes/Stack.routes";
+import { ExpenseHttpService } from "@infra/services/http/ExpenseHttpService";
+import { httpService } from "@infra/services/http/HttpService";
 
 export function ExpenseViewModel() {
   const currency = useCurrency();

@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { useExpensesContext } from "./useExpensesContext.hook";
-import { ExpenseModel } from "../../../core/entities/Expense.entity";
+import { ExpenseModel } from "@core/entities/Expense.entity";
 
 export const ExpensesContext = createContext<
   ReturnType<typeof useExpensesContext>

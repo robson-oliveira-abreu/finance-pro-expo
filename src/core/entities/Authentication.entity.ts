@@ -1,6 +1,6 @@
-import { AuthService } from "../services/AuthService";
-import { AuthTokenLocalService } from "../services/AuthTokenLocalService";
-import { UserLocalService } from "../services/UserLocalService";
+import { AuthService } from "@core/services/AuthService";
+import { AuthTokenLocalService } from "@core/services/AuthTokenLocalService";
+import { UserLocalService } from "@core/services/UserLocalService";
 import { User } from "./User.entity";
 
 export class Authentication {

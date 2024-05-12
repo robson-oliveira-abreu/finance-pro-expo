@@ -1,8 +1,7 @@
-import { Alert } from "react-native";
-import { useExpenses } from "../../../infra/Hooks/useExpenses/useExpenses.hook";
-import { filterPayableExpenses } from "../../../infra/utils/filterPayableExpenses";
+import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
+import { filterPayableExpenses } from "@infra/utils/filterPayableExpenses";
 import { HomeView } from "./Home.view";
-import { RootStackParamList } from "../../routes/Stack.routes";
+import { RootStackParamList } from "@ui/routes/Stack.routes";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 export function HomeViewModel() {

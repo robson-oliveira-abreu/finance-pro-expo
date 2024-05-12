@@ -1,4 +1,4 @@
-import { Text } from "../../../../components/UIComponents";
+import { Text } from "@ui/components/UIComponents";
 
 export function RowData({ label, value }: { label: string; value: string }) {
   return (

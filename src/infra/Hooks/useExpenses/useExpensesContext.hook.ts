@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { ExpenseModel } from "../../../core/entities/Expense.entity";
-import { ExpenseService } from "../../services/local/expense.service";
-import { ExpenseHttpService } from "../../services/http/ExpenseHttpService";
-import { httpService } from "../../services/http/HttpService";
-import { useAuth } from "../useAuth/useAuth.hook";
-import { ExpenseList } from "../../../core/entities/ExpenseList";
+import { ExpenseModel } from "@core/entities/Expense.entity";
+import { ExpenseService } from "@infra/services/local/expense.service";
+import { ExpenseHttpService } from "@infra/services/http/ExpenseHttpService";
+import { httpService } from "@infra/services/http/HttpService";
+import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
+import { ExpenseList } from "@core/entities/ExpenseList";
 
 export type UseExpense = {
   expenses: ExpenseModel[];

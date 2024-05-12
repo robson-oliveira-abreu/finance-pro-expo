@@ -1,9 +1,9 @@
 import AsyncStorage, {
   AsyncStorageStatic,
 } from "@react-native-async-storage/async-storage";
-import { Success } from "../../../core/entities/Success";
-import { Failure } from "../../../core/entities/Failure";
-import { LogError } from "../../utils/logError";
+import { Success } from "@core/entities/Success";
+import { Failure } from "@core/entities/Failure";
+import { LogError } from "@infra/utils/logError";
 
 export type Storage<Entitie> = ReturnType<typeof Storage<Entitie>>;
 

@@ -1,5 +1,5 @@
-import { Failure } from "../entities/Failure";
-import { Success } from "../entities/Success";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
 
 export class AuthTokenLocalService {
   public get: () => Promise<Success<string | null> | Failure>;

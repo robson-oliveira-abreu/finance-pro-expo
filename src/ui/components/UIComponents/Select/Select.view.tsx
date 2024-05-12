@@ -4,9 +4,9 @@ import { Picker } from "@react-native-picker/picker";
 import { styles } from "./common/styles";
 import { SelectViewProps } from "./common/types";
 import IconButton from "@expo/vector-icons/FontAwesome";
-import { Spacer } from "../../Spacer/Spacer";
-import { isIos, isWeb } from "../../../../infra/utils/platform";
-import { Text } from "../Text";
+import { Spacer } from "@ui/components/Spacer/Spacer";
+import { isIos, isWeb } from "@infra/utils/platform";
+import { Text } from "@ui/components/UIComponents/Text";
 
 export function SelectView(props: SelectViewProps) {
   const { open, months, onSelect, formatDate, handleOpen } = props;

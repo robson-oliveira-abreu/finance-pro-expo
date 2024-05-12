@@ -1,5 +1,5 @@
 import axios from "axios";
-import HttpAuthErrorObservable from "../../observables/HttpErrorObservable/HttpErrorObservable";
+import HttpAuthErrorObservable from "@infra/observables/HttpErrorObservable/HttpErrorObservable";
 
 const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL;
 

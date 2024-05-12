@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from "react";
 
-import { ExpenseProvider } from "../Hooks/useExpenses/ExpensesContext";
-import { CurrencyProvider } from "../Hooks/useCurrency/CurrencyContext";
-import { AuthProvider } from "../Hooks/useAuth/AuthContext";
+import { ExpenseProvider } from "@infra/Hooks/useExpenses/ExpensesContext";
+import { CurrencyProvider } from "@infra/Hooks/useCurrency/CurrencyContext";
+import { AuthProvider } from "@infra/Hooks/useAuth/AuthContext";
 
 const providers = [AuthProvider, ExpenseProvider, CurrencyProvider];
 

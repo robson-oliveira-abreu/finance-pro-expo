@@ -2,7 +2,7 @@ import React from "react";
 import { styles } from "./common/styles";
 import { THomeModel } from "./common/types";
 import { Header } from "./components/Header";
-import { ExpenseList } from "../../components/ExpenseList/ExpenseList.view";
+import { ExpenseList } from "@ui/components/ExpenseList/ExpenseList.view";
 import { View } from "react-native";
 
 export function HomeView(props: THomeModel) {

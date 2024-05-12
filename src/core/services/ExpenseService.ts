@@ -1,6 +1,6 @@
-import { ExpenseModel } from "../entities/Expense.entity";
-import { Failure } from "../entities/Failure";
-import { Success } from "../entities/Success";
+import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
 
 type CreateExpense = Omit<ExpenseModel, "id">;
 

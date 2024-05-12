@@ -1,6 +1,6 @@
-import { Failure } from "../entities/Failure";
-import { Success } from "../entities/Success";
-import { User } from "../entities/User.entity";
+import { Failure } from "@core/entities/Failure";
+import { Success } from "@core/entities/Success";
+import { User } from "@core/entities/User.entity";
 
 export class AuthService {
   public initialize: (token: string) => void;

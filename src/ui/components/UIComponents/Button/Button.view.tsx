@@ -4,8 +4,8 @@ import {
   TouchableOpacity,
   ViewProps,
 } from "react-native";
-import { Text } from "../Text";
-import { theme } from "../../../theme/theme";
+import { Text } from "@ui/components/UIComponents/Text";
+import { theme } from "@ui/theme/theme";
 
 type ButtonMode = "text" | "outlined" | "contained";
 

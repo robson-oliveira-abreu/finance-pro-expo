@@ -1,12 +1,12 @@
 import { Image, StyleSheet, View } from "react-native";
-import { Text } from "../../../../components/UIComponents/Text";
-import { GoalsViewModel } from "../Goals/Goals.view-model";
-import { isIos } from "../../../../../infra/utils/platform";
+import { Text } from "@ui/components/UIComponents/Text";
+import { GoalsViewModel } from "@ui/screens/Home/components/Goals/Goals.view-model";
+import { isIos } from "@infra/utils/platform";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { TileButtonViewModel } from "../../../../components/UIComponents/TileButton/TileButton.view-model";
+import { TileButtonViewModel } from "@ui/components/UIComponents/TileButton/TileButton.view-model";
 import Icon from "@expo/vector-icons/Ionicons";
-import { Spacer } from "../../../../components/Spacer/Spacer";
-import { theme } from "../../../../theme/theme";
+import { Spacer } from "@ui/components/Spacer/Spacer";
+import { theme } from "@ui/theme/theme";
 
 type HeaderProps = {
   onPressAccount: () => void;

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { AuthHttpService } from "../../services/http/AuthHttpService";
-import { httpService } from "../../services/http/HttpService";
-import { AuthTokenLocalService } from "../../services/local/AuthTokenLocalService";
-import { UserLocalService } from "../../services/local/UserLocalService";
-import { SubscribeHttpErrorObserver } from "../../observables/HttpErrorObservable/SubscribeHttpErrorObserver";
-import { Authentication } from "../../../core/entities/Authentication.entity";
+import { AuthHttpService } from "@infra/services/http/AuthHttpService";
+import { httpService } from "@infra/services/http/HttpService";
+import { AuthTokenLocalService } from "@infra/services/local/AuthTokenLocalService";
+import { UserLocalService } from "@infra/services/local/UserLocalService";
+import { SubscribeHttpErrorObserver } from "@infra/observables/HttpErrorObservable/SubscribeHttpErrorObserver";
+import { Authentication } from "@core/entities/Authentication.entity";
 
 const defaultLoadings = {
   loadLocalAuthData: false,

@@ -1,10 +1,10 @@
 import { TouchableOpacity, View } from "react-native";
 import IconButton from "@expo/vector-icons/FontAwesome";
-import { Text } from "../UIComponents";
+import { Text } from "@ui/components/UIComponents";
 import { PropsWithChildren } from "react";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { Spacer } from "../Spacer/Spacer";
+import { Spacer } from "@ui/components/Spacer/Spacer";
 
 type Action = {
   icon: string;

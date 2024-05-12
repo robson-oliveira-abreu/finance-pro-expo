@@ -1,4 +1,4 @@
-import { ExpenseService } from "../services/ExpenseService";
+import { ExpenseService } from "@core/services/ExpenseService";
 import { ExpenseModel } from "./Expense.entity";
 import { User } from "./User.entity";
 

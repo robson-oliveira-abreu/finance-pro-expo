@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Icon from "@expo/vector-icons/AntDesign";
-import { TextView as Text } from "../Text/Text.view";
-import { theme } from "../../../theme/theme";
+import { TextView as Text } from "@ui/components/UIComponents/Text/Text.view";
+import { theme } from "@ui/theme/theme";
 
 type TileButtonViewModelProps = {
   title: string;
