@@ -5,6 +5,7 @@ import { Spacer } from "@ui/components/Spacer/Spacer";
 import { ExpenseItem } from "@ui/components/ExpenseItem/ExpenseItem.view";
 import { styles } from "./styles";
 import { Text } from "@ui/components/UIComponents";
+import { Loading } from "@ui/components/UIComponents/Loading/Loading";
 
 export type ExpenseListProps = {
   data?: Array<ExpenseModel>;
@@ -12,15 +13,16 @@ export type ExpenseListProps = {
   HeaderComponent?:
     | React.ComponentType<any>
     | React.ReactElement<any, string | React.JSXElementConstructor<any>>;
+  loading?: boolean;
 };
 
 export function ExpenseList(props: ExpenseListProps) {
-  const { data, HeaderComponent, title } = props;
+  const { data, HeaderComponent, title, loading } = props;
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={!loading ? data : []}
         contentContainerStyle={[
           Boolean(data && data.length > 0) && styles.list,
         ]}
@@ -40,6 +42,7 @@ export function ExpenseList(props: ExpenseListProps) {
         stickyHeaderIndices={[0]}
         stickyHeaderHiddenOnScroll
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={loading ? <Loading /> : <></>}
       />
     </View>
   );

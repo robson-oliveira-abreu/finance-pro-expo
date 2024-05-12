@@ -4,8 +4,7 @@ import { Failure } from "@core/entities/Failure";
 import { Success } from "@core/entities/Success";
 import { LogError } from "@infra/utils/logError";
 import { ExpenseService } from "@core/services/ExpenseService";
-
-type CreateExpense = Omit<ExpenseModel, "id">;
+import { CreateExpense } from "@core/entities/CreateExpense";
 
 export class ExpenseHttpService implements ExpenseService {
   constructor(private httpService: AxiosInstance) {}
@@ -98,7 +97,7 @@ export class ExpenseHttpService implements ExpenseService {
     }
   }
 
-  async remove(id: string) {
+  async delete(id: string) {
     try {
       await this.httpService.delete(`expenses/${id}`);
 

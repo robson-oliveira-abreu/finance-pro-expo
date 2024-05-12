@@ -18,6 +18,7 @@ export function HomeView(props: THomeModel) {
           />
         }
         data={props.payableExpenses}
+        loading={props.loading}
       />
     </View>
   );

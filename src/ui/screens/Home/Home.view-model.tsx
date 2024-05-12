@@ -6,7 +6,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 export function HomeViewModel() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { expenses } = useExpenses();
+  const { expenses, loading } = useExpenses();
   const payableExpenses = filterPayableExpenses(expenses);
 
   const onPressAccount = () => {
@@ -23,6 +23,7 @@ export function HomeViewModel() {
 
   return (
     <HomeView
+      loading={loading}
       payableExpenses={payableExpenses}
       onPressAccount={onPressAccount}
       onPressExpenses={onPressExpenses}

@@ -1,4 +1,4 @@
-type CreateExpense = Pick<
+type NewInstance = Pick<
   Expense,
   | "id"
   | "description"
@@ -27,7 +27,7 @@ export class Expense {
   public paid_date?: Date;
   public userId?: string;
 
-  constructor(expense: CreateExpense | null = null) {
+  constructor(expense: NewInstance | null = null) {
     if (expense) {
       this.id = expense.id;
       this.description = expense.description;

@@ -7,9 +7,11 @@ import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
 import { ExpenseList } from "@core/entities/ExpenseList";
 
 export type UseExpense = {
+  loading: boolean;
   expenses: ExpenseModel[];
-  setExpense: (expense: ExpenseModel) => Promise<void>;
-  removeExpense: (expense_id: string) => Promise<void>;
+  create: (expense: ExpenseModel) => Promise<void>;
+  delete: (expense_id: string) => Promise<void>;
+  update: (expense_id: string, expense: Partial<ExpenseModel>) => Promise<void>;
   migrate: () => void;
 };
 
@@ -31,7 +33,9 @@ export function useExpensesContext(): UseExpense {
   const [loadings, setLoadings] = useState(defaultLoadingsState);
   const { user } = useAuth();
 
-  async function runAuthMethod(
+  const loading = Object.values(loadings).some((isLoading) => isLoading);
+
+  async function runExpenseListMethod(
     expenseListMethod: () => Promise<ExpenseList>,
     loadKey: keyof typeof loadings
   ) {
@@ -45,28 +49,36 @@ export function useExpensesContext(): UseExpense {
   }
 
   const listExpenses = async () => {
-    if (user) runAuthMethod(() => expenseList.list(user), "list");
+    if (user) runExpenseListMethod(() => expenseList.list(user), "list");
   };
 
   const createExpense = async (expense: ExpenseModel) => {
-    const { id, ...expenseWithoutId } = expense;
-    if (user)
-      runAuthMethod(() => expenseList.create(expenseWithoutId), "create");
+    const { id, ...withoutId } = expense;
 
-    await expenseService.set(expense);
+    await runExpenseListMethod(
+      () => expenseList.create(expense.toCreateObject()),
+      "create"
+    );
 
     listExpenses();
   };
 
-  const removeExpense = async (expense_id: string) => {
-    await expenseService.remove(expense_id);
+  const updateExpense = async (id: string, expense: Partial<ExpenseModel>) => {
+    await runExpenseListMethod(() => expenseList.update(id, expense), "update");
+
+    listExpenses();
+  };
+
+  const deleteExpense = async (id: string) => {
+    await runExpenseListMethod(() => expenseList.delete(id), "delete");
+
     listExpenses();
   };
 
   const migrate = async () => {
     const expenses = await expenseService.list();
 
-    if (expenses.success)
+    if (expenses.success) {
       await expenseHttpService.migrate(
         expenses.payload.map(({ id, ...rest }) => ({
           ...rest,
@@ -74,7 +86,8 @@ export function useExpensesContext(): UseExpense {
         }))
       );
 
-    listExpenses();
+      listExpenses();
+    }
   };
 
   useEffect(() => {
@@ -82,9 +95,11 @@ export function useExpensesContext(): UseExpense {
   }, [user]);
 
   return {
+    loading,
     expenses: expenseList.expenses,
-    setExpense: createExpense,
-    removeExpense,
+    create: createExpense,
+    delete: deleteExpense,
+    update: updateExpense,
     migrate,
   };
 }

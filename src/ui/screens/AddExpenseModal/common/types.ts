@@ -39,7 +39,7 @@ export type ExpenseType = "loose" | "expense" | "fixed";
 export type AddExpenseModalViewModelProps = {
   open: boolean;
   onClose: () => void;
-  expense?: ExpenseModel;
+  expense?: ExpenseModel | null;
 };
 
 export type AddExpenseModalViewProps = AddExpenseModalViewModelProps &

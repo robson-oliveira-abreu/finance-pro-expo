@@ -1,4 +1,5 @@
 import uuid from "react-native-uuid"; // TODO remover do core
+import { CreateExpense } from "./CreateExpense";
 
 export class ExpenseModel {
   public id: string;
@@ -19,5 +20,28 @@ export class ExpenseModel {
     this.id = id || (uuid.v4() as string);
     this.due_date = new Date(due_date);
     this.paid_date = paid_date ? new Date(paid_date) : undefined;
+  }
+
+  pay(amount?: number) {
+    return {
+      paid: true,
+      paid_date: new Date(),
+      paid_amount: amount ?? this.paid_amount,
+    };
+  }
+
+  toCreateObject(): CreateExpense {
+    return {
+      description: this.description,
+      amount: this.amount,
+      due_date: this.due_date,
+      installment: this.installment,
+      installments: this.installments,
+      observation: this.observation,
+      paid: this.paid,
+      paid_amount: this.paid_amount,
+      paid_date: this.paid_date,
+      userId: this.userId,
+    };
   }
 }

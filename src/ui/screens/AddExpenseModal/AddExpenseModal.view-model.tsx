@@ -129,33 +129,20 @@ export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
         ? getWebDate(webDate?.paid_date)
         : formState?.paid_date;
 
-      const expense_list = new Array(installments - installment + 1)
-        .fill(null)
-        .map(
-          (_, index) =>
-            new ExpenseModel(
-              null,
-              formState.description || "",
-              amount,
-              addMonths(due_date || new Date(), index),
-              installment + index,
-              installments,
-              formState.observation,
-              type === "expense" ? true : formState.paid,
-              formState.paid_amount,
-              paid_date
-            )
-        );
+      const expense = new ExpenseModel(
+        null,
+        formState.description || "",
+        amount,
+        due_date || new Date(),
+        installment,
+        installments,
+        formState.observation,
+        type === "expense" ? true : formState.paid,
+        formState.paid_amount,
+        paid_date
+      );
 
-      const { id, ...expense } = expense_list[0];
-      expense.userId = user?.id;
-      const res = await expenseHttpService.create(expense);
-
-      console.log({ res });
-
-      expense_list.forEach((expense) => {
-        expenses.setExpense(expense);
-      });
+      await expenses.create(expense);
 
       closeModal();
     } catch (error) {

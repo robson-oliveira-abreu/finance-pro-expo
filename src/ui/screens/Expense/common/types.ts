@@ -5,7 +5,7 @@ export type ExpenseModel = {
   payExpense: () => Promise<void>;
   removeExpense: () => void;
   handleOpenEditExpense: () => void;
-  expense: Expense | undefined;
+  expense?: Expense | null;
   openEditExpense: boolean;
 };
 

@@ -107,7 +107,7 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
                   <Input
                     label="Dia"
                     inputMode="numeric"
-                    defaultValue={`${formState.due_date?.getDate() || ""}`}
+                    // defaultValue={`${formState.due_date?.getDate() || ""}`}
                     onChange={onChangeDateWeb("due_date", "day")}
                     error={Boolean(webDateErrors.get("day"))}
                   />
@@ -119,7 +119,7 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
                   <Input
                     label="Mês"
                     inputMode="numeric"
-                    defaultValue={`${formState.due_date?.getMonth() || ""}`}
+                    // defaultValue={`${formState.due_date?.getMonth() || ""}`}
                     onChange={onChangeDateWeb("due_date", "month")}
                     error={Boolean(webDateErrors.get("month"))}
                   />
@@ -131,7 +131,7 @@ export function AddExpenseModalView(props: AddExpenseModalViewProps) {
                   <Input
                     label="Ano"
                     inputMode="numeric"
-                    defaultValue={`${formState.due_date?.getFullYear() || ""}`}
+                    // defaultValue={`${formState.due_date?.getFullYear() || ""}`}
                     onChange={onChangeDateWeb("due_date", "year")}
                     error={Boolean(webDateErrors.get("year"))}
                   />

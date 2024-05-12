@@ -7,39 +7,36 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
-import { ExpenseModel as Expense } from "@core/entities/Expense.entity";
 import { useState } from "react";
 import { RootStackParamList } from "@ui/routes/Stack.routes";
-import { ExpenseHttpService } from "@infra/services/http/ExpenseHttpService";
-import { httpService } from "@infra/services/http/HttpService";
 
 export function ExpenseViewModel() {
   const currency = useCurrency();
-  const expenses = useExpenses();
+  const expenseList = useExpenses();
   const navigator = useNavigation<NavigationProp<RootStackParamList>>();
   const route = useRoute<RouteProp<RootStackParamList>>();
-  const [expense, setExpense] = useState(route.params?.expense);
+
   const [openEditExpense, setOpenEditExpense] = useState(false);
-  const expensesHttpService = new ExpenseHttpService(httpService);
+
+  const expenseId = route?.params?.expense?.id;
+
+  const expense = expenseId
+    ? expenseList.expenses.find((item) => item.id === expenseId)
+    : null;
 
   const payExpense = async () => {
-    if (!expense || !expenses) return;
+    if (!expenseId || !expense) return;
 
-    const paidExpense: Expense = { ...expense, paid: true };
-
-    await expenses.setExpense(paidExpense);
-
-    setExpense(paidExpense);
+    await expenseList.update(expenseId, expense.pay());
   };
 
-  const removeExpense = () => {
+  const removeExpense = async () => {
     if (!expense) {
       return;
     }
 
-    expensesHttpService.delete(expense.id);
+    await expenseList.delete(expense.id);
 
-    expenses?.removeExpense(expense.id);
     goBack();
   };
 

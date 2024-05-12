@@ -1,6 +1,8 @@
 import { ExpenseService } from "@core/services/ExpenseService";
 import { ExpenseModel } from "./Expense.entity";
 import { User } from "./User.entity";
+import { Expense } from "./Expense";
+import { CreateExpense } from "./CreateExpense";
 
 export class ExpenseList {
   public expenses: ExpenseModel[];
@@ -18,16 +20,16 @@ export class ExpenseList {
     return new ExpenseList(expenseList, this.expenseService);
   }
 
-  async create(expense: Omit<ExpenseModel, "id">): Promise<ExpenseList> {
+  async create(expense: CreateExpense): Promise<ExpenseList> {
     try {
       const response = await this.expenseService.create(expense);
 
       if (response.success && response.payload) {
-        const newAuth = this.newInstance(this);
+        const newExpenseList = this.newInstance(this);
 
-        newAuth.expenses.push(response.payload);
+        newExpenseList.expenses.push(response.payload);
 
-        return this.newInstance(newAuth);
+        return this.newInstance(newExpenseList);
       }
 
       return this;
@@ -45,10 +47,64 @@ export class ExpenseList {
       });
 
       if (response.success && response.payload) {
-        const newAuth = this.newInstance();
-        newAuth.expenses = response.payload;
+        const newExpenseList = this.newInstance();
+        newExpenseList.expenses = response.payload;
 
-        return this.newInstance(newAuth);
+        return newExpenseList;
+      }
+
+      return this;
+    } catch (error) {
+      console.log(error);
+      return this;
+    }
+  }
+
+  async update(id: string, expense: Partial<Expense>): Promise<ExpenseList> {
+    try {
+      const response = await this.expenseService.update(id, expense);
+
+      if (response.success && response.payload) {
+        const newExpenseList = this.newInstance(this);
+
+        const index = newExpenseList.expenses.findIndex(
+          (item) => item.id === id
+        );
+
+        if (index < 0) {
+          return this;
+        }
+
+        newExpenseList.expenses.splice(index, 0, response.payload);
+
+        return newExpenseList;
+      }
+
+      return this;
+    } catch (error) {
+      console.log(error);
+      return this;
+    }
+  }
+
+  async delete(id: string): Promise<ExpenseList> {
+    try {
+      const response = await this.expenseService.delete(id);
+
+      if (response.success && response.payload) {
+        const newExpenseList = this.newInstance(this);
+
+        const index = newExpenseList.expenses.findIndex(
+          (item) => item.id === id
+        );
+
+        if (index < 0) {
+          return this;
+        }
+
+        newExpenseList.expenses.splice(index, 1);
+
+        return newExpenseList;
       }
 
       return this;
