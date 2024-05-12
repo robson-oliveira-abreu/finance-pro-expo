@@ -18,7 +18,7 @@ export function ExpensesViewModel() {
   const { unPaidExpense, paidExpense } = useMemo(() => {
     const filter = filterMonthExpenses(new Date(selectedMonth));
 
-    const [paidExpense, unPaidExpense] = expenses?.reduce(
+    const [paidExpense, unPaidExpense] = (expenses || []).reduce(
       (acc, curr) => {
         if (!filter(curr)) {
           return acc;

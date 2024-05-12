@@ -15,49 +15,72 @@ export type UseExpense = {
   useHttp: boolean;
 };
 
+const defaultLoadingsState = {
+  find: false,
+  create: false,
+  list: false,
+  update: false,
+  delete: false,
+};
+
 export function useExpensesContext(): UseExpense {
-  const [expenseList, setExpenseList] = useState(new ExpenseList());
   const expenseService = new ExpenseService();
   const expenseHttpService = new ExpenseHttpService(httpService);
+
+  const [expenseList, setExpenseList] = useState(
+    new ExpenseList(null, expenseHttpService)
+  );
+  const [loadings, setLoadings] = useState(defaultLoadingsState);
+  const [useHttp, setUseHttp] = useState(false);
   const { user } = useAuth();
 
-  const [useHttp, setUseHttp] = useState(false);
+  async function runAuthMethod(
+    authenticationMethod: () => Promise<ExpenseList>,
+    loadKey: keyof typeof loadings
+  ) {
+    setLoadings((state) => ({ ...state, [loadKey]: true }));
 
-  const getExpenses = async () => {
-    const result = await expenseService.list();
-    const res = await expenseHttpService.list({ userId: user?.id });
+    const newAuthState = await authenticationMethod();
 
-    if (useHttp) {
-      if (res.success) setExpenseList(new ExpenseList().set(res.payload));
-      return;
-    }
+    setExpenseList(newAuthState);
 
-    if (result.success) setExpenseList(new ExpenseList().set(result.payload));
+    setLoadings((state) => ({ ...state, [loadKey]: false }));
+  }
+
+  const listExpenses = async () => {
+    if (user) runAuthMethod(() => expenseList.list(user), "list");
   };
 
-  const setExpense = async (expense: ExpenseModel) => {
+  const createExpense = async (expense: ExpenseModel) => {
+    if (user) runAuthMethod(() => expenseList.create(expense), "create");
+
     await expenseService.set(expense);
-    getExpenses();
   };
 
   const removeExpense = async (expense_id: string) => {
     await expenseService.remove(expense_id);
-    getExpenses();
+    listExpenses();
   };
 
   const migrate = async () => {
     const expenses = await expenseService.list();
 
-    if (expenses.success) expenseHttpService.migrate(expenses.payload);
+    if (expenses.success)
+      expenseHttpService.migrate(
+        expenses.payload.map(({ id, ...rest }) => ({
+          ...rest,
+          userId: user?.id,
+        }))
+      );
   };
 
   useEffect(() => {
-    getExpenses();
+    listExpenses();
   }, [useHttp]);
 
   return {
-    expenses: expenseList.list,
-    setExpense,
+    expenses: expenseList.expenses,
+    setExpense: createExpense,
     removeExpense,
     handleUseHttp: () => setUseHttp((state) => !state),
     useHttp,

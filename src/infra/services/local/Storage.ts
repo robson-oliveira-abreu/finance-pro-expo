@@ -3,6 +3,7 @@ import AsyncStorage, {
 } from "@react-native-async-storage/async-storage";
 import { Success } from "../../../core/entities/Success";
 import { Failure } from "../../../core/entities/Failure";
+import { LogError } from "../../utils/logError";
 
 export type Storage<Entitie> = ReturnType<typeof Storage<Entitie>>;
 
@@ -23,7 +24,7 @@ export function Storage<Entitie>() {
 
       return new Success(parsed_data);
     } catch (error) {
-      console.error(error);
+      LogError(error, { type: "LOCAL", handler: `Storage.get.${id}` });
       return new Failure();
     }
   }
@@ -40,7 +41,7 @@ export function Storage<Entitie>() {
 
       return new Success(null);
     } catch (error) {
-      console.error(error);
+      LogError(error, { type: "LOCAL", handler: `Storage.set.${id}` });
       return new Failure();
     }
   }
@@ -53,7 +54,7 @@ export function Storage<Entitie>() {
 
       return new Success(null);
     } catch (error) {
-      console.error(error);
+      LogError(error, { type: "LOCAL", handler: `Storage.remove.${id}` });
       return new Failure();
     }
   }
@@ -78,7 +79,7 @@ export function Storage<Entitie>() {
 
       return new Success(parsed_data);
     } catch (error) {
-      console.error(error);
+      LogError(error, { type: "LOCAL", handler: `Storage.list.${id}` });
       return new Failure();
     }
   }

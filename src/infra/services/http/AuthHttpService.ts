@@ -5,6 +5,7 @@ import { UserLocalService } from "../local/UserLocalService";
 import { Failure } from "../../../core/entities/Failure";
 import { Success } from "../../../core/entities/Success";
 import { AuthService } from "../../../core/services/AuthService";
+import { LogError } from "../../utils/logError";
 
 type HttpResponseData = {
   user: User;
@@ -43,7 +44,7 @@ export class AuthHttpService implements AuthService {
 
       return new Success(user);
     } catch (error) {
-      console.log(error);
+      LogError(error, { type: "HTTP", handler: "AuthHttpService.signin" });
       return new Failure();
     }
   }
@@ -69,7 +70,7 @@ export class AuthHttpService implements AuthService {
 
       return new Success(data.user);
     } catch (error) {
-      console.log(error);
+      LogError(error, { type: "HTTP", handler: "AuthHttpService.signup" });
       return new Failure();
     }
   }
@@ -82,7 +83,7 @@ export class AuthHttpService implements AuthService {
 
       return new Success(null);
     } catch (error) {
-      console.log(error);
+      LogError(error, { type: "HTTP", handler: "AuthHttpService.signout" });
       return new Failure();
     }
   }
