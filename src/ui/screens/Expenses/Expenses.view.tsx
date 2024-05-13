@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { styles } from "./common/styles";
 import { TopTabRoutes } from "@ui/routes/TopTab.routes";
-import { AddExpenseModalViewModel } from "@ui/screens/AddExpenseModal/AddExpenseModal.view-model";
 import { isIos, isWeb } from "@infra/utils/platform";
 import { ExpensesViewProps } from "./common/types";
 import { ExpenseList } from "@ui/components/ExpenseList/ExpenseList.view";
@@ -12,6 +11,7 @@ import AntDesignIcon from "@expo/vector-icons/AntDesign";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { BackButton } from "@ui/components/UIComponents/BackButton/BackButton";
 import { theme } from "@ui/theme/theme";
+import { ExpenseModal } from "../ExpenseModal";
 
 export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
   const { modal, selectedMonth, onSelectMonth, onChangeModal, getScreens } =
@@ -36,9 +36,7 @@ export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
         </TouchableOpacity>
       </View>
 
-      {modal.open && (
-        <AddExpenseModalViewModel open={modal.open} onClose={onChangeModal} />
-      )}
+      <ExpenseModal open={modal.open} onClose={onChangeModal} />
     </View>
   );
 };

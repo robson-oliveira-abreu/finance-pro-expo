@@ -1,3 +1,6 @@
+import { CreateExpense } from "./CreateExpense";
+import { ExpenseModel } from "./Expense.entity";
+
 type NewInstance = Pick<
   Expense,
   | "id"
@@ -14,7 +17,7 @@ type NewInstance = Pick<
   observation?: string;
 };
 
-export class Expense {
+export class Expense implements ExpenseModel {
   public id: string | null;
   public description: string;
   public amount: number;
@@ -41,5 +44,28 @@ export class Expense {
       this.installments = expense.installments ?? 1;
       this.observation = expense.observation ?? "";
     }
+  }
+
+  pay(amount?: number) {
+    return {
+      paid: true,
+      paid_date: new Date(),
+      paid_amount: amount ?? this.paid_amount,
+    };
+  }
+
+  toObjectWithoutId(): CreateExpense {
+    return {
+      description: this.description,
+      amount: this.amount,
+      due_date: this.due_date,
+      installment: this.installment,
+      installments: this.installments,
+      observation: this.observation,
+      paid: this.paid,
+      paid_amount: this.paid_amount,
+      paid_date: this.paid_date,
+      userId: this.userId,
+    };
   }
 }

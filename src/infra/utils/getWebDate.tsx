@@ -1,4 +1,4 @@
-import { WebDate } from "@ui/screens/AddExpenseModal/common/types";
+import { WebDate } from "@ui/screens/ExpenseModal/common/types";
 
 export function getWebDate(date?: WebDate): Date | undefined {
   if (!date?.day || !date?.month || !date?.year) {

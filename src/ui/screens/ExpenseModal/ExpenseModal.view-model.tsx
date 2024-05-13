@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AddExpenseModalView } from "./AddExpenseModal.view";
+import { ExpenseModalView } from "./ExpenseModal.view";
 import {
   AddExpenseModalViewModelProps,
   DateLabel,
@@ -14,12 +14,12 @@ import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
 import { isWeb } from "@infra/utils/platform";
 import { getWebDate } from "@infra/utils/getWebDate";
 import { ExpenseModel } from "@core/entities/Expense.entity";
-import { addMonths } from "date-fns";
-import { ExpenseHttpService } from "@infra/services/http/ExpenseHttpService";
-import { httpService } from "@infra/services/http/HttpService";
 import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
+import { Expense } from "@core/entities/Expense";
 
-export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
+export function ExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
+  if (!props?.open) return null;
+
   const [formState, setFormState] = useState<ExpenseFormState>({});
   const [webDate, setWebDate] = useState<WebDateState>({});
   const [openAndroidDate, setOpenAndroidDate] = useState<OpenDateAndroid>({});
@@ -28,9 +28,10 @@ export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
     new Map()
   );
   const expenses = useExpenses();
-  const [type, setType] = useState<ExpenseType>("expense");
-  const expenseHttpService = new ExpenseHttpService(httpService);
+  const [type, setType] = useState<ExpenseType>("loose");
   const { user } = useAuth();
+
+  const isEdit = Boolean(props?.expense);
 
   const onChange = (label: keyof ExpenseFormState) => {
     return (value: ExpenseFormState[keyof ExpenseFormState]) => {
@@ -129,20 +130,25 @@ export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
         ? getWebDate(webDate?.paid_date)
         : formState?.paid_date;
 
-      const expense = new ExpenseModel(
-        null,
-        formState.description || "",
-        amount,
-        due_date || new Date(),
+      const expense = new Expense({
+        id: props.expense?.id ?? null,
+        description: formState.description || "",
+        amount: amount,
+        due_date: due_date || new Date(),
+        paid: type === "expense" ? true : Boolean(formState.paid),
+        paid_amount: formState.paid_amount,
+        paid_date: paid_date,
+        userId: user?.id,
         installment,
         installments,
-        formState.observation,
-        type === "expense" ? true : formState.paid,
-        formState.paid_amount,
-        paid_date
-      );
+        observation: formState.observation,
+      });
 
-      await expenses.create(expense);
+      if (isEdit) {
+        await expenses.update(expense);
+      } else {
+        await expenses.create(expense);
+      }
 
       closeModal();
     } catch (error) {
@@ -177,7 +183,7 @@ export function AddExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
   }, [props.expense]);
 
   return (
-    <AddExpenseModalView
+    <ExpenseModalView
       type={type}
       onClose={props.onClose}
       open={props.open}

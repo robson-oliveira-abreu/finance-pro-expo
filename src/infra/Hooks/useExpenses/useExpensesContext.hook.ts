@@ -5,13 +5,16 @@ import { ExpenseHttpService } from "@infra/services/http/ExpenseHttpService";
 import { httpService } from "@infra/services/http/HttpService";
 import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
 import { ExpenseList } from "@core/entities/ExpenseList";
+import { Expense } from "@core/entities/Expense";
+import { Success } from "@core/entities/Success";
+import { Failure } from "@core/entities/Failure";
 
 export type UseExpense = {
   loading: boolean;
   expenses: ExpenseModel[];
   create: (expense: ExpenseModel) => Promise<void>;
   delete: (expense_id: string) => Promise<void>;
-  update: (expense_id: string, expense: Partial<ExpenseModel>) => Promise<void>;
+  update: (expense: Partial<ExpenseModel>) => Promise<void>;
   migrate: () => void;
 };
 
@@ -36,35 +39,52 @@ export function useExpensesContext(): UseExpense {
   const loading = Object.values(loadings).some((isLoading) => isLoading);
 
   async function runExpenseListMethod(
-    expenseListMethod: () => Promise<ExpenseList>,
+    expenseListMethod: () => Promise<Success<ExpenseList> | Failure>,
     loadKey: keyof typeof loadings
-  ) {
+  ): Promise<Success<null> | Failure> {
     setLoadings((state) => ({ ...state, [loadKey]: true }));
 
-    const newExpenseState = await expenseListMethod();
+    const response = await expenseListMethod();
 
-    setExpenseList(newExpenseState);
+    if (!response.success) {
+      setLoadings((state) => ({ ...state, [loadKey]: false }));
+      return new Failure();
+    }
+
+    setExpenseList(response.payload);
 
     setLoadings((state) => ({ ...state, [loadKey]: false }));
+
+    return new Success(null);
   }
 
   const listExpenses = async () => {
-    if (user) runExpenseListMethod(() => expenseList.list(user), "list");
+    if (user) {
+      const response = await runExpenseListMethod(
+        () => expenseList.list(user),
+        "list"
+      );
+
+      if (response.success) {
+      } else {
+      }
+    }
   };
 
   const createExpense = async (expense: ExpenseModel) => {
-    const { id, ...withoutId } = expense;
-
     await runExpenseListMethod(
-      () => expenseList.create(expense.toCreateObject()),
+      () => expenseList.create(expense.toObjectWithoutId()),
       "create"
     );
 
     listExpenses();
   };
 
-  const updateExpense = async (id: string, expense: Partial<ExpenseModel>) => {
-    await runExpenseListMethod(() => expenseList.update(id, expense), "update");
+  const updateExpense = async (expense: Expense) => {
+    await runExpenseListMethod(
+      () => expenseList.update(expense.id!, expense.toObjectWithoutId()),
+      "update"
+    );
 
     listExpenses();
   };

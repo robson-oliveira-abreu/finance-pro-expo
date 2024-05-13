@@ -5,7 +5,7 @@ import { ExpenseViewProps } from "./common/types";
 import { Button } from "@ui/components/UIComponents";
 import { RowData } from "./components/RowData/RowData.view";
 import { NavigationHeader } from "@ui/components/NavigationHeader/NavigationHeader.view";
-import { AddExpenseModalViewModel as EditExpenseModalViewModel } from "@ui/screens/AddExpenseModal/AddExpenseModal.view-model";
+import { ExpenseModal } from "@ui/screens/ExpenseModal";
 
 export function ExpenseView(props: ExpenseViewProps) {
   const {
@@ -55,7 +55,7 @@ export function ExpenseView(props: ExpenseViewProps) {
         </Button>
       </View>
 
-      <EditExpenseModalViewModel
+      <ExpenseModal
         expense={expense}
         open={openEditExpense}
         onClose={handleOpenEditExpense}

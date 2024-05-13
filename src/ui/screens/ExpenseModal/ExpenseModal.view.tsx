@@ -14,7 +14,7 @@ import { SegmentedButton } from "@ui/components/UIComponents/SegmentedButton/Seg
 import { expenseTypeOptions } from "./common/constants";
 import { theme } from "@ui/theme/theme";
 
-export function AddExpenseModalView(props: AddExpenseModalViewProps) {
+export function ExpenseModalView(props: AddExpenseModalViewProps) {
   const {
     type,
     onClose,

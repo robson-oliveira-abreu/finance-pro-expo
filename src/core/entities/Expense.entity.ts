@@ -2,7 +2,7 @@ import uuid from "react-native-uuid"; // TODO remover do core
 import { CreateExpense } from "./CreateExpense";
 
 export class ExpenseModel {
-  public id: string;
+  public id: string | null;
 
   constructor(
     id: string | null,
@@ -30,7 +30,7 @@ export class ExpenseModel {
     };
   }
 
-  toCreateObject(): CreateExpense {
+  toObjectWithoutId(): CreateExpense {
     return {
       description: this.description,
       amount: this.amount,

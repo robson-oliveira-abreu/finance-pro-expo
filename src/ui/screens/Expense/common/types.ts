@@ -12,3 +12,7 @@ export type ExpenseModel = {
 export type ExpenseViewProps = {
   currency: ICurrencyContext;
 } & ExpenseModel;
+
+export type ExpenseRouteProps = {
+  expense?: ExpenseModel;
+};
