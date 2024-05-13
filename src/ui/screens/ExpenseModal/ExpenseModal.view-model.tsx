@@ -13,7 +13,6 @@ import {
 import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
 import { isWeb } from "@infra/utils/platform";
 import { getWebDate } from "@infra/utils/getWebDate";
-import { ExpenseModel } from "@core/entities/Expense.entity";
 import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
 import { Expense } from "@core/entities/Expense";
 

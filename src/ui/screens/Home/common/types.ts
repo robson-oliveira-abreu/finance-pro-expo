@@ -1,8 +1,8 @@
-import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Expense } from "@core/entities/Expense";
 
 export type THomeModel = {
   loading: boolean;
-  payableExpenses: ExpenseModel[];
+  payableExpenses: Expense[];
   onPressAccount: () => void;
   onPressExpenses: () => void;
   onPressSettings: () => void;

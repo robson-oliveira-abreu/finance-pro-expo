@@ -1,19 +1,18 @@
 import { AxiosInstance } from "axios";
-import { ExpenseModel } from "@core/entities/Expense.entity";
 import { Failure } from "@core/entities/Failure";
 import { Success } from "@core/entities/Success";
 import { LogError } from "@infra/utils/logError";
 import { ExpenseService } from "@core/services/ExpenseService";
 import { CreateExpense } from "@core/entities/CreateExpense";
+import { AppError } from "@core/entities/AppError";
+import { Expense } from "@core/entities/Expense";
 
 export class ExpenseHttpService implements ExpenseService {
   constructor(private httpService: AxiosInstance) {}
 
-  async create(
-    expense: CreateExpense
-  ): Promise<Success<ExpenseModel> | Failure> {
+  async create(expense: CreateExpense): Promise<Success<Expense> | Failure> {
     try {
-      const response = await this.httpService.post<{ expense: ExpenseModel }>(
+      const response = await this.httpService.post<{ expense: Expense }>(
         "/expenses",
         expense
       );
@@ -24,11 +23,11 @@ export class ExpenseHttpService implements ExpenseService {
     }
   }
 
-  async find(id: string): Promise<Success<ExpenseModel> | Failure> {
+  async find(id: string): Promise<Success<Expense> | Failure> {
     try {
       if (!id) throw new Error("id  must be provided");
 
-      const response = await this.httpService.get<{ expense: ExpenseModel }>(
+      const response = await this.httpService.get<{ expense: Expense }>(
         `/expenses?id=${id}`
       );
 
@@ -42,10 +41,10 @@ export class ExpenseHttpService implements ExpenseService {
   async list({
     userId = "",
     groupId = "",
-  }): Promise<Success<ExpenseModel[]> | Failure> {
+  }): Promise<Success<Expense[]> | Failure> {
     try {
       if (!groupId && !userId)
-        throw new Error("groupId or userId must be provided");
+        throw new AppError("groupId or userId must be provided");
 
       const query =
         "/expenses?" +
@@ -55,37 +54,24 @@ export class ExpenseHttpService implements ExpenseService {
           ? `userId=${userId}`
           : `groupId=${groupId}`);
 
-      const response = await this.httpService.get<{ expenses: ExpenseModel[] }>(
+      const response = await this.httpService.get<{ expenses: Expense[] }>(
         query
       );
 
       const parsed = response.data?.expenses?.map(
-        (expense) =>
-          new ExpenseModel(
-            expense.id,
-            expense.description,
-            expense.amount,
-            expense.due_date,
-            expense.installment,
-            expense.installments,
-            expense.observation,
-            expense.paid,
-            expense.paid_amount,
-            expense.paid_date,
-            expense.userId
-          )
+        (expense) => new Expense(expense)
       );
 
       return new Success(parsed);
     } catch (error) {
       LogError(error, { type: "HTTP", handler: "ExpenseHttpService.list" });
-      return new Failure();
+      return new Failure(error?.errorMessage);
     }
   }
 
   async update(id: string, expense: Partial<CreateExpense>) {
     try {
-      const response = await this.httpService.patch<{ expense: ExpenseModel }>(
+      const response = await this.httpService.patch<{ expense: Expense }>(
         `/expenses/${id}`,
         expense
       );
@@ -115,8 +101,10 @@ export class ExpenseHttpService implements ExpenseService {
       });
 
       console.log({ response });
+      return new Success(null);
     } catch (error) {
       LogError(error, { type: "HTTP", handler: "ExpenseHttpService.migrate" });
+      return new Failure();
     }
   }
 }

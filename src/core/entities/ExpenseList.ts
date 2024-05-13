@@ -1,13 +1,13 @@
 import { ExpenseService } from "@core/services/ExpenseService";
-import { ExpenseModel } from "./Expense.entity";
 import { User } from "./User.entity";
 import { Expense } from "./Expense";
 import { CreateExpense } from "./CreateExpense";
 import { Success } from "./Success";
 import { Failure } from "./Failure";
+import { AppError } from "./AppError";
 
 export class ExpenseList {
-  public expenses: ExpenseModel[];
+  public expenses: Expense[];
 
   constructor(
     expenseList: ExpenseList | null = null,
@@ -29,7 +29,7 @@ export class ExpenseList {
       const response = await this.expenseService.create(expense);
 
       if (!response.success || !response.payload) {
-        throw new Error("Error on creating expense");
+        throw new AppError("Error on creating expense!");
       }
 
       const newExpenseList = this.newInstance(this);
@@ -39,7 +39,12 @@ export class ExpenseList {
       return new Success(this.newInstance(newExpenseList));
     } catch (error) {
       console.log(error);
-      return new Failure();
+
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on creating expense!");
     }
   }
 
@@ -54,7 +59,7 @@ export class ExpenseList {
       });
 
       if (!response.success || !response.payload) {
-        throw new Error("Error on updating expense");
+        throw new AppError("Error on list expenses!");
       }
 
       const newExpenseList = this.newInstance();
@@ -63,7 +68,12 @@ export class ExpenseList {
       return new Success(newExpenseList);
     } catch (error) {
       console.log(error);
-      return new Failure();
+
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on lisnt expenses!");
     }
   }
 
@@ -75,7 +85,7 @@ export class ExpenseList {
       const response = await this.expenseService.update(id, expense);
 
       if (!response.success || !response.payload) {
-        throw new Error("Error on updating expense");
+        throw new AppError("Error on updating expense!");
       }
 
       const newExpenseList = this.newInstance(this);
@@ -83,7 +93,7 @@ export class ExpenseList {
       const index = newExpenseList.expenses.findIndex((item) => item.id === id);
 
       if (index < 0) {
-        throw new Error("Expense index not found in expenseList");
+        throw new AppError("Expense index not found in expenseList!");
       }
 
       newExpenseList.expenses.splice(index, 0, response.payload);
@@ -91,7 +101,12 @@ export class ExpenseList {
       return new Success(newExpenseList);
     } catch (error) {
       console.log(error);
-      return new Failure();
+
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on updating expense!");
     }
   }
 
@@ -99,14 +114,14 @@ export class ExpenseList {
     try {
       const response = await this.expenseService.delete(id);
       if (!response.success || !response.payload) {
-        throw new Error("Error on updating expense");
+        throw new AppError("Error on deleting expense!");
       }
       const newExpenseList = this.newInstance(this);
 
       const index = newExpenseList.expenses.findIndex((item) => item.id === id);
 
       if (index < 0) {
-        throw new Error("Expense index not found in expenseList");
+        throw new AppError("Expense index not found in expenseList!");
       }
 
       newExpenseList.expenses.splice(index, 1);
@@ -114,11 +129,16 @@ export class ExpenseList {
       return new Success(newExpenseList);
     } catch (error) {
       console.log(error);
-      return new Failure();
+
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on deleting expense!");
     }
   }
 
-  set(list: ExpenseModel[]) {
+  set(list: Expense[]) {
     this.expenses = list.sort(
       (a, b) => a.due_date.getTime() - b.due_date.getTime()
     );

@@ -1,19 +1,19 @@
-import { ExpenseModel } from "@core/entities/Expense.entity";
 import { Failure } from "@core/entities/Failure";
 import { Success } from "@core/entities/Success";
 import { Storage } from "./Storage";
+import { Expense } from "@core/entities/Expense";
 
 export class ExpenseService {
-  private storage: Storage<ExpenseModel> = Storage<ExpenseModel>();
+  private storage: Storage<Expense> = Storage<Expense>();
 
-  get(id: string): Promise<Failure | Success<ExpenseModel | null>> {
+  get(id: string): Promise<Failure | Success<Expense | null>> {
     const full_id = this.getFullId(id);
 
     return this.storage.get(full_id);
   }
 
-  set(expense: ExpenseModel): Promise<Failure | Success<null>> {
-    return this.storage.set(this.getFullId(expense.id), expense);
+  set(expense: Expense): Promise<Failure | Success<null>> {
+    return this.storage.set(this.getFullId(expense?.id!), expense);
   }
 
   remove(id: string): Promise<Failure | Success<null>> {
@@ -22,7 +22,7 @@ export class ExpenseService {
     return this.storage.remove(full_id);
   }
 
-  async list(): Promise<Failure | Success<ExpenseModel[]>> {
+  async list(): Promise<Failure | Success<Expense[]>> {
     const id = this.getFullId("");
     const data = await this.storage.list(id);
 
@@ -30,21 +30,7 @@ export class ExpenseService {
       return new Failure();
     }
 
-    const parsed = data.payload.map(
-      (expense) =>
-        new ExpenseModel(
-          expense.id,
-          expense.description,
-          expense.amount,
-          expense.due_date,
-          expense.installment,
-          expense.installments,
-          expense.observation,
-          expense.paid,
-          expense.paid_amount,
-          expense.paid_date
-        )
-    );
+    const parsed = data.payload.map((expense) => new Expense(expense));
 
     return new Success(parsed);
   }

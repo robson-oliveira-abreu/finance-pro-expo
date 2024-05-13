@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { ExpenseModel } from "@core/entities/Expense.entity";
 import { ExpenseService } from "@infra/services/local/expense.service";
 import { ExpenseHttpService } from "@infra/services/http/ExpenseHttpService";
 import { httpService } from "@infra/services/http/HttpService";
@@ -8,13 +7,14 @@ import { ExpenseList } from "@core/entities/ExpenseList";
 import { Expense } from "@core/entities/Expense";
 import { Success } from "@core/entities/Success";
 import { Failure } from "@core/entities/Failure";
+import { Toast } from "react-native-toast-notifications";
 
 export type UseExpense = {
   loading: boolean;
-  expenses: ExpenseModel[];
-  create: (expense: ExpenseModel) => Promise<void>;
-  delete: (expense_id: string) => Promise<void>;
-  update: (expense: Partial<ExpenseModel>) => Promise<void>;
+  expenses: Expense[];
+  create: (expense: Expense) => Promise<void>;
+  delete: (id: string) => Promise<void>;
+  update: (expense: Partial<Expense>) => Promise<void>;
   migrate: () => void;
 };
 
@@ -65,49 +65,106 @@ export function useExpensesContext(): UseExpense {
         "list"
       );
 
-      if (response.success) {
-      } else {
-      }
+      if (!response.success)
+        Toast.show(response.message ?? "Error on list expenses!", {
+          type: "danger",
+        });
     }
   };
 
-  const createExpense = async (expense: ExpenseModel) => {
-    await runExpenseListMethod(
+  const createExpense = async (expense: Expense) => {
+    const response = await runExpenseListMethod(
       () => expenseList.create(expense.toObjectWithoutId()),
       "create"
     );
+
+    if (!response.success) {
+      Toast.show(response.message || "Error on create expense!", {
+        type: "danger",
+      });
+      return;
+    }
+
+    Toast.show("Expense was created!", {
+      type: "success",
+    });
 
     listExpenses();
   };
 
   const updateExpense = async (expense: Expense) => {
-    await runExpenseListMethod(
-      () => expenseList.update(expense.id!, expense.toObjectWithoutId()),
+    const response = await runExpenseListMethod(
+      () =>
+        expenseList.update(
+          expense.id!,
+          new Expense(expense).toObjectWithoutId()
+        ),
       "update"
     );
+
+    if (!response.success) {
+      Toast.show(response.message || "Error on update expense!", {
+        type: "danger",
+      });
+      return;
+    }
+
+    Toast.show("Expense was updated!", {
+      type: "success",
+    });
 
     listExpenses();
   };
 
   const deleteExpense = async (id: string) => {
-    await runExpenseListMethod(() => expenseList.delete(id), "delete");
+    const response = await runExpenseListMethod(
+      () => expenseList.delete(id),
+      "delete"
+    );
+
+    if (!response.success) {
+      Toast.show(response.message || "Error on delete expense!", {
+        type: "danger",
+      });
+      return;
+    }
+
+    Toast.show("Expense was deleted!", {
+      type: "success",
+    });
 
     listExpenses();
   };
 
   const migrate = async () => {
-    const expenses = await expenseService.list();
+    const response = await expenseService.list();
 
-    if (expenses.success) {
-      await expenseHttpService.migrate(
-        expenses.payload.map(({ id, ...rest }) => ({
-          ...rest,
-          userId: user?.id,
-        }))
-      );
-
-      listExpenses();
+    if (!response.success) {
+      Toast.show(response.message || "Error on list local expenses!", {
+        type: "danger",
+      });
+      return;
     }
+
+    const httpResponse = await expenseHttpService.migrate(
+      response.payload.map(({ id, ...rest }) => ({
+        ...rest,
+        userId: user?.id,
+      }))
+    );
+
+    if (!httpResponse.success) {
+      Toast.show(httpResponse.message || "Error on migrate expenses!", {
+        type: "danger",
+      });
+      return;
+    }
+
+    Toast.show("Expenses was migrated!", {
+      type: "success",
+    });
+
+    listExpenses();
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
-import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Expense } from "@core/entities/Expense";
 
 export function filterMonthExpenses(selectedMonth: Date) {
-  return function (expense: ExpenseModel) {
+  return function (expense: Expense) {
     if (!expense?.due_date) return;
 
     const date = new Date(expense?.due_date);

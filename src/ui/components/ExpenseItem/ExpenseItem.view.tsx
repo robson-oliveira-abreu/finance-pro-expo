@@ -1,6 +1,5 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
-import { ExpenseModel } from "@core/entities/Expense.entity";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { styles } from "./styles";
 import { getLocaleDate } from "@infra/utils/date";
@@ -10,9 +9,10 @@ import { badgeStatus } from "./constants";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@ui/routes/Stack.routes";
 import { useCurrency } from "@infra/Hooks/useCurrency/useCurrency.hook";
+import { Expense } from "@core/entities/Expense";
 
 type ExpenseItemProps = {
-  expense: ExpenseModel;
+  expense: Expense;
 };
 
 export function ExpenseItem({ expense }: ExpenseItemProps) {
@@ -20,7 +20,7 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
   const status = getStatus(expense);
   const currency = useCurrency();
 
-  const openExpense = (expense: ExpenseModel) => {
+  const openExpense = (expense: Expense) => {
     navigation.navigate("Expense", { expense });
   };
 

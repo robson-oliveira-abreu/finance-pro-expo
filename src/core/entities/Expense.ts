@@ -1,5 +1,4 @@
 import { CreateExpense } from "./CreateExpense";
-import { ExpenseModel } from "./Expense.entity";
 
 type NewInstance = Pick<
   Expense,
@@ -17,7 +16,7 @@ type NewInstance = Pick<
   observation?: string;
 };
 
-export class Expense implements ExpenseModel {
+export class Expense {
   public id: string | null;
   public description: string;
   public amount: number;

@@ -1,3 +1,5 @@
 export class Failure {
-  success: false = false;
+  success = false as const;
+
+  constructor(public message?: string) {}
 }

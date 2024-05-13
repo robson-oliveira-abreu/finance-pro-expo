@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
-import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Expense } from "@core/entities/Expense";
 import { TopTabScreen } from "@ui/routes/TopTab.routes";
 import { ExpensesView } from "./Expenses.view";
 import { filterMonthExpenses } from "@infra/utils/filterExpensesByMonth";
@@ -34,7 +34,7 @@ export function ExpensesViewModel() {
 
         return [paid, unPaid];
       },
-      [new Array<ExpenseModel>(), new Array<ExpenseModel>()]
+      [new Array<Expense>(), new Array<Expense>()]
     );
 
     return { paidExpense, unPaidExpense };
@@ -49,7 +49,7 @@ export function ExpensesViewModel() {
   };
 
   const getScreens = function (
-    component: (props: { data: ExpenseModel[] }) => React.JSX.Element
+    component: (props: { data: Expense[] }) => React.JSX.Element
   ) {
     return [
       new TopTabScreen("A Pagar", component, {

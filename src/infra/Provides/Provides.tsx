@@ -1,10 +1,5 @@
 import React, { PropsWithChildren } from "react";
-
-import { ExpenseProvider } from "@infra/Hooks/useExpenses/ExpensesContext";
-import { CurrencyProvider } from "@infra/Hooks/useCurrency/CurrencyContext";
-import { AuthProvider } from "@infra/Hooks/useAuth/AuthContext";
-
-const providers = [AuthProvider, ExpenseProvider, CurrencyProvider];
+import { providers } from "./constants";
 
 export default function Providers({ children }: PropsWithChildren) {
   return (

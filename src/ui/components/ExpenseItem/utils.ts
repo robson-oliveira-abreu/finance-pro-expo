@@ -1,6 +1,6 @@
-import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Expense } from "@core/entities/Expense";
 
-export function getStatus(expense: ExpenseModel) {
+export function getStatus(expense: Expense) {
   return expense.paid
     ? "paid"
     : expense.due_date > new Date()

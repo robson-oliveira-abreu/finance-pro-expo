@@ -1,14 +1,14 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { ExpenseModel } from "@core/entities/Expense.entity";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { ExpenseItem } from "@ui/components/ExpenseItem/ExpenseItem.view";
 import { styles } from "./styles";
 import { Text } from "@ui/components/UIComponents";
 import { Loading } from "@ui/components/UIComponents/Loading/Loading";
+import { Expense } from "@core/entities/Expense";
 
 export type ExpenseListProps = {
-  data?: Array<ExpenseModel>;
+  data?: Array<Expense>;
   title?: string;
   HeaderComponent?:
     | React.ComponentType<any>
@@ -37,7 +37,7 @@ export function ExpenseList(props: ExpenseListProps) {
           </>
         }
         ItemSeparatorComponent={() => <Spacer y={12} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item?.id!}
         renderItem={({ item }) => <ExpenseItem expense={item} />}
         stickyHeaderIndices={[0]}
         stickyHeaderHiddenOnScroll

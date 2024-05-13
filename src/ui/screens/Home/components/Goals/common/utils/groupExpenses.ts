@@ -1,7 +1,7 @@
-import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Expense } from "@core/entities/Expense";
 import { filterMonthExpenses } from "@infra/utils/filterExpensesByMonth";
 
-export function groupExpenses(_expenses: ExpenseModel[]) {
+export function groupExpenses(_expenses: Expense[]) {
   const grouped = {
     paid: 0,
     payable: 0,

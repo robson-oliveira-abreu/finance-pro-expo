@@ -1,5 +1,5 @@
 import { ICurrencyContext } from "@infra/Hooks/useCurrency/useCurrencyContext.hook";
-import { ExpenseModel as Expense } from "@core/entities/Expense.entity";
+import { Expense } from "@core/entities/Expense";
 
 export type ExpenseModel = {
   payExpense: () => Promise<void>;
@@ -14,5 +14,5 @@ export type ExpenseViewProps = {
 } & ExpenseModel;
 
 export type ExpenseRouteProps = {
-  expense?: ExpenseModel;
+  expense?: Expense;
 };

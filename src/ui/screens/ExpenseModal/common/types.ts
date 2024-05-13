@@ -1,8 +1,8 @@
-import { ExpenseModel } from "@core/entities/Expense.entity";
+import { Expense } from "@core/entities/Expense";
 
 export interface ExpenseFormState
   extends Partial<
-    Omit<ExpenseModel, "id" | "amount" | "installment" | "installments">
+    Omit<Expense, "id" | "amount" | "installment" | "installments">
   > {
   amount?: string;
   installment?: string;
@@ -26,7 +26,7 @@ export type OpenDateAndroid = {
 };
 
 export type AddExpenseModalControllerProps = {
-  expense?: ExpenseModel;
+  expense?: Expense;
   onClose: () => void;
 };
 
@@ -39,7 +39,7 @@ export type ExpenseType = "loose" | "expense" | "fixed";
 export type AddExpenseModalViewModelProps = {
   open: boolean;
   onClose: () => void;
-  expense?: ExpenseModel | null;
+  expense?: Expense | null;
 };
 
 export type AddExpenseModalViewProps = AddExpenseModalViewModelProps &
