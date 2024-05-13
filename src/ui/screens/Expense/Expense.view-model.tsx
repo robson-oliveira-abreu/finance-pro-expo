@@ -27,9 +27,7 @@ export function ExpenseViewModel() {
   const payExpense = async () => {
     if (!expenseId || !expense) return;
 
-    expense.pay();
-
-    await expenseList.update(expense);
+    await expenseList.update(expense.pay());
   };
 
   const removeExpense = async () => {

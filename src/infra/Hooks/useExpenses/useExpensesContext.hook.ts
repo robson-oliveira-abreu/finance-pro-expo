@@ -66,7 +66,7 @@ export function useExpensesContext(): UseExpense {
       );
 
       if (!response.success)
-        Toast.show(response.message ?? "Error on list expenses!", {
+        Toast.show(response.errorMessage ?? "Error on list expenses!", {
           type: "danger",
         });
     }
@@ -79,7 +79,7 @@ export function useExpensesContext(): UseExpense {
     );
 
     if (!response.success) {
-      Toast.show(response.message || "Error on create expense!", {
+      Toast.show(response.errorMessage || "Error on create expense!", {
         type: "danger",
       });
       return;
@@ -103,7 +103,7 @@ export function useExpensesContext(): UseExpense {
     );
 
     if (!response.success) {
-      Toast.show(response.message || "Error on update expense!", {
+      Toast.show(response.errorMessage || "Error on update expense!", {
         type: "danger",
       });
       return;
@@ -123,7 +123,7 @@ export function useExpensesContext(): UseExpense {
     );
 
     if (!response.success) {
-      Toast.show(response.message || "Error on delete expense!", {
+      Toast.show(response.errorMessage || "Error on delete expense!", {
         type: "danger",
       });
       return;
@@ -140,7 +140,7 @@ export function useExpensesContext(): UseExpense {
     const response = await expenseService.list();
 
     if (!response.success) {
-      Toast.show(response.message || "Error on list local expenses!", {
+      Toast.show(response.errorMessage || "Error on list local expenses!", {
         type: "danger",
       });
       return;
@@ -154,7 +154,7 @@ export function useExpensesContext(): UseExpense {
     );
 
     if (!httpResponse.success) {
-      Toast.show(httpResponse.message || "Error on migrate expenses!", {
+      Toast.show(httpResponse.errorMessage || "Error on migrate expenses!", {
         type: "danger",
       });
       return;

@@ -46,11 +46,13 @@ export class Expense {
   }
 
   pay(amount?: number) {
-    return {
-      paid: true,
-      paid_date: new Date(),
-      paid_amount: amount ?? this.paid_amount,
-    };
+    const expense = new Expense(this);
+
+    expense.paid = true;
+    expense.paid_date = new Date();
+    expense.paid_amount = amount ?? this.paid_amount;
+
+    return expense;
   }
 
   toObjectWithoutId(): CreateExpense {

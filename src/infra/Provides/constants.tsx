@@ -7,5 +7,5 @@ export const providers = [
   AuthProvider,
   ExpenseProvider,
   CurrencyProvider,
-  ToastProvider,
+  ({ children }) => <ToastProvider placement="top">{children}</ToastProvider>,
 ];

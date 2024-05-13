@@ -5,6 +5,9 @@ import { AuthTokenLocalService } from "@infra/services/local/AuthTokenLocalServi
 import { UserLocalService } from "@infra/services/local/UserLocalService";
 import { SubscribeHttpErrorObserver } from "@infra/observables/HttpErrorObservable/SubscribeHttpErrorObserver";
 import { Authentication } from "@core/entities/Authentication.entity";
+import { Success } from "@core/entities/Success";
+import { Failure } from "@core/entities/Failure";
+import { Toast } from "react-native-toast-notifications";
 
 const defaultLoadings = {
   loadLocalAuthData: false,
@@ -35,45 +38,74 @@ export function useAuthContext() {
   const loading = Object.values(loadings).some(Boolean);
   const isAuthenticated = Boolean(authentication.user?.id);
 
-  function setLoading(props: Partial<typeof loadings>) {
-    setLoadings((state) => ({ ...state, ...props }));
-
-    const revertLoadingValue: Partial<typeof loadings> = {};
-
-    Object.entries(props).forEach(([key, value]) => {
-      revertLoadingValue[key] = !value;
-    });
-
-    return () => setLoadings((state) => ({ ...state, ...revertLoadingValue }));
-  }
-
   async function runAuthMethod(
-    authenticationMethod: () => Promise<Authentication>,
+    authenticationMethod: () => Promise<Success<Authentication> | Failure>,
     loadKey: keyof typeof loadings
-  ) {
-    const revertLoading = setLoading({ [loadKey]: true });
+  ): Promise<Success<null> | Failure> {
+    setLoadings((state) => ({ ...state, [loadKey]: false }));
 
-    const newAuthState = await authenticationMethod();
+    const response = await authenticationMethod();
 
-    setAuthentication(newAuthState);
+    setLoadings((state) => ({ ...state, [loadKey]: false }));
 
-    revertLoading();
+    if (response.success) {
+      setAuthentication(response.payload);
+      return new Success(null);
+    }
+
+    return new Failure(response.errorMessage);
   }
 
-  function signin(email: string, password: string) {
-    runAuthMethod(() => authentication.signin(email, password), "signin");
+  async function signin(email: string, password: string) {
+    const response = await runAuthMethod(
+      () => authentication.signin(email, password),
+      "signin"
+    );
+
+    if (!response.success) {
+      Toast.show(response.errorMessage || "Error on singin!", {
+        type: "danger",
+      });
+    }
   }
 
-  function signup(email: string, password: string, name: string) {
-    runAuthMethod(() => authentication.signup(email, password, name), "signup");
+  async function signup(email: string, password: string, name: string) {
+    const response = await runAuthMethod(
+      () => authentication.signup(email, password, name),
+      "signup"
+    );
+
+    if (!response.success) {
+      Toast.show(response.errorMessage || "Error on signup!", {
+        type: "danger",
+      });
+    }
   }
 
-  function signout() {
-    runAuthMethod(() => authentication.signout(), "signout");
+  async function signout() {
+    const response = await runAuthMethod(
+      () => authentication.signout(),
+      "signout"
+    );
+
+    if (!response.success) {
+      Toast.show(response.errorMessage || "Error on signout!", {
+        type: "danger",
+      });
+    }
   }
 
-  function loadLocalAuth() {
-    runAuthMethod(() => authentication.loadLocalAuth(), "loadLocalAuthData");
+  async function loadLocalAuth() {
+    const response = await runAuthMethod(
+      () => authentication.loadLocalAuth(),
+      "loadLocalAuthData"
+    );
+
+    if (!response.success) {
+      Toast.show(response.errorMessage || "Error on load user data!", {
+        type: "danger",
+      });
+    }
   }
 
   function onHttpError(onHttpErrorProps: { status: number }) {

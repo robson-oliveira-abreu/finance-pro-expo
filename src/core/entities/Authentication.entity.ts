@@ -2,6 +2,9 @@ import { AuthService } from "@core/services/AuthService";
 import { AuthTokenLocalService } from "@core/services/AuthTokenLocalService";
 import { UserLocalService } from "@core/services/UserLocalService";
 import { User } from "./User.entity";
+import { AppError } from "./AppError";
+import { Failure } from "./Failure";
+import { Success } from "./Success";
 
 export class Authentication {
   private authenticatedUser: User;
@@ -34,43 +37,80 @@ export class Authentication {
     );
   }
 
-  public async signin(email: string, password: string) {
-    const response = await this.authService.signin(email, password);
+  public async signin(
+    email: string,
+    password: string
+  ): Promise<Success<Authentication> | Failure> {
+    try {
+      const response = await this.authService.signin(email, password);
 
-    if (response.success) {
+      if (!response.success) {
+        throw new AppError("Error no signin!");
+      }
+
       const newAuth = this.newInstance();
       newAuth.user = response.payload;
 
-      return this.newInstance(newAuth);
-    }
+      return new Success(this.newInstance(newAuth));
+    } catch (error) {
+      console.log(error);
 
-    return this;
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on signin!");
+    }
   }
 
-  public async signup(email: string, password: string, name: string) {
-    const response = await this.authService.signup(email, password, name);
+  public async signup(
+    email: string,
+    password: string,
+    name: string
+  ): Promise<Success<Authentication> | Failure> {
+    try {
+      const response = await this.authService.signup(email, password, name);
 
-    if (response.success) {
+      if (!response.success) {
+        throw new AppError("Error no singup!");
+      }
+
       const newAuth = this.newInstance();
       newAuth.user = response.payload;
 
-      return this.newInstance(newAuth);
-    }
+      return new Success(this.newInstance(newAuth));
+    } catch (error) {
+      console.log(error);
 
-    return this;
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on singup!");
+    }
   }
 
-  public async signout() {
-    const res = await this.authService.signout();
+  public async signout(): Promise<Success<Authentication> | Failure> {
+    try {
+      const response = await this.authService.signout();
 
-    if (res.success) {
-      return this.newInstance();
+      if (!response.success) {
+        throw new AppError("Error no singout!");
+      }
+
+      return new Success(this.newInstance());
+    } catch (error) {
+      console.log(error);
+
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on singout!");
     }
-
-    return this;
   }
 
-  public async loadLocalAuth() {
+  public async loadLocalAuth(): Promise<Success<Authentication> | Failure> {
     try {
       const [user_response, token_response] = await Promise.all([
         this.userLocalService.get(),
@@ -78,24 +118,29 @@ export class Authentication {
       ]);
 
       if (
-        user_response.success &&
-        user_response.payload &&
-        token_response.success &&
-        token_response.payload
+        !user_response.success ||
+        !user_response.payload ||
+        !token_response.success ||
+        !token_response.payload
       ) {
-        const newAuth = this.newInstance();
-
-        newAuth.user = user_response.payload;
-
-        this.authService.initialize(token_response.payload);
-
-        return this.newInstance(newAuth);
+        throw new AppError("Error on load user data!");
       }
 
-      return this.signout();
+      const newAuth = this.newInstance();
+
+      newAuth.user = user_response.payload;
+
+      this.authService.initialize(token_response.payload);
+
+      return new Success(this.newInstance(newAuth));
     } catch (error) {
-      console.log({ error });
-      return this;
+      console.log(error);
+
+      if (error instanceof AppError) {
+        return new Failure(error.errorMessage);
+      }
+
+      return new Failure("Error on load user data!");
     }
   }
 }
