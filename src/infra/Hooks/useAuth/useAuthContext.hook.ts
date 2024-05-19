@@ -42,7 +42,7 @@ export function useAuthContext() {
     authenticationMethod: () => Promise<Success<Authentication> | Failure>,
     loadKey: keyof typeof loadings
   ): Promise<Success<null> | Failure> {
-    setLoadings((state) => ({ ...state, [loadKey]: false }));
+    setLoadings((state) => ({ ...state, [loadKey]: true }));
 
     const response = await authenticationMethod();
 

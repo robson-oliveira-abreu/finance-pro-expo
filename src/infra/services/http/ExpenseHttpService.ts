@@ -100,7 +100,6 @@ export class ExpenseHttpService implements ExpenseService {
         expenses,
       });
 
-      console.log({ response });
       return new Success(null);
     } catch (error) {
       LogError(error, { type: "HTTP", handler: "ExpenseHttpService.migrate" });

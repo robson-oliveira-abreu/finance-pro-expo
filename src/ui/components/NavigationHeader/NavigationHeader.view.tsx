@@ -5,6 +5,7 @@ import { PropsWithChildren } from "react";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
+import { theme } from "@infra/theme/theme";
 
 type Action = {
   icon: string;
@@ -40,6 +41,7 @@ export function NavigationHeader({
         >
           <IconButton
             name={(leftAction?.icon as any) || "angle-left"}
+            color={theme.colors.text}
             size={20}
             style={{
               width: 20,
@@ -65,6 +67,7 @@ export function NavigationHeader({
           <IconButton
             size={20}
             name={rightAction.icon as any}
+            color={theme.colors.text}
             style={{
               width: 20,
               height: 20,

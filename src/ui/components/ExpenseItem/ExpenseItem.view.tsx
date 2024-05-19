@@ -7,7 +7,7 @@ import { Text } from "@ui/components/UIComponents";
 import { getStatus } from "./utils";
 import { badgeStatus } from "./constants";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "@ui/routes/Stack.routes";
+import { RootStackParamList } from "@infra/routes/Stack.routes";
 import { useCurrency } from "@infra/Hooks/useCurrency/useCurrency.hook";
 import { Expense } from "@core/entities/Expense";
 

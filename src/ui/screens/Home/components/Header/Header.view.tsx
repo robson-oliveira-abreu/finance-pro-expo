@@ -6,15 +6,18 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { TileButtonViewModel } from "@ui/components/UIComponents/TileButton/TileButton.view-model";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
+import { User } from "@core/entities/User.entity";
 
 type HeaderProps = {
+  user: User | null;
   onPressAccount: () => void;
   onPressExpenses: () => void;
   onPressSettings: () => void;
 };
 
 export function Header({
+  user,
   onPressAccount,
   onPressExpenses,
   onPressSettings,
@@ -23,7 +26,7 @@ export function Header({
     <View style={styles.container}>
       <View style={styles.content}>
         <Text variant="headlineSmall" style={styles.logo}>
-          App
+          {user?.name ? `Olá, ${user.name.split(" ").at(0)}` : null}
         </Text>
 
         <View style={styles.row}>
@@ -31,6 +34,7 @@ export function Header({
             name="settings-sharp"
             size={20}
             onPress={onPressSettings}
+            color={theme.colors.text}
             style={styles.settingIcon}
           />
 

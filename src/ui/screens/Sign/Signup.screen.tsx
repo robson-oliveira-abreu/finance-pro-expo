@@ -51,6 +51,7 @@ export function Signup({ navigation }: Props) {
           onChange={onChangeForm("name")}
           keyboardType="default"
           inputMode="text"
+          placeholder="Nome"
         />
 
         <Input
@@ -60,6 +61,7 @@ export function Signup({ navigation }: Props) {
           type="email"
           keyboardType="email-address"
           inputMode="email"
+          placeholder="email@email.com"
         />
 
         <Input
@@ -69,6 +71,7 @@ export function Signup({ navigation }: Props) {
           type="password"
           keyboardType="default"
           inputMode="text"
+          placeholder="******"
         />
 
         <Input
@@ -78,6 +81,7 @@ export function Signup({ navigation }: Props) {
           type="password"
           keyboardType="default"
           inputMode="text"
+          placeholder="******"
         />
 
         <Spacer y={8} />

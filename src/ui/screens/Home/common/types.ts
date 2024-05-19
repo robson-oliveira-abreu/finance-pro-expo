@@ -1,9 +1,5 @@
-import { Expense } from "@core/entities/Expense";
+import { HomeController } from "@infra/controllers/useHomeController";
 
-export type THomeModel = {
-  loading: boolean;
-  payableExpenses: Expense[];
-  onPressAccount: () => void;
-  onPressExpenses: () => void;
-  onPressSettings: () => void;
+export type HomeViewProps = {
+  homeController: HomeController;
 };

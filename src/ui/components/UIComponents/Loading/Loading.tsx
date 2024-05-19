@@ -1,5 +1,5 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 
 export function Loading() {
   return (
@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     minHeight: "100%",
+    backgroundColor: theme.colors.background,
   },
 });

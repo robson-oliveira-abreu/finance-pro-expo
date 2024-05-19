@@ -11,7 +11,7 @@ import {
   KeyboardTypeOptions,
   InputModeOptions,
 } from "react-native";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 import { isWeb } from "@infra/utils/platform";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 
@@ -34,6 +34,7 @@ type Props = {
   left?: React.ReactNode;
   right?: React.ReactNode;
   inputMode?: InputModeOptions | undefined;
+  placeholder?: string;
 };
 
 const border_radius = {
@@ -161,6 +162,8 @@ export function Input(props: Props) {
           secureTextEntry={type === "password"}
           inputMode={inputMode}
           defaultValue={defaultValue}
+          placeholder={props.placeholder}
+          placeholderTextColor={theme.colors.textInfo}
         />
 
         {Boolean(props.right) && (
@@ -188,10 +191,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 2,
-    borderColor: "#d1d1d1",
+    borderColor: theme.colors.backgroundSecondary,
+    backgroundColor: theme.colors.backgroundSecondary,
     borderRadius: 8,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
   },
   errorMessage: {
     paddingLeft: 8,
@@ -199,7 +203,7 @@ const styles = StyleSheet.create({
     color: "red",
   },
   focus: {
-    borderColor: "#0050ff",
+    borderColor: theme.colors.main,
   },
   error: {
     borderColor: "#ff0000",
@@ -207,12 +211,13 @@ const styles = StyleSheet.create({
   label: {
     paddingLeft: 8,
     fontSize: 10,
-    color: theme.colors.shapeDark,
+    color: theme.colors.textSecondary,
     marginBottom: 4,
   },
   input: {
     borderWidth: 0,
     width: "100%",
     lineHeight: 16,
+    color: theme.colors.text,
   },
 });

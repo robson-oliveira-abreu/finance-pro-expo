@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { styles } from "./common/styles";
-import { TopTabRoutes } from "@ui/routes/TopTab.routes";
+import { TopTabRoutes } from "@infra/routes/TopTab.routes";
 import { isIos, isWeb } from "@infra/utils/platform";
 import { ExpensesViewProps } from "./common/types";
 import { ExpenseList } from "@ui/components/ExpenseList/ExpenseList.view";
@@ -10,7 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AntDesignIcon from "@expo/vector-icons/AntDesign";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { BackButton } from "@ui/components/UIComponents/BackButton/BackButton";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 import { ExpenseModal } from "../ExpenseModal";
 
 export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
@@ -32,7 +32,7 @@ export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
 
       <View style={styles.addButtonWrapper}>
         <TouchableOpacity onPress={onChangeModal} style={styles.addButton}>
-          <AntDesignIcon name="plus" size={32} color={theme.colors.shape} />
+          <AntDesignIcon name="plus" size={32} color={theme.colors.text} />
         </TouchableOpacity>
       </View>
 

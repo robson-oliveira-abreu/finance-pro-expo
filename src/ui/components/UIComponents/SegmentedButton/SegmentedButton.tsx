@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui/components/UIComponents/Text";
 import { useState } from "react";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 
 export type Option = {
   label: string;
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 4,
     paddingHorizontal: 8,
-    borderColor: theme.colors.shapeSecondary,
+    borderColor: theme.colors.backgroundSecondary,
   },
   firstOption: {
     borderTopLeftRadius: RADIUS,

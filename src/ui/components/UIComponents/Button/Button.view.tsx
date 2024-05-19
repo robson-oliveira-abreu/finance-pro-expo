@@ -5,7 +5,7 @@ import {
   ViewProps,
 } from "react-native";
 import { Text } from "@ui/components/UIComponents/Text";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 
 type ButtonMode = "text" | "outlined" | "contained";
 
@@ -65,19 +65,19 @@ const containerStyles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     paddingVertical: 8,
+    paddingHorizontal: 12,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: theme.colors.main,
   },
   container_text: {
     borderColor: "transparent",
   },
   container_outlined: {
-    borderWidth: 2,
-    borderColor: theme.colors.shapeDark,
+    borderColor: theme.colors.main,
   },
   container_contained: {
     backgroundColor: theme.colors.main,
+    borderColor: theme.colors.main,
   },
   disabled: {
     opacity: 0.5,
@@ -95,6 +95,6 @@ const tesxtStyles = StyleSheet.create({
     color: theme.colors.main,
   },
   text_contained: {
-    color: theme.colors.background,
+    color: theme.colors.text,
   },
 });

@@ -1,6 +1,4 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Signin } from "@ui/screens/Sign/Signin.screen";
-import { Signup } from "@ui/screens/Sign/Signup.screen";
 
 export type PublicRootStackParamList = {
   Signin: undefined;
@@ -10,12 +8,12 @@ export type PublicRootStackParamList = {
 
 const Stack = createStackNavigator<PublicRootStackParamList>();
 
-export function PublicStackRoutes() {
+export function PublicStackRoutes({ SigninScreen, SignupScreen }) {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Signin" component={Signin} />
-      <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="ForgotPassword" component={Signin} />
+      <Stack.Screen name="Signin" component={SigninScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="ForgotPassword" component={SigninScreen} />
     </Stack.Navigator>
   );
 }

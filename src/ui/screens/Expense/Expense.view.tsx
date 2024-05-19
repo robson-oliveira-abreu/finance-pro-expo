@@ -6,6 +6,7 @@ import { Button } from "@ui/components/UIComponents";
 import { RowData } from "./components/RowData/RowData.view";
 import { NavigationHeader } from "@ui/components/NavigationHeader/NavigationHeader.view";
 import { ExpenseModal } from "@ui/screens/ExpenseModal";
+import { theme } from "@infra/theme/theme";
 
 export function ExpenseView(props: ExpenseViewProps) {
   const {
@@ -50,7 +51,11 @@ export function ExpenseView(props: ExpenseViewProps) {
         <Button variant="text" onPress={handleOpenEditExpense}>
           Editar
         </Button>
-        <Button variant="text" onPress={removeExpense}>
+        <Button
+          variant="text"
+          onPress={removeExpense}
+          color={theme.colors.danger}
+        >
           Excluir
         </Button>
       </View>

@@ -1,17 +1,24 @@
 import { StyleSheet, Text } from "react-native";
 import { TextViewProps } from "./types";
+import { theme } from "@infra/theme/theme";
 
 export function TextView(props: TextViewProps) {
   const { children, variant = "bodyMedium", style, color, ...rest } = props;
 
   return (
-    <Text style={[styles[variant], color ? { color } : null, style]} {...rest}>
+    <Text
+      style={[styles[variant], style, styles.base, color ? { color } : null]}
+      {...rest}
+    >
       {children}
     </Text>
   );
 }
 
 const styles = StyleSheet.create({
+  base: {
+    color: theme.colors.text,
+  },
   bodySmall: {
     fontSize: 12,
     fontWeight: "400",

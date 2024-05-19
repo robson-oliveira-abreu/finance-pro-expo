@@ -1,4 +1,4 @@
-import { Modal, View } from "react-native";
+import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { Text } from "@ui/components/UIComponents/Text";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
@@ -12,7 +12,7 @@ import { Input } from "@ui/components/UIComponents/Input/Input";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SegmentedButton } from "@ui/components/UIComponents/SegmentedButton/SegmentedButton";
 import { expenseTypeOptions } from "./common/constants";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 
 export function ExpenseModalView(props: AddExpenseModalViewProps) {
   const {
@@ -33,16 +33,11 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
 
   return (
     <Modal visible={open} onRequestClose={onClose}>
-      <View style={{ minHeight: "100%" }}>
+      <View style={styles.container}>
         <KeyboardAvoidingView style={styles.keyboardAvoidingView}>
-          <View>
-            <Ionicons
-              name="close"
-              size={28}
-              onPress={onClose}
-              rippleColor="rgba(200,0,0,0.35)"
-            />
-          </View>
+          <TouchableOpacity onPress={onClose}>
+            <Ionicons name="close" size={28} color={theme.colors.text} />
+          </TouchableOpacity>
 
           <SegmentedButton
             options={expenseTypeOptions}
@@ -177,7 +172,7 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
             )}
           </View>
           <Spacer flex={1} />
-          <Button variant="contained" onPress={onSubmit} color={"black"}>
+          <Button variant="contained" onPress={onSubmit}>
             Salvar
           </Button>
         </KeyboardAvoidingView>

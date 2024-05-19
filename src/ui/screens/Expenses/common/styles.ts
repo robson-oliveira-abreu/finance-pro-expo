@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { isIos, isWeb } from "@infra/utils/platform";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     paddingTop: isIos ? 24 : 12,
   },
   addButtonWrapper: {
-    backgroundColor: "red",
+    backgroundColor: theme.colors.main,
     borderRadius: 16,
     position: "absolute",
     bottom: 20,

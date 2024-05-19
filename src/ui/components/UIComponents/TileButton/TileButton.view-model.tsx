@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Icon from "@expo/vector-icons/AntDesign";
 import { TextView as Text } from "@ui/components/UIComponents/Text/Text.view";
-import { theme } from "@ui/theme/theme";
+import { theme } from "@infra/theme/theme";
 
 type TileButtonViewModelProps = {
   title: string;
@@ -11,7 +11,7 @@ type TileButtonViewModelProps = {
 
 export function TileButtonViewModel({
   title,
-  icon = <Icon name="right" />,
+  icon,
   onPress,
 }: TileButtonViewModelProps) {
   return (
@@ -21,7 +21,7 @@ export function TileButtonViewModel({
           {title}
         </Text>
       </View>
-      {icon}
+      {icon ?? <Icon name="right" color={theme.colors.text} />}
     </TouchableOpacity>
   );
 }

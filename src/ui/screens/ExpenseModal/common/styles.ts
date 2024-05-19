@@ -1,6 +1,11 @@
+import { theme } from "@infra/theme/theme";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  container: {
+    minHeight: "100%",
+    backgroundColor: theme.colors.background,
+  },
   keyboardAvoidingView: {
     flex: 1,
     padding: 20,

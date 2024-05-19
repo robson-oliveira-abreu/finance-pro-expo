@@ -8,7 +8,7 @@ import {
 } from "@react-navigation/native";
 import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
 import { useState } from "react";
-import { RootStackParamList } from "@ui/routes/Stack.routes";
+import { RootStackParamList } from "@infra/routes/Stack.routes";
 
 export function ExpenseViewModel() {
   const currency = useCurrency();

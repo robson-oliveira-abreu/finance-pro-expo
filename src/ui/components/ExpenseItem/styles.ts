@@ -1,3 +1,4 @@
+import { theme } from "@infra/theme/theme";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -8,7 +9,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 12,
     gap: 8,
-    backgroundColor: "#f6f6f6",
+    backgroundColor: theme.colors.backgroundSecondary,
   },
   title: {
     fontWeight: "600",

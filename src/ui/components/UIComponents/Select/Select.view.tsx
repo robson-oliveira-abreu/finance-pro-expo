@@ -5,8 +5,9 @@ import { styles } from "./common/styles";
 import { SelectViewProps } from "./common/types";
 import IconButton from "@expo/vector-icons/FontAwesome";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { isIos, isWeb } from "@infra/utils/platform";
+import { isAndroid, isIos, isWeb } from "@infra/utils/platform";
 import { Text } from "@ui/components/UIComponents/Text";
+import { theme } from "@infra/theme/theme";
 
 export function SelectView(props: SelectViewProps) {
   const { open, months, onSelect, formatDate, handleOpen } = props;
@@ -25,9 +26,21 @@ export function SelectView(props: SelectViewProps) {
       )}
       {(open || !isIos) && (
         <Picker
+          mode="dropdown"
           selectedValue={props.selected}
           onValueChange={onSelect}
-          style={[isWeb ? { padding: 8, borderRadius: 8 } : {}]}
+          style={[
+            isWeb && {
+              padding: 8,
+              borderRadius: 8,
+            },
+            (isAndroid || isWeb) && {
+              backgroundColor: theme.colors.backgroundSecondary,
+              color: theme.colors.text,
+            },
+          ]}
+          dropdownIconColor={theme.colors.main}
+          dropdownIconRippleColor={theme.colors.main}
         >
           {months.reverse().map((month) => {
             return (
@@ -35,6 +48,8 @@ export function SelectView(props: SelectViewProps) {
                 key={month.getTime()}
                 label={formatDate(month)}
                 value={month.toDateString()}
+                color={theme.colors.text}
+                style={{ backgroundColor: theme.colors.backgroundSecondary }}
               />
             );
           })}
