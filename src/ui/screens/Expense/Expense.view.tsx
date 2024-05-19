@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { getLocaleDate } from "@infra/utils/date";
+import { getLocaleDate } from "src/application/utils/date";
 import { styles } from "./common/styles";
 import { ExpenseViewProps } from "./common/types";
 import { Button } from "@ui/components/UIComponents";

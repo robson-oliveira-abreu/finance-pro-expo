@@ -1,13 +1,13 @@
 import { Image, StyleSheet, View } from "react-native";
 import { Text } from "@ui/components/UIComponents/Text";
 import { GoalsViewModel } from "@ui/screens/Home/components/Goals/Goals.view-model";
-import { isIos } from "@infra/utils/platform";
+import { isIos } from "src/application/utils/platform";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { TileButtonViewModel } from "@ui/components/UIComponents/TileButton/TileButton.view-model";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { theme } from "@infra/theme/theme";
-import { User } from "@core/entities/User.entity";
+import { User } from "@domain/entities/User.entity";
 
 type HeaderProps = {
   user: User | null;

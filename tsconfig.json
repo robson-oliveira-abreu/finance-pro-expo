@@ -7,11 +7,17 @@
     "emitDeclarationOnly": true,
     "baseUrl": ".",
     "paths": {
-      "@core/*": [
-        "src/core/*"
+      "@/*": [
+        "src/*"
+      ],
+      "@domain/*": [
+        "src/domain/*"
       ],
       "@infra/*": [
         "src/infra/*"
+      ],
+      "@application/*": [
+        "src/application/*"
       ],
       "@ui/*": [
         "src/ui/*"

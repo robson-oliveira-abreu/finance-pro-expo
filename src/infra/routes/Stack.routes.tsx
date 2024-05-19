@@ -1,4 +1,4 @@
-import { Expense } from "@core/entities/Expense";
+import { Expense } from "@domain/entities/Expense";
 import { createStackNavigator } from "@react-navigation/stack";
 
 export type RootStackParamList = {

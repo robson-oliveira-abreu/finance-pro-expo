@@ -12,7 +12,7 @@ import {
   InputModeOptions,
 } from "react-native";
 import { theme } from "@infra/theme/theme";
-import { isWeb } from "@infra/utils/platform";
+import { isWeb } from "src/application/utils/platform";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 
 type Props = {

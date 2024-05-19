@@ -10,11 +10,11 @@ import {
   WebDateErrorState,
   WebDateState,
 } from "./common/types";
-import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
-import { isWeb } from "@infra/utils/platform";
-import { getWebDate } from "@infra/utils/getWebDate";
-import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
-import { Expense } from "@core/entities/Expense";
+import { useExpenses } from "src/application/Hooks/useExpenses/useExpenses.hook";
+import { isWeb } from "src/application/utils/platform";
+import { getWebDate } from "src/application/utils/getWebDate";
+import { useAuth } from "src/application/Hooks/useAuth/useAuth.hook";
+import { Expense } from "@domain/entities/Expense";
 
 export function ExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
   if (!props?.open) return null;

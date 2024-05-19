@@ -1,5 +1,5 @@
-import { HomeController } from "@infra/controllers/useHomeController";
+import { THomeController } from "src/application/controllers/HomeController";
 
 export type HomeViewProps = {
-  homeController: HomeController;
+  homeController: THomeController;
 };

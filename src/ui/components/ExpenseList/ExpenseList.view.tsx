@@ -5,7 +5,7 @@ import { ExpenseItem } from "@ui/components/ExpenseItem/ExpenseItem.view";
 import { styles } from "./styles";
 import { Text } from "@ui/components/UIComponents";
 import { Loading } from "@ui/components/UIComponents/Loading/Loading";
-import { Expense } from "@core/entities/Expense";
+import { Expense } from "@domain/entities/Expense";
 
 export type ExpenseListProps = {
   data?: Array<Expense>;

@@ -5,7 +5,7 @@ import { styles } from "./common/styles";
 import { SelectViewProps } from "./common/types";
 import IconButton from "@expo/vector-icons/FontAwesome";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { isAndroid, isIos, isWeb } from "@infra/utils/platform";
+import { isAndroid, isIos, isWeb } from "src/application/utils/platform";
 import { Text } from "@ui/components/UIComponents/Text";
 import { theme } from "@infra/theme/theme";
 

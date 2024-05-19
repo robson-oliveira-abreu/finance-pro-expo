@@ -2,14 +2,14 @@ import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { styles } from "./styles";
-import { getLocaleDate } from "@infra/utils/date";
+import { getLocaleDate } from "src/application/utils/date";
 import { Text } from "@ui/components/UIComponents";
 import { getStatus } from "./utils";
 import { badgeStatus } from "./constants";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@infra/routes/Stack.routes";
-import { useCurrency } from "@infra/Hooks/useCurrency/useCurrency.hook";
-import { Expense } from "@core/entities/Expense";
+import { useCurrency } from "src/application/Hooks/useCurrency/useCurrency.hook";
+import { Expense } from "@domain/entities/Expense";
 
 type ExpenseItemProps = {
   expense: Expense;

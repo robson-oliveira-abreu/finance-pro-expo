@@ -1,6 +1,6 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleProp, ViewStyle, useWindowDimensions } from "react-native";
-import { Expense } from "@core/entities/Expense";
+import { Expense } from "@domain/entities/Expense";
 import { theme } from "@infra/theme/theme";
 
 export class TopTabScreen<TProps> {

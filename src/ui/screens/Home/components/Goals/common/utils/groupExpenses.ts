@@ -1,5 +1,5 @@
-import { Expense } from "@core/entities/Expense";
-import { filterMonthExpenses } from "@infra/utils/filterExpensesByMonth";
+import { Expense } from "@domain/entities/Expense";
+import { filterMonthExpenses } from "src/application/utils/filterExpensesByMonth";
 
 export function groupExpenses(_expenses: Expense[]) {
   const grouped = {

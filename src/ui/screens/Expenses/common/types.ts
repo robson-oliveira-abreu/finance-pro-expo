@@ -1,4 +1,4 @@
-import { Expense } from "@core/entities/Expense";
+import { Expense } from "@domain/entities/Expense";
 import { TopTabScreen } from "@infra/routes/TopTab.routes";
 
 export type ExpensesViewProps = {} & TExpensesModel;

@@ -1,5 +1,5 @@
-import { ICurrencyContext } from "@infra/Hooks/useCurrency/useCurrencyContext.hook";
-import { Expense } from "@core/entities/Expense";
+import { ICurrencyContext } from "src/application/Hooks/useCurrency/useCurrencyContext.hook";
+import { Expense } from "@domain/entities/Expense";
 
 export type ExpenseModel = {
   payExpense: () => Promise<void>;

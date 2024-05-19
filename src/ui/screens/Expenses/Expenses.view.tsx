@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { styles } from "./common/styles";
 import { TopTabRoutes } from "@infra/routes/TopTab.routes";
-import { isIos, isWeb } from "@infra/utils/platform";
+import { isIos, isWeb } from "src/application/utils/platform";
 import { ExpensesViewProps } from "./common/types";
 import { ExpenseList } from "@ui/components/ExpenseList/ExpenseList.view";
 import { SelectViewModel } from "@ui/components/UIComponents/Select/Select.view-model";

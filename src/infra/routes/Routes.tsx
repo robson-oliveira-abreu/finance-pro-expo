@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { StackRoutes } from "./Stack.routes";
-import { useAuth } from "@infra/Hooks/useAuth/useAuth.hook";
+import { useAuth } from "src/application/Hooks/useAuth/useAuth.hook";
 import { PublicStackRoutes } from "./PublicRoutes";
 import { theme } from "@infra/theme/theme";
 

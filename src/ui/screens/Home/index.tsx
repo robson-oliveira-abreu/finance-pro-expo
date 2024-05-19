@@ -1,8 +1,8 @@
-import { useHomeController } from "@infra/controllers/useHomeController";
+import { HomeController } from "src/application/controllers/HomeController";
 import { HomeView } from "./Home.view";
 
 export function Home() {
-  const homeController = useHomeController();
+  const homeController = HomeController();
 
   return <HomeView homeController={homeController} />;
 }

@@ -1,5 +1,5 @@
-import { useExpenses } from "@infra/Hooks/useExpenses/useExpenses.hook";
-import { useCurrency } from "@infra/Hooks/useCurrency/useCurrency.hook";
+import { useExpenses } from "src/application/Hooks/useExpenses/useExpenses.hook";
+import { useCurrency } from "src/application/Hooks/useCurrency/useCurrency.hook";
 import { GoalsView } from "./Goals.view";
 import { groupExpenses } from "./common/utils/groupExpenses";
 
