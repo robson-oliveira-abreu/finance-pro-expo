@@ -7,7 +7,6 @@
       "**/*"
     ],
     "sdkVersion": "51.0.0",
-    "entryPoint": ".vscode\\exponentIndex.js",
     "web": {
       "bundler": "metro",
       "output": "single",

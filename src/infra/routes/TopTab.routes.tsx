@@ -1,6 +1,5 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleProp, ViewStyle, useWindowDimensions } from "react-native";
-import { Expense } from "@domain/entities/Expense";
 import { theme } from "@infra/theme/theme";
 
 export class TopTabScreen<TProps> {
@@ -11,13 +10,15 @@ export class TopTabScreen<TProps> {
   ) {}
 }
 
-type TopTabProps = {
-  screens?: Array<TopTabScreen<{ data?: Expense[] }>>;
+type TopTabProps<Props> = {
+  screens?: Array<TopTabScreen<Props>>;
 };
 
 const TopTab = createMaterialTopTabNavigator();
 
-export const TopTabRoutes = ({ screens }: TopTabProps) => {
+export function TopTabRoutes<Props extends {}>({
+  screens,
+}: TopTabProps<Props>) {
   const { width } = useWindowDimensions();
 
   const style: StyleProp<ViewStyle> = {
@@ -47,4 +48,4 @@ export const TopTabRoutes = ({ screens }: TopTabProps) => {
       ))}
     </TopTab.Navigator>
   );
-};
+}
