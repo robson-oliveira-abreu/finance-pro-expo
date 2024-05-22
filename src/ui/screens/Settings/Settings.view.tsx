@@ -1,14 +1,29 @@
-import { SafeAreaView, View } from "react-native";
-import { Button } from "@ui/components/UIComponents";
+import { SafeAreaView, Switch, View } from "react-native";
+import { Button, Text } from "@ui/components/UIComponents";
 import { NavigationHeader } from "@ui/components/NavigationHeader/NavigationHeader.view";
 
-export function SettingsView({ signout, migrate }) {
+export function SettingsView({
+  signout,
+  migrate,
+  darkMode,
+  toggleTheme,
+  isDark,
+}) {
   return (
-    <SafeAreaView style={{ flex: 1, minHeight: "100%" }}>
+    <SafeAreaView
+      className={`flex flex-1 min-h-full  ${isDark(
+        "bg-dark-background",
+        "bg-background"
+      )}`}
+    >
       <NavigationHeader title="Settings" />
-      <View style={{ marginHorizontal: 20, gap: 12 }}>
+      <View className="mx-5 gap-y-3">
         <Button onPress={migrate}>Migrar para nuvem</Button>
         <Button onPress={signout}>Sair</Button>
+        <View className="flex flex-row items-center justify-between">
+          <Text>Dark Mode</Text>
+          <Switch value={darkMode} onValueChange={toggleTheme} />
+        </View>
       </View>
     </SafeAreaView>
   );

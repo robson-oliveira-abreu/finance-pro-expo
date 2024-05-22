@@ -1,21 +1,21 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Icon from "@expo/vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
-import { theme } from "@infra/theme/theme";
+import { useTheme } from "@/application/Hooks/useTheme";
+import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
+import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
 
 export function BackButton() {
   const navigation = useNavigation();
+  const { isDark } = useTheme();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={navigation.goBack}>
-      <Icon name="angle-left" size={20} color={theme.colors.text} />
+    <TouchableOpacity className="py-2 px-5" onPress={navigation.goBack}>
+      <Icon
+        name="angle-left"
+        size={20}
+        color={isDark(darkColorsTheme.text, lightColorsTheme.text)}
+      />
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-  },
-});

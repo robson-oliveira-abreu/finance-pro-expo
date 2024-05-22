@@ -5,6 +5,7 @@ import { TopTabScreen } from "@infra/routes/TopTab.routes";
 import { ExpensesView } from "./Expenses.view";
 import { filterMonthExpenses } from "src/application/utils/filterExpensesByMonth";
 import { ModalState } from "./common/types";
+import { useTheme } from "@/application/Hooks/useTheme";
 
 const defaultModalState: ModalState = {
   open: false,
@@ -14,6 +15,7 @@ export function ExpensesViewModel() {
   const { expenses } = useExpenses();
   const [modal, setModal] = useState<ModalState>(defaultModalState);
   const [selectedMonth, setSelectedMonth] = useState(new Date().toDateString());
+  const { isDark } = useTheme();
 
   const { unPaidExpense, paidExpense } = useMemo(() => {
     const filter = filterMonthExpenses(new Date(selectedMonth));
@@ -63,6 +65,7 @@ export function ExpensesViewModel() {
 
   return (
     <ExpensesView
+      isDark={isDark}
       modal={modal}
       selectedMonth={selectedMonth}
       onSelectMonth={onSelectMonth}

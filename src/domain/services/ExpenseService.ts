@@ -4,9 +4,7 @@ import { Failure } from "@domain/entities/Failure";
 import { Success } from "@domain/entities/Success";
 
 export class ExpenseService {
-  public create: (
-    expense: CreateExpense
-  ) => Promise<Success<Expense | null> | Failure>;
+  public create: (expense: CreateExpense) => Promise<Success<null> | Failure>;
 
   public find: (id: string) => Promise<Success<Expense | null> | Failure>;
 

@@ -25,6 +25,7 @@
     "expo": "^51.0.8",
     "expo-splash-screen": "~0.27.4",
     "expo-status-bar": "~1.12.1",
+    "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.1",
@@ -42,6 +43,10 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@types/react": "~18.2.45",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "postcss-loader": "4.2.0",
+    "tailwindcss": "3.3.2",
     "typescript": "~5.3.3"
   },
   "private": true

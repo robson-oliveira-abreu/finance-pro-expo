@@ -1,11 +1,10 @@
-import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Modal, TouchableOpacity, View } from "react-native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { Text } from "@ui/components/UIComponents/Text";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { getLocaleDate } from "src/application/utils/date";
 import { isAndroid, isIos, isWeb } from "src/application/utils/platform";
 import { AddExpenseModalViewProps } from "./common/types";
-import { styles } from "./common/styles";
 import { KeyboardAvoidingView } from "@ui/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
 import { Button } from "@ui/components/UIComponents";
 import { Input } from "@ui/components/UIComponents/Input/Input";
@@ -13,6 +12,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { SegmentedButton } from "@ui/components/UIComponents/SegmentedButton/SegmentedButton";
 import { expenseTypeOptions } from "./common/constants";
 import { theme } from "@infra/theme/theme";
+import { Container } from "@/ui/components/Container/Container";
+import { useTheme } from "@/application/Hooks/useTheme";
+import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
+import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
+import { WithCondition } from "@/ui/components/WithCondition/WithCondition";
 
 export function ExpenseModalView(props: AddExpenseModalViewProps) {
   const {
@@ -30,13 +34,18 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
     onChangeDateNative,
     onChangeType,
   } = props;
+  const { isDark } = useTheme();
 
   return (
     <Modal visible={open} onRequestClose={onClose}>
-      <View style={styles.container}>
-        <KeyboardAvoidingView style={styles.keyboardAvoidingView}>
+      <KeyboardAvoidingView>
+        <Container className="gap-y-3">
           <TouchableOpacity onPress={onClose}>
-            <Ionicons name="close" size={28} color={theme.colors.text} />
+            <Ionicons
+              name="close"
+              size={28}
+              color={isDark(darkColorsTheme.text, lightColorsTheme.text)}
+            />
           </TouchableOpacity>
 
           <SegmentedButton
@@ -77,15 +86,19 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
               <Text type="error">{errors.get("amount")}</Text>
             )}
           </View>
-          <Input
-            label="Observação"
-            value={formState.observation}
-            onChange={onChange("observation")}
-            keyboardType="default"
-            inputMode="text"
-          />
-          {type === "fixed" && (
-            <>
+
+          <View>
+            <Input
+              label="Observação"
+              value={formState.observation}
+              onChange={onChange("observation")}
+              keyboardType="default"
+              inputMode="text"
+            />
+          </View>
+
+          <WithCondition condition={type === "fixed"}>
+            <View className="mt-3">
               <Input
                 label="1º Parcela"
                 value={formState.installment}
@@ -93,6 +106,11 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
                 keyboardType="numeric"
                 inputMode="decimal"
               />
+            </View>
+          </WithCondition>
+
+          <WithCondition condition={type === "fixed"}>
+            <View className="mt-3">
               <Input
                 label="Qtd. Parcelas"
                 value={formState.installments}
@@ -101,8 +119,9 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
                 keyboardType="numeric"
                 inputMode="decimal"
               />
-            </>
-          )}
+            </View>
+          </WithCondition>
+
           <View>
             <Text>
               {props.type === "expense"
@@ -111,11 +130,10 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
             </Text>
             <Spacer y={6} />
             {isWeb && (
-              <View style={styles.rowInputs}>
-                <View style={styles.flexOne}>
+              <View className="flex-row w-full gap-2">
+                <View className="flex-1">
                   <Input
                     label="Dia"
-                    // defaultValue={`${formState.due_date?.getDate() || ""}`}
                     onChange={onChangeDateWeb("due_date", "day")}
                     error={Boolean(webDateErrors.get("day"))}
                     keyboardType="numeric"
@@ -125,10 +143,9 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
                     <Text type="error">{webDateErrors.get("day")}</Text>
                   )}
                 </View>
-                <View style={styles.flexOne}>
+                <View className="flex-1">
                   <Input
                     label="Mês"
-                    // defaultValue={`${formState.due_date?.getMonth() || ""}`}
                     onChange={onChangeDateWeb("due_date", "month")}
                     error={Boolean(webDateErrors.get("month"))}
                     keyboardType="numeric"
@@ -138,10 +155,9 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
                     <Text type="error">{webDateErrors.get("month")}</Text>
                   )}
                 </View>
-                <View style={styles.flexOne}>
+                <View className="flex-1">
                   <Input
                     label="Ano"
-                    // defaultValue={`${formState.due_date?.getFullYear() || ""}`}
                     onChange={onChangeDateWeb("due_date", "year")}
                     error={Boolean(webDateErrors.get("year"))}
                     keyboardType="numeric"
@@ -175,8 +191,8 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
           <Button variant="contained" onPress={onSubmit}>
             Salvar
           </Button>
-        </KeyboardAvoidingView>
-      </View>
+        </Container>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }

@@ -14,6 +14,9 @@ import {
 import { theme } from "@infra/theme/theme";
 import { isWeb } from "src/application/utils/platform";
 import { Spacer } from "@ui/components/Spacer/Spacer";
+import { useTheme } from "@/application/Hooks/useTheme";
+import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
+import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
 
 type Props = {
   value?: string;
@@ -53,8 +56,8 @@ export function Input(props: Props) {
     minLength: "",
     maxLength: "",
   });
-
   const [status, setStatus] = useState("unfocused");
+  const theme = useTheme();
   const {
     value,
     onChange,
@@ -128,12 +131,15 @@ export function Input(props: Props) {
 
   const handleContentStyles = () => {
     const _styles: StyleProp<ViewStyle> = [
-      styles.content,
       { borderRadius: border_radius[radius] },
     ];
 
     if (status === "focused")
-      _styles.push(focusColor ? { borderColor: focusColor } : styles.focus);
+      _styles.push(
+        focusColor
+          ? { borderColor: focusColor }
+          : { borderColor: darkColorsTheme.main }
+      );
 
     if (errorMessage) _styles.push(styles.error);
 
@@ -141,9 +147,27 @@ export function Input(props: Props) {
   };
 
   return (
-    <View style={styles.container}>
-      {!!label && <Text style={[styles.label, labelStyle]}>{label}:</Text>}
-      <View style={[handleContentStyles(), style]}>
+    <View className="w-full">
+      {!!label && (
+        <Text
+          className={`pl-2 text-xs mb-1  ${theme.isDark(
+            "text-dark-textSecondary",
+            "text-textSecondary"
+          )}`}
+          style={[labelStyle]}
+        >
+          {label}:
+        </Text>
+      )}
+      <View
+        className={`
+        w-full flex-row items-center border-2 rounded-lg py-2 px-3
+        ${theme.isDark(
+          "bg-dark-backgroundSecondary border-dark-backgroundSecondary",
+          "bg-backgroundSecondary border-backgroundSecondary"
+        )}`}
+        style={[handleContentStyles(), style]}
+      >
         {Boolean(props.left) && (
           <>
             {props.left}
@@ -152,6 +176,7 @@ export function Input(props: Props) {
         )}
 
         <TextInput
+          className={`${theme.isDark("text-dark-text", "text-text")}`}
           style={[styles.input, isWeb && ({ outline: 0 } as any)]}
           keyboardType={keyboardType}
           ref={inputRef}
@@ -163,7 +188,10 @@ export function Input(props: Props) {
           inputMode={inputMode}
           defaultValue={defaultValue}
           placeholder={props.placeholder}
-          placeholderTextColor={theme.colors.textInfo}
+          placeholderTextColor={theme.isDark(
+            darkColorsTheme.textInfo,
+            lightColorsTheme.textInfo
+          )}
         />
 
         {Boolean(props.right) && (
@@ -183,41 +211,17 @@ export function Input(props: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
-  content: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: theme.colors.backgroundSecondary,
-    backgroundColor: theme.colors.backgroundSecondary,
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-  },
   errorMessage: {
     paddingLeft: 8,
     fontSize: 10,
     color: "red",
   },
-  focus: {
-    borderColor: theme.colors.main,
-  },
   error: {
     borderColor: "#ff0000",
-  },
-  label: {
-    paddingLeft: 8,
-    fontSize: 10,
-    color: theme.colors.textSecondary,
-    marginBottom: 4,
   },
   input: {
     borderWidth: 0,
     width: "100%",
     lineHeight: 16,
-    color: theme.colors.text,
   },
 });

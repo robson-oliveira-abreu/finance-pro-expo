@@ -1,11 +1,11 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { Spacer } from "@ui/components/Spacer/Spacer";
 import { ExpenseItem } from "@ui/components/ExpenseItem/ExpenseItem.view";
 import { styles } from "./styles";
 import { Text } from "@ui/components/UIComponents";
 import { Loading } from "@ui/components/UIComponents/Loading/Loading";
 import { Expense } from "@domain/entities/Expense";
+import { useTheme } from "@/application/Hooks/useTheme";
 
 export type ExpenseListProps = {
   data?: Array<Expense>;
@@ -18,9 +18,10 @@ export type ExpenseListProps = {
 
 export function ExpenseList(props: ExpenseListProps) {
   const { data, HeaderComponent, title, loading } = props;
+  const { isDark } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View className={`flex-1 ${isDark("bg-dark-background", "bg-background")}`}>
       <FlatList
         data={!loading ? data : []}
         contentContainerStyle={[
@@ -30,13 +31,16 @@ export function ExpenseList(props: ExpenseListProps) {
           <>
             {HeaderComponent}
             {Boolean(title) && (
-              <Text variant="titleSmall" style={styles.title}>
+              <Text
+                variant="titleSmall"
+                className="w-full text-left px-6 pt-1 pb-2"
+              >
                 {title}
               </Text>
             )}
           </>
         }
-        ItemSeparatorComponent={() => <Spacer y={12} />}
+        ItemSeparatorComponent={() => <View className="h-3" />}
         keyExtractor={(item) => item?.id!}
         renderItem={({ item }) => <ExpenseItem expense={item} />}
         stickyHeaderIndices={[0]}

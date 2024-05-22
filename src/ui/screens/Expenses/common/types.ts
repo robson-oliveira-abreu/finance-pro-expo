@@ -1,7 +1,9 @@
 import { Expense } from "@domain/entities/Expense";
 import { TopTabScreen } from "@infra/routes/TopTab.routes";
 
-export type ExpensesViewProps = {} & TExpensesModel;
+export type ExpensesViewProps = {
+  isDark: (...classes: string[]) => string;
+} & TExpensesModel;
 
 export type ModalState = {
   open: boolean;

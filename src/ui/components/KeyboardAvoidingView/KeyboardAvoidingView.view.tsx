@@ -1,22 +1,17 @@
 import {
   Keyboard,
   KeyboardAvoidingView as RNKeyboardAvoidingView,
+  KeyboardAvoidingViewProps,
   TouchableWithoutFeedback,
-  ViewStyle,
 } from "react-native";
 import { isWeb } from "src/application/utils/platform";
-import { PropsWithChildren } from "react";
-
-type KeyboardAvoidingViewProps = PropsWithChildren & {
-  style?: ViewStyle;
-};
 
 function KeyboardAvoidingView(props: KeyboardAvoidingViewProps) {
   const onPress = () => !isWeb && Keyboard.dismiss();
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <RNKeyboardAvoidingView
-        style={[{ flex: 1 }, props.style]}
+        className={`${props.className} flex flex-1`}
         behavior="padding"
       >
         {props.children}

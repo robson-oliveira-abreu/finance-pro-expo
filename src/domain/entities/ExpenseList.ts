@@ -22,21 +22,15 @@ export class ExpenseList {
     return new ExpenseList(expenseList, this.expenseService);
   }
 
-  async create(
-    expense: CreateExpense
-  ): Promise<Success<ExpenseList> | Failure> {
+  async create(expense: CreateExpense): Promise<Success<null> | Failure> {
     try {
       const response = await this.expenseService.create(expense);
 
-      if (!response.success || !response.payload) {
+      if (!response.success) {
         throw new AppError("Error on creating expense!");
       }
 
-      const newExpenseList = this.newInstance(this);
-
-      newExpenseList.expenses.push(response.payload);
-
-      return new Success(this.newInstance(newExpenseList));
+      return response;
     } catch (error) {
       console.log(error);
 

@@ -1,14 +1,24 @@
 import { StyleSheet, Text } from "react-native";
 import { TextViewProps } from "./types";
 import { theme } from "@infra/theme/theme";
+import { useTheme } from "@/application/Hooks/useTheme";
 
 export function TextView(props: TextViewProps) {
-  const { children, variant = "bodyMedium", style, color, ...rest } = props;
+  const {
+    children,
+    variant = "bodyMedium",
+    style,
+    color,
+    className,
+    ...rest
+  } = props;
+  const { isDark } = useTheme();
 
   return (
     <Text
-      style={[styles[variant], style, styles.base, color ? { color } : null]}
+      style={[styles[variant], style, color ? { color } : null]}
       {...rest}
+      className={`${className} ${isDark("text-dark-text", "text-text")}`}
     >
       {children}
     </Text>

@@ -1,7 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { styles } from "./styles";
 import { getLocaleDate } from "src/application/utils/date";
 import { Text } from "@ui/components/UIComponents";
 import { getStatus } from "./utils";
@@ -10,6 +9,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@infra/routes/Stack.routes";
 import { useCurrency } from "src/application/Hooks/useCurrency/useCurrency.hook";
 import { Expense } from "@domain/entities/Expense";
+import { useTheme } from "@/application/Hooks/useTheme";
 
 type ExpenseItemProps = {
   expense: Expense;
@@ -19,21 +19,24 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const status = getStatus(expense);
   const currency = useCurrency();
+  const { isDark } = useTheme();
 
   const openExpense = (expense: Expense) => {
     navigation.navigate("Expense", { expense });
   };
 
+  console.log({ expense });
+
   return (
-    <TouchableOpacity
-      onPress={() => openExpense(expense)}
-      style={{ borderRadius: 12, marginHorizontal: 20 }}
-    >
-      <View style={styles.container}>
+    <TouchableOpacity onPress={() => openExpense(expense)} className="mx-5">
+      <View
+        className={`flex m-0 p-0 flex-row justify-between px-4 py-2 rounded-xl gap-x-2 ${isDark(
+          "bg-dark-backgroundSecondary",
+          "bg-backgroundSecondary"
+        )}`}
+      >
         <View>
-          <Text variant="titleMedium" style={styles.title}>
-            {expense.description}
-          </Text>
+          <Text variant="titleMedium">{expense.description}</Text>
 
           {Boolean(expense?.observation) && <Text>{expense.observation}</Text>}
 
@@ -46,7 +49,9 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
         </View>
 
         <View>
-          <View style={badgeStatus[status].style}>
+          <View
+            className={`justify-center items-center px-1 rounded-lg ${badgeStatus[status].bgColor}`}
+          >
             <Text color={"#FFFFFF"} variant="bodySmall">
               {badgeStatus[status].text}
             </Text>
@@ -55,10 +60,9 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
           <Spacer flex={1} />
 
           <Text
-            style={[
-              expense.paid ? styles.amount_paid : styles.amount_unpaid,
-              styles.amount,
-            ]}
+            className={`font-bold text-right ${
+              expense.paid ? "text-success" : "text-danger"
+            }`}
             variant="titleMedium"
           >
             {currency.parse(expense?.amount)}

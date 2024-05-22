@@ -1,21 +1,17 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { theme } from "@infra/theme/theme";
+import { useTheme } from "@/application/Hooks/useTheme";
 
 export function Loading() {
+  const { isDark } = useTheme();
   return (
-    <View style={styles.container}>
+    <View
+      className={`flex-1 justify-center items-center w-full min-h-full ${isDark(
+        "bg-dark-background",
+        "bg-background"
+      )}`}
+    >
       <ActivityIndicator color={theme.colors.main} size={"large"} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    minHeight: "100%",
-    backgroundColor: theme.colors.background,
-  },
-});

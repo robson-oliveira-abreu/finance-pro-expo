@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui/components/UIComponents/Text";
 import { useState } from "react";
-import { theme } from "@infra/theme/theme";
+import { useTheme } from "@/application/Hooks/useTheme";
 
 export type Option = {
   label: string;
@@ -18,6 +18,7 @@ const RADIUS = 16;
 export function SegmentedButton(props: SegmentedButtonProps) {
   const { options } = props;
   const [selected, setSelected] = useState(props.options.at(0)?.value);
+  const { isDark } = useTheme();
 
   function onSelect(item: Option) {
     return () => {
@@ -31,17 +32,24 @@ export function SegmentedButton(props: SegmentedButtonProps) {
       {options.map((option, index) => (
         <TouchableOpacity
           key={option.value}
+          className={`${
+            selected === option.value
+              ? "border-main bg-main"
+              : isDark(
+                  "border-dark-backgroundSecondary",
+                  "border-backgroundSecondary"
+                )
+          }`}
           style={[
             styles.option,
             index === 0 && styles.firstOption,
             index === options.length - 1 && styles.lastOption,
-            selected === option.value && styles.selectedOption,
           ]}
           onPress={onSelect(option)}
         >
           <Text
             variant="titleSmall"
-            style={[selected === option.value && styles.selectedOptionLabel]}
+            className={`${selected === option.value ? "text-shape" : ""}`}
           >
             {option.label}
           </Text>
@@ -66,7 +74,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 4,
     paddingHorizontal: 8,
-    borderColor: theme.colors.backgroundSecondary,
   },
   firstOption: {
     borderTopLeftRadius: RADIUS,
@@ -77,13 +84,5 @@ const styles = StyleSheet.create({
     borderTopRightRadius: RADIUS,
     borderBottomRightRadius: RADIUS,
     borderRightWidth: 2,
-  },
-  selectedOption: {
-    backgroundColor: theme.colors.main,
-    borderColor: theme.colors.main,
-  },
-  optionLabel: {},
-  selectedOptionLabel: {
-    color: theme.colors.shape,
   },
 });

@@ -39,7 +39,7 @@ export function useExpensesContext(): UseExpense {
   const loading = Object.values(loadings).some((isLoading) => isLoading);
 
   async function runExpenseListMethod(
-    expenseListMethod: () => Promise<Success<ExpenseList> | Failure>,
+    expenseListMethod: () => Promise<Success<ExpenseList | null> | Failure>,
     loadKey: keyof typeof loadings
   ): Promise<Success<null> | Failure> {
     setLoadings((state) => ({ ...state, [loadKey]: true }));
@@ -51,7 +51,7 @@ export function useExpensesContext(): UseExpense {
       return new Failure();
     }
 
-    setExpenseList(response.payload);
+    if (response.payload) setExpenseList(response.payload);
 
     setLoadings((state) => ({ ...state, [loadKey]: false }));
 

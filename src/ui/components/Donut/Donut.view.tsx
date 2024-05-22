@@ -1,7 +1,6 @@
 import { View } from "react-native";
 import { Circle, G, Svg } from "react-native-svg";
 import { Text } from "@ui/components/UIComponents";
-import { styles } from "./styles";
 
 export function DonutView({
   target,
@@ -16,7 +15,7 @@ export function DonutView({
     circleCircumference - (circleCircumference * percentage) / 100;
 
   return (
-    <View style={styles.container}>
+    <View className="relative justify-center items-center">
       <Svg height="100%" width="100%" viewBox="0 0 100 100">
         <G rotation={-90} originX="50" originY="50">
           <Circle
@@ -41,7 +40,7 @@ export function DonutView({
           />
         </G>
       </Svg>
-      <Text variant="bodySmall" style={styles.text}>
+      <Text variant="bodySmall" className="absolute text-center font-extrabold">
         {centerText}
       </Text>
     </View>

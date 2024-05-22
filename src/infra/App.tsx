@@ -12,12 +12,16 @@ import { Expense } from "@ui/screens/Expense";
 import { Expenses } from "@ui/screens/Expenses";
 import { Home } from "@ui/screens/Home";
 import { Settings } from "@ui/screens/Settings";
+import { useColorScheme } from "nativewind";
 
 export default function App() {
+  const { colorScheme } = useColorScheme();
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Providers>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar
+          barStyle={colorScheme === "light" ? "dark-content" : "light-content"}
+        />
         <Routes
           HomeScreen={Home}
           ExpensesScreen={Expenses}

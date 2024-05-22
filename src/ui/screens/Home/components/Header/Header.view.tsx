@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, View, Text as RNText } from "react-native";
 import { Text } from "@ui/components/UIComponents/Text";
 import { GoalsViewModel } from "@ui/screens/Home/components/Goals/Goals.view-model";
 import { isIos } from "src/application/utils/platform";
@@ -6,8 +6,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { TileButtonViewModel } from "@ui/components/UIComponents/TileButton/TileButton.view-model";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { theme } from "@infra/theme/theme";
 import { User } from "@domain/entities/User.entity";
+import { useTheme } from "@/application/Hooks/useTheme";
+import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
+import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
 
 type HeaderProps = {
   user: User | null;
@@ -22,30 +24,35 @@ export function Header({
   onPressExpenses,
   onPressSettings,
 }: HeaderProps) {
+  const { isDark } = useTheme();
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Text variant="headlineSmall" style={styles.logo}>
+    <View
+      className={`w-full ${isDark("bg-dark-background", "bg-background")} ${
+        isIos ? "mt-5" : ""
+      } mb-2`}
+    >
+      <View className="w-full flex-row justify-between items-center px-5">
+        <Text variant="headlineSmall">
           {user?.name ? `Olá, ${user.name.split(" ").at(0)}` : null}
         </Text>
 
-        <View style={styles.row}>
+        <View className="flex flex-row">
           <Icon
             name="settings-sharp"
             size={20}
             onPress={onPressSettings}
-            color={theme.colors.text}
-            style={styles.settingIcon}
+            color={isDark(darkColorsTheme.text, lightColorsTheme.text)}
+            style={{ padding: 8 }}
           />
 
           <Spacer x={4} />
 
           <TouchableOpacity
             onPress={onPressAccount}
-            style={styles.accountImageContainer}
+            className="w-10 h-10 rounded-full overflow-hidden"
           >
             <Image
-              style={styles.accountImage}
+              className="w-full h-full"
               source={{ uri: "https://github.com/robson-oliveira-abreu.png" }}
             />
           </TouchableOpacity>
@@ -56,45 +63,9 @@ export function Header({
 
       <GoalsViewModel />
 
-      <View style={styles.content}>
+      <View className="px-5">
         <TileButtonViewModel title="Despesas" onPress={onPressExpenses} />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    backgroundColor: theme.colors.background,
-    paddingTop: isIos ? 20 : 0,
-    paddingBottom: 8,
-  },
-  content: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  logo: {
-    fontWeight: "700",
-  },
-  settingIcon: {
-    padding: 8,
-  },
-  accountImageContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    overflow: "hidden",
-  },
-  accountImage: {
-    width: "100%",
-    height: "100%",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});

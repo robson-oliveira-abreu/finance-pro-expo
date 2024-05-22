@@ -6,6 +6,9 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { theme } from "@infra/theme/theme";
+import { useTheme } from "@/application/Hooks/useTheme";
+import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
+import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
 
 type Action = {
   icon: string;
@@ -26,6 +29,7 @@ export function NavigationHeader({
   noGoBack = false,
 }: LayoutHeaderProps) {
   const navigator = useNavigation();
+  const { dark, darkMode } = useTheme();
 
   const goBack = () => {
     navigator.goBack();
@@ -41,12 +45,8 @@ export function NavigationHeader({
         >
           <IconButton
             name={(leftAction?.icon as any) || "angle-left"}
-            color={theme.colors.text}
+            color={darkMode ? darkColorsTheme.text : lightColorsTheme.text}
             size={20}
-            style={{
-              width: 20,
-              height: 20,
-            }}
           />
         </TouchableOpacity>
       ) : (
@@ -67,11 +67,7 @@ export function NavigationHeader({
           <IconButton
             size={20}
             name={rightAction.icon as any}
-            color={theme.colors.text}
-            style={{
-              width: 20,
-              height: 20,
-            }}
+            color={darkMode ? darkColorsTheme.text : lightColorsTheme.text}
           />
         </TouchableOpacity>
       ) : (

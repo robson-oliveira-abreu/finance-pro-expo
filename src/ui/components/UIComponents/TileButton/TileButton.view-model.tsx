@@ -1,7 +1,9 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Icon from "@expo/vector-icons/AntDesign";
 import { TextView as Text } from "@ui/components/UIComponents/Text/Text.view";
-import { theme } from "@infra/theme/theme";
+import { useTheme } from "@/application/Hooks/useTheme";
+import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
+import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
 
 type TileButtonViewModelProps = {
   title: string;
@@ -14,30 +16,22 @@ export function TileButtonViewModel({
   icon,
   onPress,
 }: TileButtonViewModelProps) {
+  const { isDark } = useTheme();
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View>
-        <Text variant="titleSmall" style={styles.title}>
-          {title}
-        </Text>
-      </View>
-      {icon ?? <Icon name="right" color={theme.colors.text} />}
+    <TouchableOpacity
+      className={`flex flex-row justify-between items-center w-full px-2 py-3 rounded-lg ${isDark(
+        "bg-dark-backgroundSecondary",
+        "bg-backgroundSecondary"
+      )}`}
+      onPress={onPress}
+    >
+      <Text variant="titleMedium">{title}</Text>
+      {icon ?? (
+        <Icon
+          name="right"
+          color={isDark(darkColorsTheme.text, lightColorsTheme.text)}
+        />
+      )}
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    paddingHorizontal: 8,
-    paddingVertical: 12,
-    backgroundColor: theme.colors.backgroundSecondary,
-    borderRadius: 8,
-  },
-  title: {
-    fontSize: 16,
-  },
-});

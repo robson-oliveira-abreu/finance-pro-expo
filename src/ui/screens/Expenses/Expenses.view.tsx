@@ -14,10 +14,21 @@ import { theme } from "@infra/theme/theme";
 import { ExpenseModal } from "../ExpenseModal";
 
 export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
-  const { modal, selectedMonth, onSelectMonth, onChangeModal, getScreens } =
-    props;
+  const {
+    modal,
+    selectedMonth,
+    onSelectMonth,
+    onChangeModal,
+    getScreens,
+    isDark,
+  } = props;
   return (
-    <View style={styles.container}>
+    <View
+      className={`flex flex-1 min-h-full items-start justify-center ${isDark(
+        "bg-dark-background",
+        "bg-background"
+      )}`}
+    >
       <Spacer y={isIos ? 20 : isWeb ? 12 : 0} />
 
       <BackButton />

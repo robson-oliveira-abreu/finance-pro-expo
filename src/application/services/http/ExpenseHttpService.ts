@@ -10,13 +10,13 @@ import { Expense } from "@domain/entities/Expense";
 export class ExpenseHttpService implements ExpenseService {
   constructor(private httpService: AxiosInstance) {}
 
-  async create(expense: CreateExpense): Promise<Success<Expense> | Failure> {
+  async create(expense: CreateExpense): Promise<Success<null> | Failure> {
     try {
-      const response = await this.httpService.post<{ expense: Expense }>(
-        "/expenses",
-        expense
-      );
-      return new Success(response.data.expense);
+      await this.httpService.post<{
+        expenses: { count: number };
+      }>("/expenses", expense);
+
+      return new Success(null);
     } catch (error) {
       LogError(error, { type: "HTTP", handler: "ExpenseHttpService.create" });
       return new Failure();

@@ -1,6 +1,8 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { StyleProp, ViewStyle, useWindowDimensions } from "react-native";
-import { theme } from "@infra/theme/theme";
+import { useWindowDimensions } from "react-native";
+import { useTheme } from "@/application/Hooks/useTheme";
+import { darkColorsTheme } from "../theme/dark.colors.theme";
+import { lightColorsTheme } from "../theme/light.colors.theme";
 
 export class TopTabScreen<TProps> {
   constructor(
@@ -20,22 +22,24 @@ export function TopTabRoutes<Props extends {}>({
   screens,
 }: TopTabProps<Props>) {
   const { width } = useWindowDimensions();
-
-  const style: StyleProp<ViewStyle> = {
-    width,
-    flex: 1,
-  };
+  const { isDark } = useTheme();
 
   return (
     <TopTab.Navigator
-      style={style}
+      style={{ width, flex: 1 }}
       screenOptions={{
-        tabBarActiveTintColor: theme.colors.main,
+        tabBarActiveTintColor: isDark(
+          darkColorsTheme.main,
+          lightColorsTheme.main
+        ),
         tabBarIndicatorContainerStyle: {
-          backgroundColor: theme.colors.background,
+          backgroundColor: isDark(
+            darkColorsTheme.background,
+            lightColorsTheme.background
+          ),
         },
         tabBarIndicatorStyle: {
-          backgroundColor: theme.colors.main,
+          backgroundColor: isDark(darkColorsTheme.main, lightColorsTheme.main),
         },
       }}
     >

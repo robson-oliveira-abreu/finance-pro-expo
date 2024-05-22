@@ -36,9 +36,13 @@ export class Expense {
       this.amount = expense.amount;
       this.paid = expense.paid;
       this.paid_amount = expense.paid_amount;
-      this.paid_date = expense.paid_date;
+      this.paid_date = expense.paid_date
+        ? new Date(expense.paid_date)
+        : undefined;
       this.userId = expense.userId;
-      this.due_date = expense.due_date ?? new Date();
+      this.due_date = expense.due_date
+        ? new Date(expense.due_date)
+        : new Date();
       this.installment = expense.installment ?? 1;
       this.installments = expense.installments ?? 1;
       this.observation = expense.observation ?? "";
