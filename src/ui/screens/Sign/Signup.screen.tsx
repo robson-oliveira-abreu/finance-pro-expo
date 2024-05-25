@@ -62,6 +62,7 @@ export function Signup({ navigation }: Props) {
           keyboardType="email-address"
           inputMode="email"
           placeholder="email@email.com"
+          autoCapitalize="none"
         />
 
         <Input
@@ -72,6 +73,7 @@ export function Signup({ navigation }: Props) {
           keyboardType="default"
           inputMode="text"
           placeholder="******"
+          autoCapitalize="none"
         />
 
         <Input
@@ -82,6 +84,7 @@ export function Signup({ navigation }: Props) {
           keyboardType="default"
           inputMode="text"
           placeholder="******"
+          autoCapitalize="none"
         />
 
         <Spacer y={8} />

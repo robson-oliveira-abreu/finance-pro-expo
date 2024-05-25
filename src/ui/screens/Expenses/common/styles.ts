@@ -30,7 +30,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   selectMonth: {
-    paddingHorizontal: 20,
     marginVertical: 8,
     marginBottom: isWeb ? 12 : 0,
   },

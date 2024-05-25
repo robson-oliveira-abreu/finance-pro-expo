@@ -10,7 +10,7 @@ export function BackButton() {
   const { isDark } = useTheme();
 
   return (
-    <TouchableOpacity className="py-2 px-5" onPress={navigation.goBack}>
+    <TouchableOpacity className="py-2 px-2" onPress={navigation.goBack}>
       <Icon
         name="angle-left"
         size={20}

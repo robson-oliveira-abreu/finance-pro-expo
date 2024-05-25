@@ -16,10 +16,9 @@ export const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 20,
   },
   footer: {
-    padding: 20,
+    paddingVertical: 20,
     gap: 8,
   },
   bold: {

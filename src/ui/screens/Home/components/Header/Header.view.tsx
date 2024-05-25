@@ -27,11 +27,12 @@ export function Header({
   const { isDark } = useTheme();
   return (
     <View
-      className={`w-full ${isDark("bg-dark-background", "bg-background")} ${
-        isIos ? "mt-5" : ""
-      } mb-2`}
+      className={`w-full ${isDark(
+        "bg-dark-background",
+        "bg-background"
+      )}  mb-2`}
     >
-      <View className="w-full flex-row justify-between items-center px-5">
+      <View className="w-full flex-row justify-between items-center">
         <Text variant="headlineSmall">
           {user?.name ? `Olá, ${user.name.split(" ").at(0)}` : null}
         </Text>
@@ -63,9 +64,7 @@ export function Header({
 
       <GoalsViewModel />
 
-      <View className="px-5">
-        <TileButtonViewModel title="Despesas" onPress={onPressExpenses} />
-      </View>
+      <TileButtonViewModel title="Despesas" onPress={onPressExpenses} />
     </View>
   );
 }

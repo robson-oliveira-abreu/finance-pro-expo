@@ -17,8 +17,6 @@ export const styles = StyleSheet.create({
     color: "#444",
   },
   list: {
-    width,
-    paddingBottom: 12,
     paddingTop: 4,
   },
 });

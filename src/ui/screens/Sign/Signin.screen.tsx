@@ -7,6 +7,7 @@ import { Button, Text } from "@ui/components/UIComponents";
 import { useAuth } from "src/application/Hooks/useAuth/useAuth.hook";
 import { styles } from "./styles";
 import { Props } from "./types";
+import { Container } from "@/ui/components/Container/Container";
 
 type Labels = "email" | "password";
 
@@ -39,51 +40,57 @@ export function Signin({ navigation }: Props) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.content, { width: maxWidth(560) }]}>
-        <Text variant="titleLarge">Login</Text>
+    <Container className="justify-center items-center max-w-xl">
+      <Text variant="titleLarge">SignIn</Text>
 
-        <Input
-          label={"Email"}
-          value={form.email}
-          onChange={onChangeForm("email")}
-          keyboardType="email-address"
-          inputMode="email"
-          placeholder="email@email.com"
-        />
+      <Spacer y={12} />
 
-        <Input
-          label={"Senha"}
-          value={form.password}
-          onChange={onChangeForm("password")}
-          type="password"
-          inputMode="text"
-          keyboardType="default"
-          placeholder="******"
-        />
+      <Input
+        label={"Email"}
+        value={form.email}
+        onChange={onChangeForm("email")}
+        keyboardType="email-address"
+        inputMode="email"
+        placeholder="email@email.com"
+        autoCapitalize="none"
+      />
 
-        <Spacer y={8} />
+      <Spacer y={12} />
 
-        <Button
-          variant="contained"
-          style={styles.button}
-          onPress={onSubmit}
-          loading={loading}
-          disabled={loading}
-        >
-          Entrar
-        </Button>
+      <Input
+        label={"Senha"}
+        value={form.password}
+        onChange={onChangeForm("password")}
+        type="password"
+        inputMode="text"
+        keyboardType="default"
+        placeholder="******"
+        autoCapitalize="none"
+      />
 
-        <Button
-          variant="text"
-          style={styles.button}
-          onPress={goToSignup}
-          loading={loading}
-          disabled={loading}
-        >
-          Cadastro
-        </Button>
-      </View>
-    </View>
+      <Spacer y={20} />
+
+      <Button
+        variant="contained"
+        style={styles.button}
+        onPress={onSubmit}
+        loading={loading}
+        disabled={loading}
+      >
+        Entrar
+      </Button>
+
+      <Spacer y={12} />
+
+      <Button
+        variant="text"
+        style={styles.button}
+        onPress={goToSignup}
+        loading={loading}
+        disabled={loading}
+      >
+        Cadastro
+      </Button>
+    </Container>
   );
 }

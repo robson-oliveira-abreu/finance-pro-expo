@@ -7,6 +7,7 @@ import { RowData } from "./components/RowData/RowData.view";
 import { NavigationHeader } from "@ui/components/NavigationHeader/NavigationHeader.view";
 import { ExpenseModal } from "@ui/screens/ExpenseModal";
 import { theme } from "@infra/theme/theme";
+import { Container } from "@/ui/components/Container/Container";
 
 export function ExpenseView(props: ExpenseViewProps) {
   const {
@@ -18,7 +19,7 @@ export function ExpenseView(props: ExpenseViewProps) {
     currency,
   } = props;
   return (
-    <View style={styles.container}>
+    <Container>
       <NavigationHeader title={expense?.description ?? ""} />
 
       <View style={styles.content}>
@@ -65,6 +66,6 @@ export function ExpenseView(props: ExpenseViewProps) {
         open={openEditExpense}
         onClose={handleOpenEditExpense}
       />
-    </View>
+    </Container>
   );
 }

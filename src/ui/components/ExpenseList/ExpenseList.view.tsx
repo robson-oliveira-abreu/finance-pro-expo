@@ -33,7 +33,7 @@ export function ExpenseList(props: ExpenseListProps) {
             {Boolean(title) && (
               <Text
                 variant="titleSmall"
-                className="w-full text-left px-6 pt-1 pb-2"
+                className="w-full text-left  pt-1 pb-2"
               >
                 {title}
               </Text>

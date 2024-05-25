@@ -6,8 +6,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingTop: isIos || isWeb ? 20 : 0,
-    paddingHorizontal: 20,
+    paddingTop: isWeb ? 20 : 0,
   },
   title: {
     textAlign: "center",

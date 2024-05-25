@@ -10,8 +10,8 @@ import {
   ColorValue,
   KeyboardTypeOptions,
   InputModeOptions,
+  TextInputProps,
 } from "react-native";
-import { theme } from "@infra/theme/theme";
 import { isWeb } from "src/application/utils/platform";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { useTheme } from "@/application/Hooks/useTheme";
@@ -38,7 +38,7 @@ type Props = {
   right?: React.ReactNode;
   inputMode?: InputModeOptions | undefined;
   placeholder?: string;
-};
+} & Omit<TextInputProps, "onChange">;
 
 const border_radius = {
   none: 0,
@@ -74,6 +74,7 @@ export function Input(props: Props) {
     inputMode,
     keyboardType,
     defaultValue,
+    ...rest
   } = props;
 
   const errorMessage =
@@ -168,12 +169,12 @@ export function Input(props: Props) {
         )}`}
         style={[handleContentStyles(), style]}
       >
-        {Boolean(props.left) && (
+        {props.left ? (
           <>
             {props.left}
             <Spacer x={4} />
           </>
-        )}
+        ) : null}
 
         <TextInput
           className={`${theme.isDark("text-dark-text", "text-text")}`}
@@ -192,6 +193,7 @@ export function Input(props: Props) {
             darkColorsTheme.textInfo,
             lightColorsTheme.textInfo
           )}
+          {...rest}
         />
 
         {Boolean(props.right) && (

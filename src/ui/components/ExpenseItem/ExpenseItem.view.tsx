@@ -28,9 +28,9 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
   console.log({ expense });
 
   return (
-    <TouchableOpacity onPress={() => openExpense(expense)} className="mx-5">
+    <TouchableOpacity onPress={() => openExpense(expense)}>
       <View
-        className={`flex m-0 p-0 flex-row justify-between px-4 py-2 rounded-xl gap-x-2 ${isDark(
+        className={`flex m-0 p-0 flex-row justify-between px-4 py-2 rounded-xl  ${isDark(
           "bg-dark-backgroundSecondary",
           "bg-backgroundSecondary"
         )}`}

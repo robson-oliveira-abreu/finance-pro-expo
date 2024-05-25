@@ -39,7 +39,7 @@ export function ExpenseModalView(props: AddExpenseModalViewProps) {
   return (
     <Modal visible={open} onRequestClose={onClose}>
       <KeyboardAvoidingView>
-        <Container className="gap-y-3">
+        <Container>
           <TouchableOpacity onPress={onClose}>
             <Ionicons
               name="close"

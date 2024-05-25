@@ -12,6 +12,7 @@ import { Spacer } from "@ui/components/Spacer/Spacer";
 import { BackButton } from "@ui/components/UIComponents/BackButton/BackButton";
 import { theme } from "@infra/theme/theme";
 import { ExpenseModal } from "../ExpenseModal";
+import { Container } from "@/ui/components/Container/Container";
 
 export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
   const {
@@ -23,13 +24,13 @@ export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
     isDark,
   } = props;
   return (
-    <View
+    <Container
       className={`flex flex-1 min-h-full items-start justify-center ${isDark(
         "bg-dark-background",
         "bg-background"
       )}`}
     >
-      <Spacer y={isIos ? 20 : isWeb ? 12 : 0} />
+      <Spacer y={isWeb ? 12 : 0} />
 
       <BackButton />
 
@@ -48,6 +49,6 @@ export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
       </View>
 
       <ExpenseModal open={modal.open} onClose={onChangeModal} />
-    </View>
+    </Container>
   );
 };
