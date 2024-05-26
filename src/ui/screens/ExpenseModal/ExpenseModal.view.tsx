@@ -2,8 +2,8 @@ import { Modal, TouchableOpacity, View } from "react-native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { Text } from "@ui/components/UIComponents/Text";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { getLocaleDate } from "src/application/utils/date";
-import { isAndroid, isIos, isWeb } from "src/application/utils/platform";
+import { getLocaleDate } from "@application/utils/date";
+import { isAndroid, isIos, isWeb } from "@application/utils/platform";
 import { AddExpenseModalViewProps } from "./common/types";
 import { KeyboardAvoidingView } from "@ui/components/KeyboardAvoidingView/KeyboardAvoidingView.view";
 import { Button } from "@ui/components/UIComponents";
@@ -12,11 +12,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { SegmentedButton } from "@ui/components/UIComponents/SegmentedButton/SegmentedButton";
 import { expenseTypeOptions } from "./common/constants";
 import { theme } from "@infra/theme/theme";
-import { Container } from "@/ui/components/Container/Container";
-import { useTheme } from "@/application/Hooks/useTheme";
-import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
-import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
-import { WithCondition } from "@/ui/components/WithCondition/WithCondition";
+import { Container } from "@ui/components/Container/Container";
+import { useTheme } from "@application/Hooks/useTheme";
+import { darkColorsTheme } from "@infra/theme/dark.colors.theme";
+import { lightColorsTheme } from "@infra/theme/light.colors.theme";
+import { WithCondition } from "@ui/components/WithCondition/WithCondition";
 
 export function ExpenseModalView(props: AddExpenseModalViewProps) {
   const {

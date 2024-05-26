@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
-import { useExpenses } from "src/application/Hooks/useExpenses/useExpenses.hook";
+import { useExpenses } from "@application/Hooks/useExpenses/useExpenses.hook";
 import { Expense } from "@domain/entities/Expense";
 import { TopTabScreen } from "@infra/routes/TopTab.routes";
 import { ExpensesView } from "./Expenses.view";
-import { filterMonthExpenses } from "src/application/utils/filterExpensesByMonth";
+import { filterMonthExpenses } from "@application/utils/filterExpensesByMonth";
 import { ModalState } from "./common/types";
-import { useTheme } from "@/application/Hooks/useTheme";
+import { useTheme } from "@application/Hooks/useTheme";
 
 const defaultModalState: ModalState = {
   open: false,

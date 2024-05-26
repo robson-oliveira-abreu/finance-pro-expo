@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { AuthHttpService } from "src/application/services/http/AuthHttpService";
-import { httpService } from "src/application/services/http/HttpService";
-import { AuthTokenLocalService } from "src/application/services/local/AuthTokenLocalService";
-import { UserLocalService } from "src/application/services/local/UserLocalService";
+import { AuthHttpService } from "@application/services/http/AuthHttpService";
+import { httpService } from "@application/services/http/HttpService";
+import { AuthTokenLocalService } from "@application/services/local/AuthTokenLocalService";
+import { UserLocalService } from "@application/services/local/UserLocalService";
 import { Authentication } from "@domain/entities/Authentication.entity";
 import { Success } from "@domain/entities/Success";
 import { Failure } from "@domain/entities/Failure";
 import { Toast } from "react-native-toast-notifications";
-import { SubscribeHttpErrorObserver } from "src/application/observables/HttpErrorObservable/SubscribeHttpErrorObserver";
+import { SubscribeHttpErrorObserver } from "@application/observables/HttpErrorObservable/SubscribeHttpErrorObserver";
 
 const defaultLoadings = {
   loadLocalAuthData: false,

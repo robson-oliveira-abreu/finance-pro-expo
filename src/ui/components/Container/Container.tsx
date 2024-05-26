@@ -1,5 +1,5 @@
-import { useTheme } from "@/application/Hooks/useTheme";
-import { isIos } from "@/application/utils/platform";
+import { useTheme } from "@application/Hooks/useTheme";
+import { isIos } from "@application/utils/platform";
 import { SafeAreaView, View, ViewProps } from "react-native";
 
 export function Container({ className, ...props }: ViewProps) {

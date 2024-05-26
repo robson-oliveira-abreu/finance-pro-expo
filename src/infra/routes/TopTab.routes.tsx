@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { useTheme } from "@/application/Hooks/useTheme";
+import { useTheme } from "@application/Hooks/useTheme";
 import { darkColorsTheme } from "../theme/dark.colors.theme";
 import { lightColorsTheme } from "../theme/light.colors.theme";
 

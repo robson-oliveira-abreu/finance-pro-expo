@@ -1,11 +1,11 @@
-import { useCurrency } from "src/application/Hooks/useCurrency/useCurrency.hook";
+import { useCurrency } from "@application/Hooks/useCurrency/useCurrency.hook";
 import {
   NavigationProp,
   RouteProp,
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import { useExpenses } from "src/application/Hooks/useExpenses/useExpenses.hook";
+import { useExpenses } from "@application/Hooks/useExpenses/useExpenses.hook";
 import { useState } from "react";
 import { RootStackParamList } from "@infra/routes/Stack.routes";
 

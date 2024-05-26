@@ -1,4 +1,4 @@
-import { ICurrencyContext } from "src/application/Hooks/useCurrency/useCurrencyContext.hook";
+import { ICurrencyContext } from "@application/Hooks/useCurrency/useCurrencyContext.hook";
 import { Expense } from "@domain/entities/Expense";
 
 export type ExpenseModel = {

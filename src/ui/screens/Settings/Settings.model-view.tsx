@@ -1,8 +1,8 @@
 import { SettingsView } from "./Settings.view";
-import { useExpenses } from "src/application/Hooks/useExpenses/useExpenses.hook";
-import { useAuth } from "src/application/Hooks/useAuth/useAuth.hook";
+import { useExpenses } from "@application/Hooks/useExpenses/useExpenses.hook";
+import { useAuth } from "@application/Hooks/useAuth/useAuth.hook";
 import { useColorScheme } from "nativewind";
-import { useTheme } from "@/application/Hooks/useTheme";
+import { useTheme } from "@application/Hooks/useTheme";
 
 export function SettingsModelView() {
   const { migrate } = useExpenses();

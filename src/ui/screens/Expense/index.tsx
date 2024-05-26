@@ -1,4 +1,4 @@
-import { ExpenseController } from "src/application/controllers/ExpenseController";
+import { ExpenseController } from "@application/controllers/ExpenseController";
 import { ExpenseView } from "./Expense.view";
 
 function Expense() {

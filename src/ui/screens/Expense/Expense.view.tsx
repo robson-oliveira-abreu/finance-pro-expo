@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { getLocaleDate } from "src/application/utils/date";
+import { getLocaleDate } from "@application/utils/date";
 import { styles } from "./common/styles";
 import { ExpenseViewProps } from "./common/types";
 import { Button } from "@ui/components/UIComponents";
@@ -7,7 +7,7 @@ import { RowData } from "./components/RowData/RowData.view";
 import { NavigationHeader } from "@ui/components/NavigationHeader/NavigationHeader.view";
 import { ExpenseModal } from "@ui/screens/ExpenseModal";
 import { theme } from "@infra/theme/theme";
-import { Container } from "@/ui/components/Container/Container";
+import { Container } from "@ui/components/Container/Container";
 
 export function ExpenseView(props: ExpenseViewProps) {
   const {

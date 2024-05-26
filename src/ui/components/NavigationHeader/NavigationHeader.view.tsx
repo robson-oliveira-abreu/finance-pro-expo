@@ -6,9 +6,9 @@ import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
 import { theme } from "@infra/theme/theme";
-import { useTheme } from "@/application/Hooks/useTheme";
-import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
-import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
+import { useTheme } from "@application/Hooks/useTheme";
+import { lightColorsTheme } from "@infra/theme/light.colors.theme";
+import { darkColorsTheme } from "@infra/theme/dark.colors.theme";
 
 type Action = {
   icon: string;

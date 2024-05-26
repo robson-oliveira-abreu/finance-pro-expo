@@ -7,9 +7,6 @@
     "emitDeclarationOnly": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
       "@domain/*": [
         "src/domain/*"
       ],

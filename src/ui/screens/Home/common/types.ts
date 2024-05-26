@@ -1,4 +1,4 @@
-import { THomeController } from "src/application/controllers/HomeController";
+import { THomeController } from "@application/controllers/HomeController";
 
 export type HomeViewProps = {
   homeController: THomeController;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ExpenseService } from "src/application/services/local/expense.service";
-import { ExpenseHttpService } from "src/application/services/http/ExpenseHttpService";
-import { httpService } from "src/application/services/http/HttpService";
-import { useAuth } from "src/application/Hooks/useAuth/useAuth.hook";
+import { ExpenseService } from "@application/services/local/expense.service";
+import { ExpenseHttpService } from "@application/services/http/ExpenseHttpService";
+import { httpService } from "@application/services/http/HttpService";
+import { useAuth } from "@application/Hooks/useAuth/useAuth.hook";
 import { ExpenseList } from "@domain/entities/ExpenseList";
 import { Expense } from "@domain/entities/Expense";
 import { Success } from "@domain/entities/Success";

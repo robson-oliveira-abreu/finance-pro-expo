@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui/components/UIComponents/Text";
 import { useState } from "react";
-import { useTheme } from "@/application/Hooks/useTheme";
+import { useTheme } from "@application/Hooks/useTheme";
 
 export type Option = {
   label: string;

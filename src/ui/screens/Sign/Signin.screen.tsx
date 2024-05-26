@@ -2,12 +2,12 @@ import React from "react";
 import { View } from "react-native";
 import { Input } from "@ui/components/UIComponents/Input/Input";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { useWidth } from "src/application/Hooks/useWidth.hook";
+import { useWidth } from "@application/Hooks/useWidth.hook";
 import { Button, Text } from "@ui/components/UIComponents";
-import { useAuth } from "src/application/Hooks/useAuth/useAuth.hook";
+import { useAuth } from "@application/Hooks/useAuth/useAuth.hook";
 import { styles } from "./styles";
 import { Props } from "./types";
-import { Container } from "@/ui/components/Container/Container";
+import { Container } from "@ui/components/Container/Container";
 
 type Labels = "email" | "password";
 

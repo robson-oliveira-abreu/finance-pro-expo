@@ -1,4 +1,4 @@
-import { HomeController } from "src/application/controllers/HomeController";
+import { HomeController } from "@application/controllers/HomeController";
 import { HomeView } from "./Home.view";
 
 export function Home() {

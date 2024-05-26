@@ -4,7 +4,7 @@ import {
   KeyboardAvoidingViewProps,
   TouchableWithoutFeedback,
 } from "react-native";
-import { isWeb } from "src/application/utils/platform";
+import { isWeb } from "@application/utils/platform";
 
 function KeyboardAvoidingView(props: KeyboardAvoidingViewProps) {
   const onPress = () => !isWeb && Keyboard.dismiss();

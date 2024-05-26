@@ -12,11 +12,11 @@ import {
   InputModeOptions,
   TextInputProps,
 } from "react-native";
-import { isWeb } from "src/application/utils/platform";
+import { isWeb } from "@application/utils/platform";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { useTheme } from "@/application/Hooks/useTheme";
-import { darkColorsTheme } from "@/infra/theme/dark.colors.theme";
-import { lightColorsTheme } from "@/infra/theme/light.colors.theme";
+import { useTheme } from "@application/Hooks/useTheme";
+import { darkColorsTheme } from "@infra/theme/dark.colors.theme";
+import { lightColorsTheme } from "@infra/theme/light.colors.theme";
 
 type Props = {
   value?: string;

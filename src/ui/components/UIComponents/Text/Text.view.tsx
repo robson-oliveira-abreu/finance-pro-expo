@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from "react-native";
 import { TextViewProps } from "./types";
 import { theme } from "@infra/theme/theme";
-import { useTheme } from "@/application/Hooks/useTheme";
+import { useTheme } from "@application/Hooks/useTheme";
 
 export function TextView(props: TextViewProps) {
   const {

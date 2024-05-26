@@ -1,10 +1,10 @@
-import { useExpenses } from "src/application/Hooks/useExpenses/useExpenses.hook";
-import { filterPayableExpenses } from "src/application/utils/filterPayableExpenses";
+import { useExpenses } from "@application/Hooks/useExpenses/useExpenses.hook";
+import { filterPayableExpenses } from "@application/utils/filterPayableExpenses";
 import { RootStackParamList } from "@infra/routes/Stack.routes";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Expense } from "@domain/entities/Expense";
 import { User } from "@domain/entities/User.entity";
-import { useAuth } from "src/application/Hooks/useAuth/useAuth.hook";
+import { useAuth } from "@application/Hooks/useAuth/useAuth.hook";
 
 export type THomeController = {
   user: User | null;

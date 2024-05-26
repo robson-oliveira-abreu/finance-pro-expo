@@ -2,9 +2,9 @@ import React from "react";
 import { HomeViewProps } from "./common/types";
 import { Header } from "./components/Header";
 import { ExpenseList } from "@ui/components/ExpenseList/ExpenseList.view";
-import { useTheme } from "@/application/Hooks/useTheme";
-import { isIos } from "@/application/utils/platform";
-import { Container } from "@/ui/components/Container/Container";
+import { useTheme } from "@application/Hooks/useTheme";
+import { isIos } from "@application/utils/platform";
+import { Container } from "@ui/components/Container/Container";
 
 export function HomeView({ homeController }: HomeViewProps) {
   const { isDark } = useTheme();

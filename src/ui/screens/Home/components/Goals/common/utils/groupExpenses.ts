@@ -1,5 +1,5 @@
 import { Expense } from "@domain/entities/Expense";
-import { filterMonthExpenses } from "src/application/utils/filterExpensesByMonth";
+import { filterMonthExpenses } from "@application/utils/filterExpensesByMonth";
 
 export function groupExpenses(_expenses: Expense[]) {
   const grouped = {

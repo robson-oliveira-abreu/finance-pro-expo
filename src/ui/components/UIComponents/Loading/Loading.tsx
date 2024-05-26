@@ -1,6 +1,6 @@
 import { ActivityIndicator, View } from "react-native";
 import { theme } from "@infra/theme/theme";
-import { useTheme } from "@/application/Hooks/useTheme";
+import { useTheme } from "@application/Hooks/useTheme";
 
 export function Loading() {
   const { isDark } = useTheme();

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { styles } from "./common/styles";
 import { TopTabRoutes } from "@infra/routes/TopTab.routes";
-import { isIos, isWeb } from "src/application/utils/platform";
+import { isIos, isWeb } from "@application/utils/platform";
 import { ExpensesViewProps } from "./common/types";
 import { ExpenseList } from "@ui/components/ExpenseList/ExpenseList.view";
 import { SelectViewModel } from "@ui/components/UIComponents/Select/Select.view-model";
@@ -12,7 +12,7 @@ import { Spacer } from "@ui/components/Spacer/Spacer";
 import { BackButton } from "@ui/components/UIComponents/BackButton/BackButton";
 import { theme } from "@infra/theme/theme";
 import { ExpenseModal } from "../ExpenseModal";
-import { Container } from "@/ui/components/Container/Container";
+import { Container } from "@ui/components/Container/Container";
 
 export const ExpensesView = (props: ExpensesViewProps): ReactNode => {
   const {

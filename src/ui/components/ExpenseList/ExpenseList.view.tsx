@@ -5,7 +5,7 @@ import { styles } from "./styles";
 import { Text } from "@ui/components/UIComponents";
 import { Loading } from "@ui/components/UIComponents/Loading/Loading";
 import { Expense } from "@domain/entities/Expense";
-import { useTheme } from "@/application/Hooks/useTheme";
+import { useTheme } from "@application/Hooks/useTheme";
 
 export type ExpenseListProps = {
   data?: Array<Expense>;

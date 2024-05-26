@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 import { Failure } from "@domain/entities/Failure";
 import { Success } from "@domain/entities/Success";
-import { LogError } from "src/application/utils/logError";
+import { LogError } from "@application/utils/logError";
 import { ExpenseService } from "@domain/services/ExpenseService";
 import { CreateExpense } from "@domain/entities/CreateExpense";
 import { AppError } from "@domain/entities/AppError";
