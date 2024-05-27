@@ -5,7 +5,6 @@ import { PropsWithChildren } from "react";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { Spacer } from "@ui/components/Spacer/Spacer";
-import { theme } from "@infra/theme/theme";
 import { useTheme } from "@application/Hooks/useTheme";
 import { lightColorsTheme } from "@infra/theme/light.colors.theme";
 import { darkColorsTheme } from "@infra/theme/dark.colors.theme";
@@ -38,15 +37,13 @@ export function NavigationHeader({
     <View style={styles.container}>
       {leftAction || !noGoBack ? (
         <TouchableOpacity
-          style={{
-            padding: 16,
-          }}
+          className="w-7 h-7 items-center justify-center"
           onPress={leftAction?.onPress ?? goBack}
         >
           <IconButton
             name={(leftAction?.icon as any) || "angle-left"}
             color={darkMode ? darkColorsTheme.text : lightColorsTheme.text}
-            size={20}
+            size={24}
           />
         </TouchableOpacity>
       ) : (
