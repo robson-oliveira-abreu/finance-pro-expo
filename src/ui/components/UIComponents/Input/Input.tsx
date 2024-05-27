@@ -17,6 +17,7 @@ import { Spacer } from "@ui/components/Spacer/Spacer";
 import { useTheme } from "@application/Hooks/useTheme";
 import { darkColorsTheme } from "@infra/theme/dark.colors.theme";
 import { lightColorsTheme } from "@infra/theme/light.colors.theme";
+import { Label } from "../Label";
 
 type Props = {
   value?: string;
@@ -34,8 +35,8 @@ type Props = {
   focusColor?: ColorValue;
   keyboardType?: KeyboardTypeOptions;
   defaultValue?: string;
-  left?: React.ReactNode;
-  right?: React.ReactNode;
+  left?: () => React.ReactNode;
+  right?: () => React.ReactNode;
   inputMode?: InputModeOptions | undefined;
   placeholder?: string;
 } & Omit<TextInputProps, "onChange">;
@@ -50,6 +51,7 @@ const border_radius = {
 };
 
 export function Input(props: Props) {
+  const { left: Left, right: Right } = props;
   const inputRef = useRef<TextInput>(null);
   const [errors, setErrors] = useState({
     email: "",
@@ -149,17 +151,7 @@ export function Input(props: Props) {
 
   return (
     <View className="w-full">
-      {!!label && (
-        <Text
-          className={`pl-2 text-xs mb-1  ${theme.isDark(
-            "text-dark-textSecondary",
-            "text-textSecondary"
-          )}`}
-          style={[labelStyle]}
-        >
-          {label}:
-        </Text>
-      )}
+      {!!label && <Label style={labelStyle}>{label}</Label>}
       <View
         className={`
         w-full flex-row items-center border-2 rounded-lg py-2 px-3
@@ -169,12 +161,12 @@ export function Input(props: Props) {
         )}`}
         style={[handleContentStyles(), style]}
       >
-        {props.left ? (
+        {Left && (
           <>
-            {props.left}
+            <Left />
             <Spacer x={4} />
           </>
-        ) : null}
+        )}
 
         <TextInput
           className={`${theme.isDark("text-dark-text", "text-text")}`}
@@ -196,10 +188,10 @@ export function Input(props: Props) {
           {...rest}
         />
 
-        {Boolean(props.right) && (
+        {Right && (
           <>
             <Spacer x={4} />
-            {props.right}
+            <Right />
           </>
         )}
       </View>
@@ -222,8 +214,8 @@ const styles = StyleSheet.create({
     borderColor: "#ff0000",
   },
   input: {
+    flex: 1,
     borderWidth: 0,
-    width: "100%",
     lineHeight: 16,
   },
 });

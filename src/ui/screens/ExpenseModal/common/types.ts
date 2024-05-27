@@ -50,6 +50,7 @@ export type TAddExpenseModalModel = {
   webDateErrors: WebDateErrorState;
   formState: ExpenseFormState;
   openAndroidDate: OpenDateAndroid;
+  webDate: WebDateState;
   onChangeDateNative: (label: DateLabel, date: Date) => void;
   onChange: (
     label: keyof ExpenseFormState

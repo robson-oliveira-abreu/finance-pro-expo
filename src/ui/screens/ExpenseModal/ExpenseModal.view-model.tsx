@@ -160,7 +160,7 @@ export function ExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
       const { expense } = props;
 
       setFormState({
-        amount: String(expense?.amount || ""),
+        amount: String(expense.amount / 100),
         description: expense?.description,
         due_date: expense?.due_date,
         installment: String(expense?.installment || ""),
@@ -170,6 +170,19 @@ export function ExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
         paid_amount: expense?.paid_amount,
         paid_date: expense?.paid_date,
       });
+
+      const due_date = {
+        day: expense?.due_date?.getDate(),
+        month: expense?.due_date?.getMonth() + 1,
+        year: expense?.due_date?.getFullYear(),
+      };
+
+      console.log({ due_date });
+
+      setWebDate((state) => ({
+        ...state,
+        due_date,
+      }));
     }
   };
 
@@ -188,6 +201,7 @@ export function ExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
       open={props.open}
       errors={errors}
       expense={props.expense}
+      webDate={webDate}
       webDateErrors={webDateErrors}
       formState={formState}
       openAndroidDate={openAndroidDate}
