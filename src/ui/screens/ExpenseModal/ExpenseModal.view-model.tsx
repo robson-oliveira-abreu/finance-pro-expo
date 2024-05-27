@@ -177,8 +177,6 @@ export function ExpenseModalViewModel(props: AddExpenseModalViewModelProps) {
         year: expense?.due_date?.getFullYear(),
       };
 
-      console.log({ due_date });
-
       setWebDate((state) => ({
         ...state,
         due_date,

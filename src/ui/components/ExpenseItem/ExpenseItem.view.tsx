@@ -25,8 +25,6 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
     navigation.navigate("Expense", { expense });
   };
 
-  console.log({ expense });
-
   return (
     <TouchableOpacity onPress={() => openExpense(expense)}>
       <View
@@ -50,9 +48,13 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
 
         <View>
           <View
-            className={`justify-center items-center px-1 rounded-lg ${badgeStatus[status].bgColor}`}
+            className={`justify-center items-center px-0.5 py-0.5 rounded-lg ${badgeStatus[status].bgColor}`}
           >
-            <Text color={"#FFFFFF"} variant="bodySmall">
+            <Text
+              color={"#FFFFFF"}
+              variant="bodySmall"
+              style={{ lineHeight: 12 }}
+            >
               {badgeStatus[status].text}
             </Text>
           </View>
